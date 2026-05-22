@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Share2, BookOpen } from "lucide-react";
+import { Share2, BookOpen, Star, Sparkles, Heart, Mic, Send } from "lucide-react";
 import { VerseCard } from "@/components/VerseCard";
 import { StreakBadge } from "@/components/StreakBadge";
 import { BottomNav } from "@/components/BottomNav";
@@ -8,6 +8,7 @@ import { AdBanner } from "@/components/AdBanner";
 import { ThemeBootstrap } from "@/components/ThemeProvider";
 import { useStreak } from "@/hooks/useStreak";
 import { formatDateEs, getVerseOfDay } from "@/lib/verses";
+import { STORAGE_KEYS, readLS, writeLS } from "@/lib/storage";
 
 export const Route = createFileRoute("/home")({
   head: () => ({
@@ -24,6 +25,28 @@ function Home() {
   const streak = useStreak();
   const verse = useMemo(() => getVerseOfDay(), []);
   const today = useMemo(() => formatDateEs(), []);
+  
+  const [userName, setUserName] = useState("Hijo de Dios");
+  const [balance, setBalance] = useState(10);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    setUserName(readLS(STORAGE_KEYS.userName, "Hijo de Dios"));
+    setBalance(readLS(STORAGE_KEYS.gracias, 10));
+  }, []);
+
+  const deductGracias = (amount: number, actionLabel: string) => {
+    if (balance < amount) {
+      alert("No tienes suficientes gracias. Ve a la tienda para conseguir más.");
+      navigate({ to: "/gracias" });
+      return false;
+    }
+    const newBalance = balance - amount;
+    setBalance(newBalance);
+    writeLS(STORAGE_KEYS.gracias, newBalance);
+    alert(`Has usado ${amount} gracias para: ${actionLabel}`);
+    return true;
+  };
 
   const onShare = async () => {
     const text = `“${verse.text}”\n— ${verse.reference}\n\nVersículo del Día`;
