@@ -7,6 +7,8 @@ export const STORAGE_KEYS = {
   theme: "vdd:theme",
   notifyTime: "vdd:notifyTime",
   streak: "vdd:streak",
+  gracias: "vdd:gracias",
+  userName: "vdd:user_name",
 } as const;
 
 export function readLS<T>(key: string, fallback: T): T {
