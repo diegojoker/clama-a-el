@@ -1,26 +1,20 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { STORAGE_KEYS, readLS } from "@/lib/storage";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Index() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const done = readLS<boolean>(STORAGE_KEYS.onboarded, false);
+    navigate({ to: done ? "/home" : "/onboarding", replace: true });
+  }, [navigate]);
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="flex min-h-screen items-center justify-center bg-background">
+      <div className="h-8 w-8 animate-pulse rounded-full bg-accent/40" />
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
