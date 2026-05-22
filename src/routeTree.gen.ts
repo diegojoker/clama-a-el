@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WidgetsRouteImport } from './routes/widgets'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ReaderRouteImport } from './routes/reader'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
@@ -16,6 +17,11 @@ import { Route as HomeRouteImport } from './routes/home'
 import { Route as GraciasRouteImport } from './routes/gracias'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WidgetsRoute = WidgetsRouteImport.update({
+  id: '/widgets',
+  path: '/widgets',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/reader': typeof ReaderRoute
   '/settings': typeof SettingsRoute
+  '/widgets': typeof WidgetsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/reader': typeof ReaderRoute
   '/settings': typeof SettingsRoute
+  '/widgets': typeof WidgetsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/reader': typeof ReaderRoute
   '/settings': typeof SettingsRoute
+  '/widgets': typeof WidgetsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,8 +90,16 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/reader'
     | '/settings'
+    | '/widgets'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/gracias' | '/home' | '/onboarding' | '/reader' | '/settings'
+  to:
+    | '/'
+    | '/gracias'
+    | '/home'
+    | '/onboarding'
+    | '/reader'
+    | '/settings'
+    | '/widgets'
   id:
     | '__root__'
     | '/'
@@ -91,6 +108,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/reader'
     | '/settings'
+    | '/widgets'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -100,10 +118,18 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   ReaderRoute: typeof ReaderRoute
   SettingsRoute: typeof SettingsRoute
+  WidgetsRoute: typeof WidgetsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/widgets': {
+      id: '/widgets'
+      path: '/widgets'
+      fullPath: '/widgets'
+      preLoaderRoute: typeof WidgetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -156,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   ReaderRoute: ReaderRoute,
   SettingsRoute: SettingsRoute,
+  WidgetsRoute: WidgetsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
