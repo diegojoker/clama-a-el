@@ -37,7 +37,7 @@ export const Route = createFileRoute("/reader")({
 });
 
 function Reader() {
-  const { chapter } = Route.useLoaderData();
+  const { chapter } = Route.useLoaderData() as { chapter: ChapterData | null };
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-md bg-background px-6 py-8">
