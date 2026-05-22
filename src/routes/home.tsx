@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Share2, BookOpen, Star, Sparkles, Heart, Mic, Send, Search } from "lucide-react";
+import { Share2, BookOpen, Star, Sparkles, Heart, Mic, Send } from "lucide-react";
 import { VerseCard } from "@/components/VerseCard";
 import { StreakBadge } from "@/components/StreakBadge";
 import { BottomNav } from "@/components/BottomNav";
@@ -9,6 +9,7 @@ import { ThemeBootstrap } from "@/components/ThemeProvider";
 import { useStreak } from "@/hooks/useStreak";
 import { formatDateEs, getVerseOfDay } from "@/lib/verses";
 import { STORAGE_KEYS, readLS, writeLS } from "@/lib/storage";
+import { BibleSearch } from "@/components/BibleSearch";
 
 export const Route = createFileRoute("/home")({
   head: () => ({
@@ -89,6 +90,10 @@ function Home() {
       <div className="px-6">
         <div className="mb-4 flex justify-center">
           <StreakBadge count={streak} />
+        </div>
+
+        <div className="mb-6">
+          <BibleSearch />
         </div>
 
         <VerseCard verse={verse} />
@@ -191,13 +196,6 @@ function Home() {
       <div className="fixed bottom-14 left-1/2 z-30 w-full max-w-md -translate-x-1/2">
         <AdBanner />
       </div>
-      <button 
-        onClick={() => navigate({ to: "/reader" })}
-        className="fixed bottom-24 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/40 transition-transform active:scale-95"
-        aria-label="Buscar"
-      >
-        <Search className="h-6 w-6" />
-      </button>
       <BottomNav />
     </div>
   );
