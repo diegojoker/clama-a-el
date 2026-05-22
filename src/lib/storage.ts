@@ -11,7 +11,21 @@ export const STORAGE_KEYS = {
   userName: "vdd:user_name",
   unlockedWidgets: "vdd:unlocked_widgets",
   activeWidgetTheme: "vdd:active_widget_theme",
+  diario: "vdd:diario",
 } as const;
+
+export interface DiarioEntry {
+  id: string;
+  date: string;
+  humor: string;
+  humorEmoji: string;
+  content: string;
+  responseVerse: {
+    text: string;
+    reference: string;
+  };
+  responseText: string;
+}
 
 export function readLS<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;

@@ -14,7 +14,9 @@ import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ReaderRouteImport } from './routes/reader'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as HomeRouteImport } from './routes/home'
+import { Route as HablarRouteImport } from './routes/hablar'
 import { Route as GraciasRouteImport } from './routes/gracias'
+import { Route as DiarioRouteImport } from './routes/diario'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WidgetsRoute = WidgetsRouteImport.update({
@@ -42,9 +44,19 @@ const HomeRoute = HomeRouteImport.update({
   path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HablarRoute = HablarRouteImport.update({
+  id: '/hablar',
+  path: '/hablar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GraciasRoute = GraciasRouteImport.update({
   id: '/gracias',
   path: '/gracias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiarioRoute = DiarioRouteImport.update({
+  id: '/diario',
+  path: '/diario',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -55,7 +67,9 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/diario': typeof DiarioRoute
   '/gracias': typeof GraciasRoute
+  '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
   '/onboarding': typeof OnboardingRoute
   '/reader': typeof ReaderRoute
@@ -64,7 +78,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/diario': typeof DiarioRoute
   '/gracias': typeof GraciasRoute
+  '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
   '/onboarding': typeof OnboardingRoute
   '/reader': typeof ReaderRoute
@@ -74,7 +90,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/diario': typeof DiarioRoute
   '/gracias': typeof GraciasRoute
+  '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
   '/onboarding': typeof OnboardingRoute
   '/reader': typeof ReaderRoute
@@ -85,7 +103,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/diario'
     | '/gracias'
+    | '/hablar'
     | '/home'
     | '/onboarding'
     | '/reader'
@@ -94,7 +114,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/diario'
     | '/gracias'
+    | '/hablar'
     | '/home'
     | '/onboarding'
     | '/reader'
@@ -103,7 +125,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/diario'
     | '/gracias'
+    | '/hablar'
     | '/home'
     | '/onboarding'
     | '/reader'
@@ -113,7 +137,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DiarioRoute: typeof DiarioRoute
   GraciasRoute: typeof GraciasRoute
+  HablarRoute: typeof HablarRoute
   HomeRoute: typeof HomeRoute
   OnboardingRoute: typeof OnboardingRoute
   ReaderRoute: typeof ReaderRoute
@@ -158,11 +184,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hablar': {
+      id: '/hablar'
+      path: '/hablar'
+      fullPath: '/hablar'
+      preLoaderRoute: typeof HablarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gracias': {
       id: '/gracias'
       path: '/gracias'
       fullPath: '/gracias'
       preLoaderRoute: typeof GraciasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diario': {
+      id: '/diario'
+      path: '/diario'
+      fullPath: '/diario'
+      preLoaderRoute: typeof DiarioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -177,7 +217,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DiarioRoute: DiarioRoute,
   GraciasRoute: GraciasRoute,
+  HablarRoute: HablarRoute,
   HomeRoute: HomeRoute,
   OnboardingRoute: OnboardingRoute,
   ReaderRoute: ReaderRoute,
@@ -187,3 +229,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
