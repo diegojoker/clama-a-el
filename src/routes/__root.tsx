@@ -76,10 +76,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Tu palabra diaria de Dios — versículo bíblico cada día." },
       { name: "theme-color", content: "#1a3a5c" },
       { property: "og:title", content: "Versículo del Día" },
-      { property: "og:description", content: "Tu palabra diaria de Dios." },
+      { property: "og:description", content: "Tu palabra diaria de Dios — versículo bíblico cada día." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Versículo del Día" },
+      { name: "twitter:description", content: "Tu palabra diaria de Dios — versículo bíblico cada día." },
     ],
     links: [
       {
