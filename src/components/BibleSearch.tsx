@@ -51,10 +51,10 @@ export function BibleSearch() {
         </div>
         <input
           type="text"
-          placeholder="Buscar versículo... ej: Juan 3:16 o Salmos 23"
+          placeholder="Buscar versículo... ej: Salmos 23"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full bg-card border border-border rounded-2xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/40 transition-all"
+          className="w-full bg-white border border-accent/20 rounded-2xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/40 transition-all shadow-sm"
         />
       </div>
 
