@@ -9,6 +9,8 @@ export const STORAGE_KEYS = {
   streak: "vdd:streak",
   gracias: "vdd:gracias",
   userName: "vdd:user_name",
+  unlockedWidgets: "vdd:unlocked_widgets",
+  activeWidgetTheme: "vdd:active_widget_theme",
 } as const;
 
 export function readLS<T>(key: string, fallback: T): T {
