@@ -166,7 +166,7 @@ function Home() {
                 }}
                 className="flex h-9 items-center gap-2 rounded-full bg-primary px-4 text-xs font-bold uppercase tracking-widest text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
 
-                disabled={!message.trim()}
+                disabled={false}
               >
                 Hablar
                 <Send className="h-3.5 w-3.5" />
