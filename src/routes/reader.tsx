@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { ThemeBootstrap } from "@/components/ThemeProvider";
+import { BibleSearch } from "@/components/BibleSearch";
 import { z } from "zod";
 
 const searchSchema = z.object({
@@ -48,6 +49,10 @@ function Reader() {
       >
         <ArrowLeft className="h-4 w-4" /> Volver
       </Link>
+
+      <div className="mb-8">
+        <BibleSearch />
+      </div>
 
       {chapter ? (
         <article>
