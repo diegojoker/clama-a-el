@@ -127,83 +127,17 @@ function ExplorarPage() {
         <p className="text-muted-foreground">Clama a mí y te responderé. — Jeremías 33:3</p>
       </header>
 
-      <ScrollArea className="flex-1 px-6">
-        <section className="mt-4">
-          <Card 
-            className="bg-gradient-to-br from-indigo-900 to-amber-900 border-none p-6 text-white cursor-pointer hover:scale-[1.02] transition-transform active:scale-95 mb-8"
-            onClick={() => navigate({ to: "/devocionales" })}
-          >
-            <div className="flex items-center justify-between mb-4">
-              <Badge className="bg-white/20 text-white border-none">Nuevo</Badge>
-              <Flame className="h-6 w-6 text-accent animate-pulse" />
-            </div>
-            <h3 className="text-2xl font-bold mb-1 font-serif">Devocionales Diarios</h3>
-            <p className="text-indigo-100/80 text-sm">Alimento espiritual para cada momento de tu vida.</p>
-          </Card>
-        </section>
-
-        <section className="mt-4">
-          <h2 className="text-lg font-semibold mb-4 text-foreground/80">Versículos por tema</h2>
-          <div className="grid grid-cols-2 gap-3">
-            {TEMAS.map((tema) => (
-              <Button
-                key={tema.id}
-                variant="outline"
-                className="justify-start gap-3 h-14 bg-card/50 border-border/40 hover:bg-accent/5 hover:border-accent/30 transition-all text-sm font-medium"
-                onClick={() => setSelectedTema(tema.id)}
-              >
-                <span className="text-lg">{tema.icon}</span>
-                {tema.label}
-              </Button>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-10">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-foreground/80">Historias Bíblicas</h2>
-          </div>
-          <ScrollArea className="w-full whitespace-nowrap">
-            <div className="flex gap-4 pb-4">
-              {stories.map((story, idx) => {
-                const colors = [
-                  "from-amber-500 to-orange-600",
-                  "from-emerald-500 to-teal-600",
-                  "from-blue-500 to-indigo-600",
-                  "from-purple-500 to-pink-600",
-                  "from-rose-500 to-red-600"
-                ];
-                const colorClass = colors[idx % colors.length];
-                
-                return (
-                  <Card 
-                    key={story.id}
-                    className="flex-shrink-0 w-64 overflow-hidden border-none cursor-pointer hover:scale-[1.02] transition-transform active:scale-95"
-                    onClick={() => navigate({ to: `/explorar/historia/${story.id}` })}
-                  >
-                    <div className={`h-32 bg-gradient-to-br ${colorClass} p-4 flex items-center justify-center`}>
-                      <BookOpen className="h-12 w-12 text-white/40" />
-                    </div>
-                    <div className="p-4 bg-card">
-                      <h3 className="font-bold text-base mb-1 truncate">{story.title}</h3>
-                      <p className="text-xs text-muted-foreground uppercase tracking-widest">{story.reference}</p>
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
-          </ScrollArea>
-        </section>
-
-        <section className="mt-10 mb-8">
-          <Card className="bg-gradient-to-br from-indigo-900 to-slate-900 border-none p-6 text-white overflow-hidden relative">
+      <ScrollArea className="flex-1 px-4">
+        {/* IA Search Card - Now at the Top */}
+        <section className="mt-4 mb-8">
+          <Card className="bg-gradient-to-br from-[#0a192f] to-[#112240] border-none p-4 text-white overflow-hidden relative">
             <div className="absolute top-0 right-0 p-4 opacity-10">
               <Sparkles className="h-20 w-20" />
             </div>
             <div className="relative z-10">
-              <h3 className="text-xl font-bold mb-2">¿No encuentras lo que buscas?</h3>
+              <h3 className="text-xl font-bold mb-2">Encuentra el versículo perfecto para ti</h3>
               <p className="text-indigo-100/80 text-sm mb-6">
-                Describe tu situación y la IA encontrará versículos perfectos para ti.
+                Describe lo que estás viviendo y la IA encontrará las palabras exactas que necesitas.
               </p>
               
               <div className="space-y-4">
@@ -266,6 +200,73 @@ function ExplorarPage() {
             <AlertCircle className="h-3 w-3" />
             Impulsado por Lovable AI
           </div>
+        </section>
+
+        <section className="mb-8">
+          <Card 
+            className="bg-gradient-to-br from-indigo-900 to-amber-900 border-none p-5 text-white cursor-pointer hover:scale-[1.02] transition-transform active:scale-95"
+            onClick={() => navigate({ to: "/devocionales" })}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <Badge className="bg-white/20 text-white border-none">Nuevo</Badge>
+              <Flame className="h-6 w-6 text-accent animate-pulse" />
+            </div>
+            <h3 className="text-xl font-bold mb-1 font-serif">Devocionales Diarios</h3>
+            <p className="text-indigo-100/80 text-xs">Alimento espiritual para cada momento de tu vida.</p>
+          </Card>
+        </section>
+
+        <section className="mb-10">
+          <h2 className="text-lg font-semibold mb-4 text-foreground/80">Versículos por tema</h2>
+          <div className="grid grid-cols-1 gap-3">
+            {TEMAS.map((tema) => (
+              <Button
+                key={tema.id}
+                variant="outline"
+                className="justify-start gap-3 h-14 bg-card/50 border-border/40 hover:bg-accent/5 hover:border-accent/30 transition-all text-sm font-medium"
+                onClick={() => setSelectedTema(tema.id)}
+              >
+                <span className="text-lg">{tema.icon}</span>
+                {tema.label}
+              </Button>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-10">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-foreground/80">Historias Bíblicas</h2>
+          </div>
+          <ScrollArea className="w-full whitespace-nowrap">
+            <div className="flex gap-4 pb-4">
+              {stories.map((story, idx) => {
+                const colors = [
+                  "from-amber-500 to-orange-600",
+                  "from-emerald-500 to-teal-600",
+                  "from-blue-500 to-indigo-600",
+                  "from-purple-500 to-pink-600",
+                  "from-rose-500 to-red-600"
+                ];
+                const colorClass = colors[idx % colors.length];
+                
+                return (
+                  <Card 
+                    key={story.id}
+                    className="flex-shrink-0 w-[140px] overflow-hidden border-none cursor-pointer hover:scale-[1.02] transition-transform active:scale-95"
+                    onClick={() => navigate({ to: `/explorar/historia/${story.id}` })}
+                  >
+                    <div className={`h-24 bg-gradient-to-br ${colorClass} p-4 flex items-center justify-center`}>
+                      <BookOpen className="h-8 w-8 text-white/40" />
+                    </div>
+                    <div className="p-3 bg-card whitespace-normal">
+                      <h3 className="font-bold text-sm mb-1 line-clamp-2 leading-tight">{story.title}</h3>
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-widest truncate">{story.reference}</p>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+          </ScrollArea>
         </section>
       </ScrollArea>
     </div>
