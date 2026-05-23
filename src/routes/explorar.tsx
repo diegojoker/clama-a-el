@@ -127,24 +127,98 @@ function ExplorarPage() {
         <p className="text-muted-foreground">Clama a mí y te responderé. — Jeremías 33:3</p>
       </header>
 
-      <ScrollArea className="flex-1 px-6">
-        <section className="mt-4">
+      <ScrollArea className="flex-1 px-4">
+        {/* IA Search Card - Now at the Top */}
+        <section className="mt-4 mb-8">
+          <Card className="bg-gradient-to-br from-[#0a192f] to-[#112240] border-none p-4 text-white overflow-hidden relative">
+            <div className="absolute top-0 right-0 p-4 opacity-10">
+              <Sparkles className="h-20 w-20" />
+            </div>
+            <div className="relative z-10">
+              <h3 className="text-xl font-bold mb-2">Encuentra el versículo perfecto para ti</h3>
+              <p className="text-indigo-100/80 text-sm mb-6">
+                Describe lo que estás viviendo y la IA encontrará las palabras exactas que necesitas.
+              </p>
+              
+              <div className="space-y-4">
+                <textarea
+                  value={iaSearchQuery}
+                  onChange={(e) => setIaSearchQuery(e.target.value)}
+                  placeholder="Describe cómo te sientes o qué estás pasando..."
+                  className="w-full bg-white/10 border-white/20 rounded-xl p-4 text-sm placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-accent/50 min-h-[100px] resize-none"
+                />
+                
+                <Button 
+                  onClick={handleIaSearch}
+                  disabled={isSearchingIa}
+                  className="w-full bg-accent hover:bg-accent/90 text-white font-bold h-12 shadow-lg"
+                >
+                  {isSearchingIa ? (
+                    <span className="flex items-center gap-2">
+                      <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Buscando sabiduría...
+                    </span>
+                  ) : (
+                    "Buscar — 2 gracias ✨"
+                  )}
+                </Button>
+
+                {iaResults && (
+                  <div className="mt-6 space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <h4 className="text-sm font-bold uppercase tracking-widest text-accent flex items-center gap-2">
+                      <Sparkles className="h-4 w-4" />
+                      Resultados para ti
+                    </h4>
+                    {iaResults.map((verse, idx) => (
+                      <div 
+                        key={idx} 
+                        className="bg-white/5 border border-white/10 rounded-xl p-4 cursor-pointer hover:bg-white/10 transition-colors"
+                        onClick={() => navigate({ to: "/reader", search: { book: verse.book, chapter: verse.chapter, verse: verse.verse } })}
+                      >
+                        <div className="text-accent font-bold text-xs mb-1">{verse.reference}</div>
+                        <p className="text-sm italic mb-2">"{verse.text}"</p>
+                        <p className="text-[10px] text-indigo-200/60 leading-tight">
+                          {verse.explanation}
+                        </p>
+                      </div>
+                    ))}
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="w-full text-white/40 hover:text-white"
+                      onClick={() => setIaResults(null)}
+                    >
+                      Limpiar resultados
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </Card>
+          
+          <div className="mt-4 flex items-center justify-center gap-2 text-[10px] text-muted-foreground uppercase tracking-widest">
+            <AlertCircle className="h-3 w-3" />
+            Impulsado por Lovable AI
+          </div>
+        </section>
+
+        <section className="mb-8">
           <Card 
-            className="bg-gradient-to-br from-indigo-900 to-amber-900 border-none p-6 text-white cursor-pointer hover:scale-[1.02] transition-transform active:scale-95 mb-8"
+            className="bg-gradient-to-br from-indigo-900 to-amber-900 border-none p-5 text-white cursor-pointer hover:scale-[1.02] transition-transform active:scale-95"
             onClick={() => navigate({ to: "/devocionales" })}
           >
             <div className="flex items-center justify-between mb-4">
               <Badge className="bg-white/20 text-white border-none">Nuevo</Badge>
               <Flame className="h-6 w-6 text-accent animate-pulse" />
             </div>
-            <h3 className="text-2xl font-bold mb-1 font-serif">Devocionales Diarios</h3>
-            <p className="text-indigo-100/80 text-sm">Alimento espiritual para cada momento de tu vida.</p>
+            <h3 className="text-xl font-bold mb-1 font-serif">Devocionales Diarios</h3>
+            <p className="text-indigo-100/80 text-xs">Alimento espiritual para cada momento de tu vida.</p>
           </Card>
         </section>
 
-        <section className="mt-4">
+        <section className="mb-10">
           <h2 className="text-lg font-semibold mb-4 text-foreground/80">Versículos por tema</h2>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3">
             {TEMAS.map((tema) => (
               <Button
                 key={tema.id}
@@ -159,7 +233,7 @@ function ExplorarPage() {
           </div>
         </section>
 
-        <section className="mt-10">
+        <section className="mb-10">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-foreground/80">Historias Bíblicas</h2>
           </div>
@@ -178,15 +252,15 @@ function ExplorarPage() {
                 return (
                   <Card 
                     key={story.id}
-                    className="flex-shrink-0 w-64 overflow-hidden border-none cursor-pointer hover:scale-[1.02] transition-transform active:scale-95"
+                    className="flex-shrink-0 w-[140px] overflow-hidden border-none cursor-pointer hover:scale-[1.02] transition-transform active:scale-95"
                     onClick={() => navigate({ to: `/explorar/historia/${story.id}` })}
                   >
-                    <div className={`h-32 bg-gradient-to-br ${colorClass} p-4 flex items-center justify-center`}>
-                      <BookOpen className="h-12 w-12 text-white/40" />
+                    <div className={`h-24 bg-gradient-to-br ${colorClass} p-4 flex items-center justify-center`}>
+                      <BookOpen className="h-8 w-8 text-white/40" />
                     </div>
-                    <div className="p-4 bg-card">
-                      <h3 className="font-bold text-base mb-1 truncate">{story.title}</h3>
-                      <p className="text-xs text-muted-foreground uppercase tracking-widest">{story.reference}</p>
+                    <div className="p-3 bg-card whitespace-normal">
+                      <h3 className="font-bold text-sm mb-1 line-clamp-2 leading-tight">{story.title}</h3>
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-widest truncate">{story.reference}</p>
                     </div>
                   </Card>
                 );
@@ -194,25 +268,6 @@ function ExplorarPage() {
             </div>
           </ScrollArea>
         </section>
-
-        <section className="mt-10 mb-8">
-          <Card className="bg-gradient-to-br from-indigo-900 to-slate-900 border-none p-6 text-white overflow-hidden relative">
-            <div className="absolute top-0 right-0 p-4 opacity-10">
-              <Sparkles className="h-20 w-20" />
-            </div>
-            <div className="relative z-10">
-              <h3 className="text-xl font-bold mb-2">¿No encuentras lo que buscas?</h3>
-              <p className="text-indigo-100/80 text-sm mb-6">
-                Describe tu situación y la IA encontrará versículos perfectos para ti.
-              </p>
-              
-              <div className="space-y-4">
-                <textarea
-                  value={iaSearchQuery}
-                  onChange={(e) => setIaSearchQuery(e.target.value)}
-                  placeholder="Describe cómo te sientes o qué estás pasando..."
-                  className="w-full bg-white/10 border-white/20 rounded-xl p-4 text-sm placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-accent/50 min-h-[100px] resize-none"
-                />
                 
                 <Button 
                   onClick={handleIaSearch}
