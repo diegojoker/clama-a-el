@@ -129,7 +129,16 @@ function Home() {
 
           <button
             type="button"
-            onClick={onShare}
+            onClick={() => navigate({ 
+              to: "/compartir", 
+              search: { 
+                text: verse.text, 
+                reference: verse.reference,
+                book: verse.book,
+                chapter: verse.chapter,
+                verse: verse.verse
+              } 
+            })}
             className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/10 text-green-500">
