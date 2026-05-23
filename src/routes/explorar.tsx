@@ -151,17 +151,17 @@ function ExplorarPage() {
       <ScrollArea className="flex-1 px-4">
         {/* IA Search Card - Now at the Top */}
         <section className="mt-4 mb-8">
-          <Card className="bg-gradient-to-br from-[#0a192f] to-[#112240] border-none p-4 text-white overflow-hidden relative">
+          <Card className="bg-gradient-to-br from-[#0a192f] to-[#112240] border-none p-4 pr-4 text-white overflow-hidden relative">
             <div className="absolute top-0 right-0 p-4 opacity-10">
               <Sparkles className="h-20 w-20" />
             </div>
-            <div className="relative z-10">
-              <h3 className="text-xl font-bold mb-2">Encuentra el versículo perfecto para ti</h3>
-              <p className="text-indigo-100/80 text-sm mb-6">
+            <div className="relative z-10 w-full">
+              <h3 className="text-lg font-bold mb-2 overflow-hidden text-ellipsis whitespace-nowrap">Encuentra el versículo perfecto para ti</h3>
+              <p className="text-indigo-100/80 text-sm mb-6 line-clamp-2">
                 Describe lo que estás viviendo y la IA encontrará las palabras exactas que necesitas.
               </p>
               
-              <div className="space-y-4">
+              <div className="space-y-4 w-full">
                 <textarea
                   value={iaSearchQuery}
                   onChange={(e) => setIaSearchQuery(e.target.value)}
