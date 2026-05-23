@@ -1,5 +1,5 @@
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useMemo } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
 import { Compass, Search, ChevronRight, ArrowLeft, Sparkles, AlertCircle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,7 +27,7 @@ const TEMAS = [
   { id: "sanidad", label: "Sanidad", icon: "🏥" },
 ];
 
-export const Route = createFileRoute(\"/explorar\")({
+export const Route = createFileRoute("/explorar")({
   component: ExplorarPage,
 });
 
@@ -220,5 +220,3 @@ function ExplorarPage() {
     </div>
   );
 }
-
-import { createRootRoute } from "@tanstack/react-router";
