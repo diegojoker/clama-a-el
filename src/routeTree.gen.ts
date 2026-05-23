@@ -19,6 +19,7 @@ import { Route as GraciasRouteImport } from './routes/gracias'
 import { Route as ExplorarRouteImport } from './routes/explorar'
 import { Route as DiarioRouteImport } from './routes/diario'
 import { Route as DevocionalesRouteImport } from './routes/devocionales'
+import { Route as CompartirRouteImport } from './routes/compartir'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExplorarHistoriaStoryIdRouteImport } from './routes/explorar.historia.$storyId'
 
@@ -72,6 +73,11 @@ const DevocionalesRoute = DevocionalesRouteImport.update({
   path: '/devocionales',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompartirRoute = CompartirRouteImport.update({
+  id: '/compartir',
+  path: '/compartir',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -85,6 +91,7 @@ const ExplorarHistoriaStoryIdRoute = ExplorarHistoriaStoryIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/compartir': typeof CompartirRoute
   '/devocionales': typeof DevocionalesRoute
   '/diario': typeof DiarioRoute
   '/explorar': typeof ExplorarRouteWithChildren
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/compartir': typeof CompartirRoute
   '/devocionales': typeof DevocionalesRoute
   '/diario': typeof DiarioRoute
   '/explorar': typeof ExplorarRouteWithChildren
@@ -114,6 +122,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/compartir': typeof CompartirRoute
   '/devocionales': typeof DevocionalesRoute
   '/diario': typeof DiarioRoute
   '/explorar': typeof ExplorarRouteWithChildren
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/compartir'
     | '/devocionales'
     | '/diario'
     | '/explorar'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/compartir'
     | '/devocionales'
     | '/diario'
     | '/explorar'
@@ -158,6 +169,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/compartir'
     | '/devocionales'
     | '/diario'
     | '/explorar'
@@ -173,6 +185,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CompartirRoute: typeof CompartirRoute
   DevocionalesRoute: typeof DevocionalesRoute
   DiarioRoute: typeof DiarioRoute
   ExplorarRoute: typeof ExplorarRouteWithChildren
@@ -257,6 +270,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevocionalesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compartir': {
+      id: '/compartir'
+      path: '/compartir'
+      fullPath: '/compartir'
+      preLoaderRoute: typeof CompartirRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -288,6 +308,7 @@ const ExplorarRouteWithChildren = ExplorarRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CompartirRoute: CompartirRoute,
   DevocionalesRoute: DevocionalesRoute,
   DiarioRoute: DiarioRoute,
   ExplorarRoute: ExplorarRouteWithChildren,
@@ -302,3 +323,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
