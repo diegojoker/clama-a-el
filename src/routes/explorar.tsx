@@ -27,7 +27,7 @@ const TEMAS = [
   { id: "sanidad", label: "Sanidad", icon: "🏥" },
 ];
 
-export const Route = createRootRoute({
+export const Route = createFileRoute(\"/explorar\")({
   component: ExplorarPage,
 });
 
