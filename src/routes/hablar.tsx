@@ -21,6 +21,13 @@ const HUMORS = [
   { id: "frustrado", label: "Frustrado", emoji: "😤" },
   { id: "agradecido", label: "Agradecido", emoji: "🙏" },
   { id: "en-paz", label: "En paz", emoji: "😊" },
+  { id: "enojado", label: "Enojado", emoji: "😡" },
+  { id: "corazon-roto", label: "Con el corazón roto", emoji: "💔" },
+  { id: "enamorado", label: "Enamorado", emoji: "😍" },
+  { id: "solo", label: "Solo", emoji: "😔" },
+  { id: "confundido", label: "Confundido", emoji: "😕" },
+  { id: "con-fe", label: "Con fe", emoji: "💪" },
+  { id: "sin-fuerzas", label: "Sin fuerzas", emoji: "😴" },
 ];
 
 function HablarScreen() {
@@ -97,9 +104,13 @@ function HablarScreen() {
         </header>
 
         <div className="flex-1 px-8 flex flex-col items-center justify-center text-center">
-          <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6 text-accent">
+          <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-4 text-accent">
             <Heart className="h-8 w-8 fill-accent" />
           </div>
+
+          <p className="text-accent text-xs font-bold uppercase tracking-widest mb-2">
+            Respondiendo a alguien que se siente {humor.label.toLowerCase()}
+          </p>
           
           <h2 className="font-serif-verse text-2xl text-foreground mb-4">
             Palabra de aliento para ti
@@ -170,14 +181,14 @@ function HablarScreen() {
           Cuéntame cómo te sientes
         </h1>
 
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="flex flex-wrap gap-2 mb-8 max-h-[110px] overflow-y-auto no-scrollbar">
           {HUMORS.map((h) => (
             <button
               key={h.id}
               onClick={() => setHumor(h)}
               className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium transition-all ${
                 humor.id === h.id 
-                  ? "bg-accent border-accent text-white shadow-lg shadow-accent/20" 
+                  ? "bg-[#1a3a5c] border-[#d4af37] text-white shadow-lg shadow-accent/20" 
                   : "bg-card border-border text-foreground"
               }`}
             >
