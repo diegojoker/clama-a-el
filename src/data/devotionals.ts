@@ -23,9 +23,11 @@ export interface Series {
   duration: number;
   price: number;
   category: string;
+  isFree?: boolean;
 }
 
 export const devotionalSeries: Series[] = [
+  { id: "salmos-7-gratis", title: "Salmos para cada día", duration: 7, price: 0, category: "salmos", isFree: true },
   { id: "ansiedad-7", title: "7 días sobre la Ansiedad", duration: 7, price: 15, category: "ansiedad" },
   { id: "perdon-7", title: "7 días sobre el Perdón", duration: 7, price: 15, category: "perdon" },
   { id: "fe-7", title: "7 días sobre la Fe", duration: 7, price: 15, category: "fe" },
