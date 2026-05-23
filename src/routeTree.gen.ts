@@ -16,6 +16,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as HablarRouteImport } from './routes/hablar'
 import { Route as GraciasRouteImport } from './routes/gracias'
+import { Route as ExplorarRouteImport } from './routes/explorar'
 import { Route as DiarioRouteImport } from './routes/diario'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -54,6 +55,11 @@ const GraciasRoute = GraciasRouteImport.update({
   path: '/gracias',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExplorarRoute = ExplorarRouteImport.update({
+  id: '/explorar',
+  path: '/explorar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DiarioRoute = DiarioRouteImport.update({
   id: '/diario',
   path: '/diario',
@@ -68,6 +74,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/diario': typeof DiarioRoute
+  '/explorar': typeof ExplorarRoute
   '/gracias': typeof GraciasRoute
   '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/diario': typeof DiarioRoute
+  '/explorar': typeof ExplorarRoute
   '/gracias': typeof GraciasRoute
   '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/diario': typeof DiarioRoute
+  '/explorar': typeof ExplorarRoute
   '/gracias': typeof GraciasRoute
   '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/diario'
+    | '/explorar'
     | '/gracias'
     | '/hablar'
     | '/home'
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/diario'
+    | '/explorar'
     | '/gracias'
     | '/hablar'
     | '/home'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/diario'
+    | '/explorar'
     | '/gracias'
     | '/hablar'
     | '/home'
@@ -138,6 +150,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DiarioRoute: typeof DiarioRoute
+  ExplorarRoute: typeof ExplorarRoute
   GraciasRoute: typeof GraciasRoute
   HablarRoute: typeof HablarRoute
   HomeRoute: typeof HomeRoute
@@ -198,6 +211,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GraciasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/explorar': {
+      id: '/explorar'
+      path: '/explorar'
+      fullPath: '/explorar'
+      preLoaderRoute: typeof ExplorarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/diario': {
       id: '/diario'
       path: '/diario'
@@ -218,6 +238,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiarioRoute: DiarioRoute,
+  ExplorarRoute: ExplorarRoute,
   GraciasRoute: GraciasRoute,
   HablarRoute: HablarRoute,
   HomeRoute: HomeRoute,
