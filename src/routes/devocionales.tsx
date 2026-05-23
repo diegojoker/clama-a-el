@@ -129,11 +129,11 @@ function DevocionalesPage() {
             <div className="absolute top-0 right-0 p-4 opacity-10">
               <Book className="h-24 w-24 rotate-12" />
             </div>
-            <div className="relative z-10">
+            <div className="relative z-10 overflow-hidden">
               <Badge className="mb-3 bg-white/20 text-white border-none">Devocional del Día</Badge>
-              <h2 className="text-xl font-bold mb-3">{daily.title}</h2>
-              <p className="text-indigo-100/80 text-xs mb-6">
-                {daily.content.substring(0, 120)}...
+              <h2 className="text-xl font-bold mb-3">Caminando en Su Luz</h2>
+              <p className="text-indigo-100/80 text-xs mb-6 line-clamp-4 overflow-hidden">
+                {daily.content}
               </p>
               <Button 
                 variant="secondary" 
@@ -147,7 +147,7 @@ function DevocionalesPage() {
         </section>
 
         <section className="mt-8">
-          <Card className="p-4 border-accent/30 bg-white dark:bg-slate-900 shadow-xl shadow-accent/5">
+          <Card className="p-4 border-accent/30 bg-white dark:bg-slate-900 shadow-xl shadow-accent/5 overflow-hidden">
             <div className="flex items-center gap-2 text-accent mb-2">
               <Sparkles className="h-4 w-4" />
               <span className="text-[10px] font-bold uppercase tracking-widest">Lovable AI</span>
@@ -168,8 +168,8 @@ function DevocionalesPage() {
 
         <section className="mt-10 mb-8">
           <h3 className="text-lg font-semibold mb-4 text-foreground/80 px-1">Series Temáticas</h3>
-          <ScrollArea className="w-full whitespace-nowrap">
-            <div className="flex gap-4 pb-4">
+          <ScrollArea className="w-full whitespace-nowrap overflow-x-auto">
+            <div className="flex flex-row gap-4 pb-4">
               {devotionalSeries.map((series) => {
                 const isUnlocked = series.isFree || unlockedSeries.includes(series.id);
                 const progress = seriesProgress[series.id] || 0;
@@ -177,7 +177,7 @@ function DevocionalesPage() {
                 return (
                   <Card 
                     key={series.id}
-                    className={`flex-shrink-0 w-[160px] p-4 border-border/40 relative overflow-hidden transition-all ${!isUnlocked ? 'opacity-90' : 'hover:border-accent/50 cursor-pointer'}`}
+                    className={`flex-shrink-0 w-[160px] min-w-[160px] p-4 border-border/40 relative overflow-hidden transition-all ${!isUnlocked ? 'opacity-90' : 'hover:border-accent/50 cursor-pointer'}`}
                     onClick={() => isUnlocked ? toast.info("Serie en progreso") : handleUnlockSeries(series)}
                   >
                     {!isUnlocked && (
