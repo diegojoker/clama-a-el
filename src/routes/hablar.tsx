@@ -181,21 +181,23 @@ function HablarScreen() {
           Cuéntame cómo te sientes
         </h1>
 
-        <div className="flex flex-wrap gap-2 mb-8 max-h-[110px] overflow-y-auto no-scrollbar">
-          {HUMORS.map((h) => (
-            <button
-              key={h.id}
-              onClick={() => setHumor(h)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium transition-all ${
-                humor.id === h.id 
-                  ? "bg-[#1a3a5c] border-[#d4af37] text-white shadow-lg shadow-accent/20" 
-                  : "bg-card border-border text-foreground"
-              }`}
-            >
-              <span>{h.emoji}</span>
-              {h.label}
-            </button>
-          ))}
+        <div className="mb-8 w-full">
+          <div className="grid grid-flow-col grid-rows-2 gap-2 overflow-x-auto pb-2 no-scrollbar" style={{ gridAutoColumns: 'max-content' }}>
+            {HUMORS.map((h) => (
+              <button
+                key={h.id}
+                onClick={() => setHumor(h)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium transition-all whitespace-nowrap ${
+                  humor.id === h.id 
+                    ? "bg-[#1a3a5c] border-[#d4af37] border-2 text-white shadow-lg shadow-[#1a3a5c]/20" 
+                    : "bg-card border-border text-foreground"
+                }`}
+              >
+                <span>{h.emoji}</span>
+                {h.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="flex-1 relative flex flex-col">
