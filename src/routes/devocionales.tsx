@@ -125,15 +125,15 @@ function DevocionalesPage() {
 
       <ScrollArea className="flex-1 px-6">
         <section className="mt-4">
-          <Card className="bg-gradient-to-br from-indigo-950 via-indigo-900 to-amber-900 border-none p-6 text-white relative overflow-hidden">
+          <Card className="bg-gradient-to-br from-indigo-950 via-indigo-900 to-amber-900 border-none p-4 text-white relative overflow-hidden h-auto">
             <div className="absolute top-0 right-0 p-4 opacity-10">
               <Book className="h-24 w-24 rotate-12" />
             </div>
             <div className="relative z-10">
               <Badge className="mb-3 bg-white/20 text-white border-none">Devocional del Día</Badge>
-              <h2 className="text-2xl font-bold mb-3">{daily.title}</h2>
-              <p className="text-indigo-100/80 text-sm line-clamp-3 mb-6">
-                {daily.content}
+              <h2 className="text-xl font-bold mb-3">{daily.title}</h2>
+              <p className="text-indigo-100/80 text-xs mb-6">
+                {daily.content.substring(0, 120)}...
               </p>
               <Button 
                 variant="secondary" 
@@ -147,13 +147,13 @@ function DevocionalesPage() {
         </section>
 
         <section className="mt-8">
-          <Card className="p-6 border-accent/30 bg-white dark:bg-slate-900 shadow-xl shadow-accent/5">
+          <Card className="p-4 border-accent/30 bg-white dark:bg-slate-900 shadow-xl shadow-accent/5">
             <div className="flex items-center gap-2 text-accent mb-2">
               <Sparkles className="h-4 w-4" />
-              <span className="text-xs font-bold uppercase tracking-widest">Lovable AI</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest">Lovable AI</span>
             </div>
-            <h3 className="text-xl font-bold mb-1">Devocional para ti hoy</h3>
-            <p className="text-muted-foreground text-sm mb-6">
+            <h3 className="text-lg font-bold mb-1">Devocional para ti hoy</h3>
+            <p className="text-muted-foreground text-xs mb-6">
               Basado en cómo te sientes, la IA crea una reflexión especial para ti.
             </p>
             <Button 
@@ -161,7 +161,7 @@ function DevocionalesPage() {
               onClick={handleGenerateIa}
               disabled={isGeneratingIa}
             >
-              {isGeneratingIa ? "Conectando con la sabiduría..." : "Generar mi devocional — 3 ✨"}
+              {isGeneratingIa ? "Conectando..." : "Generar mi devocional — 3 ✨"}
             </Button>
           </Card>
         </section>
@@ -171,26 +171,26 @@ function DevocionalesPage() {
           <ScrollArea className="w-full whitespace-nowrap">
             <div className="flex gap-4 pb-4">
               {devotionalSeries.map((series) => {
-                const isUnlocked = unlockedSeries.includes(series.id);
+                const isUnlocked = series.isFree || unlockedSeries.includes(series.id);
                 const progress = seriesProgress[series.id] || 0;
                 
                 return (
                   <Card 
                     key={series.id}
-                    className={`flex-shrink-0 w-56 p-5 border-border/40 relative overflow-hidden transition-all ${!isUnlocked ? 'opacity-80' : 'hover:border-accent/50 cursor-pointer'}`}
+                    className={`flex-shrink-0 w-[160px] p-4 border-border/40 relative overflow-hidden transition-all ${!isUnlocked ? 'opacity-90' : 'hover:border-accent/50 cursor-pointer'}`}
                     onClick={() => isUnlocked ? toast.info("Serie en progreso") : handleUnlockSeries(series)}
                   >
                     {!isUnlocked && (
-                      <div className="absolute top-3 right-3">
-                        <Lock className="h-4 w-4 text-muted-foreground" />
+                      <div className="absolute top-2 right-2">
+                        <Lock className="h-3 w-3 text-muted-foreground" />
                       </div>
                     )}
-                    <h4 className="font-bold text-base mb-1 whitespace-normal">{series.title}</h4>
-                    <p className="text-xs text-muted-foreground mb-4">{series.duration} días</p>
+                    <h4 className="font-bold text-sm mb-1 whitespace-normal leading-tight h-10 overflow-hidden">{series.title}</h4>
+                    <p className="text-[10px] text-muted-foreground mb-4">{series.duration} días</p>
                     
                     {isUnlocked ? (
                       <div className="space-y-2">
-                        <div className="flex justify-between text-[10px] font-medium">
+                        <div className="flex justify-between text-[8px] font-medium">
                           <span>Progreso</span>
                           <span>{progress}%</span>
                         </div>
@@ -199,7 +199,7 @@ function DevocionalesPage() {
                         </div>
                       </div>
                     ) : (
-                      <Button variant="outline" size="sm" className="w-full text-xs font-bold border-accent/20 text-accent">
+                      <Button variant="outline" size="sm" className="w-full text-[10px] h-8 font-bold border-accent/20 text-accent p-1">
                         Desbloquear — {series.price} ✨
                       </Button>
                     )}
