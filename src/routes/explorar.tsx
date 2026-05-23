@@ -102,7 +102,28 @@ function ExplorarPage() {
                 <p className="text-foreground leading-relaxed italic">
                   "{verse.text}"
                 </p>
-                <div className="mt-4 flex justify-end">
+                <div className="mt-4 flex justify-between items-center">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="h-8 text-green-600 gap-1.5"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate({ 
+                        to: "/compartir", 
+                        search: { 
+                          text: verse.text, 
+                          reference: verse.reference,
+                          book: verse.book,
+                          chapter: verse.chapter,
+                          verse: verse.verse
+                        } 
+                      });
+                    }}
+                  >
+                    <Share2 className="h-3.5 w-3.5" />
+                    <span className="text-[10px] font-bold uppercase">Compartir</span>
+                  </Button>
                   <div className="text-xs text-muted-foreground flex items-center gap-1 font-medium">
                     Leer capítulo <ChevronRight className="h-3 w-3" />
                   </div>
