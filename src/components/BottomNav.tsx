@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { BookOpen, Settings, Star, Layout, Book } from "lucide-react";
+import { BookOpen, Settings, Star, Layout, Book, Compass } from "lucide-react";
 
 export function BottomNav() {
   return (
@@ -7,7 +7,7 @@ export function BottomNav() {
       className="fixed bottom-0 left-1/2 z-40 w-full max-w-md -translate-x-1/2 border-t border-border bg-card/95 backdrop-blur"
       aria-label="Navegación principal"
     >
-      <div className="grid grid-cols-5">
+      <div className="grid grid-cols-6">
         <Link
           to="/home"
           className="flex flex-col items-center gap-1 py-3 text-[10px] text-muted-foreground transition-colors data-[status=active]:text-accent"
@@ -15,6 +15,14 @@ export function BottomNav() {
         >
           <BookOpen className="h-5 w-5" />
           Hoy
+        </Link>
+        <Link
+          to="/explorar"
+          className="flex flex-col items-center gap-1 py-3 text-[10px] text-muted-foreground transition-colors data-[status=active]:text-accent"
+          activeProps={{ "data-status": "active" } as never}
+        >
+          <Compass className="h-5 w-5" />
+          Explorar
         </Link>
         <Link
           to="/gracias"
