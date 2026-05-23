@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useMemo } from "react";
-import { Compass, Search, ChevronRight, ArrowLeft, Sparkles, AlertCircle, BookOpen } from "lucide-react";
+import { Compass, Search, ChevronRight, ArrowLeft, Sparkles, AlertCircle, BookOpen, Flame } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -128,6 +128,20 @@ function ExplorarPage() {
       </header>
 
       <ScrollArea className="flex-1 px-6">
+        <section className="mt-4">
+          <Card 
+            className="bg-gradient-to-br from-indigo-900 to-amber-900 border-none p-6 text-white cursor-pointer hover:scale-[1.02] transition-transform active:scale-95 mb-8"
+            onClick={() => navigate({ to: "/devocionales" })}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <Badge className="bg-white/20 text-white border-none">Nuevo</Badge>
+              <Flame className="h-6 w-6 text-accent animate-pulse" />
+            </div>
+            <h3 className="text-2xl font-bold mb-1 font-serif">Devocionales Diarios</h3>
+            <p className="text-indigo-100/80 text-sm">Alimento espiritual para cada momento de tu vida.</p>
+          </Card>
+        </section>
+
         <section className="mt-4">
           <h2 className="text-lg font-semibold mb-4 text-foreground/80">Versículos por tema</h2>
           <div className="grid grid-cols-2 gap-3">
