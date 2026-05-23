@@ -109,7 +109,7 @@ function HablarScreen() {
           </div>
 
           <p className="text-accent text-xs font-bold uppercase tracking-widest mb-2">
-            Respondiendo a alguien que se siente {humor.label.toLowerCase()}
+            Respondiendo a alguien que se siente {humor.label}
           </p>
           
           <h2 className="font-serif-verse text-2xl text-foreground mb-4">
