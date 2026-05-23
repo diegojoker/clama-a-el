@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { dailyDevotionals, devotionalSeries } from "@/data/devotionals";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/devocionales")({
