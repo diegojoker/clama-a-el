@@ -7,8 +7,8 @@ import { STORAGE_KEYS, writeLS, type Translation } from "@/lib/storage";
 export const Route = createFileRoute("/onboarding")({
   head: () => ({
     meta: [
-      { title: "Bienvenido — Versículo del Día" },
-      { name: "description", content: "Configura tu experiencia diaria con la Palabra." },
+      { title: "Bienvenido — Clama a Él" },
+      { name: "description", content: "Clama a mí y te responderé. — Jeremías 33:3" },
     ],
   }),
   component: Onboarding,

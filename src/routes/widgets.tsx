@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export const Route = createFileRoute("/widgets")({
   head: () => ({
     meta: [
-      { title: "Widgets — Versículo del Día" },
+      { title: "Widgets — Clama a Él" },
       { name: "description", content: "Personaliza tu pantalla de inicio con temas sagrados." },
     ],
   }),
