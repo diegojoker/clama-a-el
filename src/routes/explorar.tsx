@@ -268,60 +268,6 @@ function ExplorarPage() {
             </div>
           </ScrollArea>
         </section>
-                
-                <Button 
-                  onClick={handleIaSearch}
-                  disabled={isSearchingIa}
-                  className="w-full bg-accent hover:bg-accent/90 text-white font-bold h-12 shadow-lg"
-                >
-                  {isSearchingIa ? (
-                    <span className="flex items-center gap-2">
-                      <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Buscando sabiduría...
-                    </span>
-                  ) : (
-                    "Buscar — 2 gracias ✨"
-                  )}
-                </Button>
-
-                {iaResults && (
-                  <div className="mt-6 space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h4 className="text-sm font-bold uppercase tracking-widest text-accent flex items-center gap-2">
-                      <Sparkles className="h-4 w-4" />
-                      Resultados para ti
-                    </h4>
-                    {iaResults.map((verse, idx) => (
-                      <div 
-                        key={idx} 
-                        className="bg-white/5 border border-white/10 rounded-xl p-4 cursor-pointer hover:bg-white/10 transition-colors"
-                        onClick={() => navigate({ to: "/reader", search: { book: verse.book, chapter: verse.chapter, verse: verse.verse } })}
-                      >
-                        <div className="text-accent font-bold text-xs mb-1">{verse.reference}</div>
-                        <p className="text-sm italic mb-2">"{verse.text}"</p>
-                        <p className="text-[10px] text-indigo-200/60 leading-tight">
-                          {verse.explanation}
-                        </p>
-                      </div>
-                    ))}
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="w-full text-white/40 hover:text-white"
-                      onClick={() => setIaResults(null)}
-                    >
-                      Limpiar resultados
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </div>
-          </Card>
-          
-          <div className="mt-4 flex items-center justify-center gap-2 text-[10px] text-muted-foreground uppercase tracking-widest">
-            <AlertCircle className="h-3 w-3" />
-            Impulsado por Lovable AI
-          </div>
-        </section>
       </ScrollArea>
     </div>
   );
