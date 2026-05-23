@@ -61,15 +61,18 @@ function Onboarding() {
           <div className="text-center">
             <img
               src={appIcon}
-              alt="Versículo del Día"
+              alt="Clama a Él"
               width={120}
               height={120}
               className="mx-auto mb-8 h-28 w-28 rounded-3xl shadow-lg"
             />
             <h1 className="font-serif-verse text-4xl leading-tight text-foreground">
-              Tu palabra diaria de Dios
+              Clama a Él
             </h1>
-            <p className="mt-4 text-base text-muted-foreground">
+            <p className="mt-2 text-sm italic text-muted-foreground">
+              Clama a mí y te responderé. — Jeremías 33:3
+            </p>
+            <p className="mt-6 text-base text-muted-foreground">
               Un versículo cada día para acompañarte, fortalecerte e inspirar tu camino.
             </p>
           </div>
