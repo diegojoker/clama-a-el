@@ -7,7 +7,7 @@ import { STORAGE_KEYS, type Theme, type Translation } from "@/lib/storage";
 
 export const Route = createFileRoute("/settings")({
   head: () => ({
-    meta: [{ title: "Ajustes — Versículo del Día" }],
+    meta: [{ title: "Ajustes — Clama a Él" }],
   }),
   component: Settings,
 });
@@ -36,10 +36,10 @@ function Settings() {
   );
 
   const onShareApp = async () => {
-    const text = "Descubre el Versículo del Día — tu palabra diaria de Dios.";
+    const text = "Descubre Clama a Él — Clama a mí y te responderé.";
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
-        await navigator.share({ title: "Versículo del Día", text });
+        await navigator.share({ title: "Clama a Él", text });
         return;
       } catch {
         /* cancelled */

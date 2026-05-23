@@ -124,7 +124,7 @@ function ExplorarPage() {
     <div className="flex flex-col min-h-screen pb-20 bg-background">
       <header className="px-6 pt-8 pb-4">
         <h1 className="text-3xl font-bold font-serif text-foreground">Explorar</h1>
-        <p className="text-muted-foreground">Encuentra sabiduría para cada situación</p>
+        <p className="text-muted-foreground">Clama a mí y te responderé. — Jeremías 33:3</p>
       </header>
 
       <ScrollArea className="flex-1 px-6">

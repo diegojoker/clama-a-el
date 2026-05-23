@@ -116,7 +116,7 @@ function DevocionalesPage() {
       <header className="px-6 pt-8 pb-4 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold font-serif text-foreground">Devocionales</h1>
-          <p className="text-muted-foreground">Alimento espiritual para tu día</p>
+          <p className="text-muted-foreground italic text-xs">Clama a mí y te responderé. — Jeremías 33:3</p>
         </div>
         <div className="bg-accent/10 p-3 rounded-full">
           <Flame className="h-6 w-6 text-accent animate-pulse" />

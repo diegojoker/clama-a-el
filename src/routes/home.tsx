@@ -14,8 +14,8 @@ import { BibleSearch } from "@/components/BibleSearch";
 export const Route = createFileRoute("/home")({
   head: () => ({
     meta: [
-      { title: "Hoy — Versículo del Día" },
-      { name: "description", content: "Tu versículo bíblico de hoy." },
+      { title: "Hoy — Clama a Él" },
+      { name: "description", content: "Clama a mí y te responderé. — Jeremías 33:3" },
     ],
   }),
   component: Home,
@@ -50,10 +50,10 @@ function Home() {
   };
 
   const onShare = async () => {
-    const text = `“${verse.text}”\n— ${verse.reference}\n\nVersículo del Día`;
+    const text = `“${verse.text}”\n— ${verse.reference}\n\nClama a Él`;
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
-        await navigator.share({ title: "Versículo del Día", text });
+        await navigator.share({ title: "Clama a Él", text });
         return;
       } catch {
         /* user cancelled */
