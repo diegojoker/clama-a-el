@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useMemo } from "react";
-import { Compass, Search, ChevronRight, ArrowLeft, Sparkles, AlertCircle } from "lucide-react";
+import { Compass, Search, ChevronRight, ArrowLeft, Sparkles, AlertCircle, BookOpen } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import versesData from "@/data/verses.es.json";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { stories } from "@/data/stories";
 import { toast } from "sonner";
 
 const TEMAS = [
@@ -142,6 +143,42 @@ function ExplorarPage() {
               </Button>
             ))}
           </div>
+        </section>
+
+        <section className="mt-10">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-foreground/80">Historias Bíblicas</h2>
+          </div>
+          <ScrollArea className="w-full whitespace-nowrap">
+            <div className="flex gap-4 pb-4">
+              {stories.map((story, idx) => {
+                const colors = [
+                  "from-amber-500 to-orange-600",
+                  "from-emerald-500 to-teal-600",
+                  "from-blue-500 to-indigo-600",
+                  "from-purple-500 to-pink-600",
+                  "from-rose-500 to-red-600"
+                ];
+                const colorClass = colors[idx % colors.length];
+                
+                return (
+                  <Card 
+                    key={story.id}
+                    className="flex-shrink-0 w-64 overflow-hidden border-none cursor-pointer hover:scale-[1.02] transition-transform active:scale-95"
+                    onClick={() => navigate({ to: `/explorar/historia/${story.id}` })}
+                  >
+                    <div className={`h-32 bg-gradient-to-br ${colorClass} p-4 flex items-center justify-center`}>
+                      <BookOpen className="h-12 w-12 text-white/40" />
+                    </div>
+                    <div className="p-4 bg-card">
+                      <h3 className="font-bold text-base mb-1 truncate">{story.title}</h3>
+                      <p className="text-xs text-muted-foreground uppercase tracking-widest">{story.reference}</p>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+          </ScrollArea>
         </section>
 
         <section className="mt-10 mb-8">
