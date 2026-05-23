@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useMemo } from "react";
-import { Compass, Search, ChevronRight, ArrowLeft, Sparkles, AlertCircle, BookOpen, Flame } from "lucide-react";
+import { Compass, Search, ChevronRight, ArrowLeft, Sparkles, AlertCircle, BookOpen, Flame, Share2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
