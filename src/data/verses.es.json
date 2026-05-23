@@ -1,119 +1,1189 @@
 [
-  {"reference":"Juan 3:16","text":"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.","book":"juan","chapter":3,"verse":16},
-  {"reference":"Salmos 23:1","text":"Jehová es mi pastor; nada me faltará.","book":"salmos","chapter":23,"verse":1},
-  {"reference":"Filipenses 4:13","text":"Todo lo puedo en Cristo que me fortalece.","book":"filipenses","chapter":4,"verse":13},
-  {"reference":"Proverbios 3:5","text":"Fíate de Jehová de todo tu corazón, y no te apoyes en tu propia prudencia.","book":"proverbios","chapter":3,"verse":5},
-  {"reference":"Jeremías 29:11","text":"Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal, para daros el fin que esperáis.","book":"jeremias","chapter":29,"verse":11},
-  {"reference":"Romanos 8:28","text":"Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien.","book":"romanos","chapter":8,"verse":28},
-  {"reference":"Isaías 41:10","text":"No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo.","book":"isaias","chapter":41,"verse":10},
-  {"reference":"Mateo 11:28","text":"Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.","book":"mateo","chapter":11,"verse":28},
-  {"reference":"Salmos 46:1","text":"Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.","book":"salmos","chapter":46,"verse":1},
-  {"reference":"Gálatas 5:22","text":"Mas el fruto del Espíritu es amor, gozo, paz, paciencia, benignidad, bondad, fe.","book":"galatas","chapter":5,"verse":22},
-  {"reference":"1 Corintios 13:4","text":"El amor es sufrido, es benigno; el amor no tiene envidia, no es jactancioso, no se envanece.","book":"1corintios","chapter":13,"verse":4},
-  {"reference":"Salmos 119:105","text":"Lámpara es a mis pies tu palabra, y lumbrera a mi camino.","book":"salmos","chapter":119,"verse":105},
-  {"reference":"Mateo 6:33","text":"Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas.","book":"mateo","chapter":6,"verse":33},
-  {"reference":"Josué 1:9","text":"Esfuérzate y sé valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en dondequiera que vayas.","book":"josue","chapter":1,"verse":9},
-  {"reference":"Salmos 27:1","text":"Jehová es mi luz y mi salvación; ¿de quién temeré?","book":"salmos","chapter":27,"verse":1},
-  {"reference":"Romanos 12:2","text":"No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento.","book":"romanos","chapter":12,"verse":2},
-  {"reference":"Efesios 2:8","text":"Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios.","book":"efesios","chapter":2,"verse":8},
-  {"reference":"1 Juan 4:19","text":"Nosotros le amamos a él, porque él nos amó primero.","book":"1juan","chapter":4,"verse":19},
-  {"reference":"Hebreos 11:1","text":"Es, pues, la fe la certeza de lo que se espera, la convicción de lo que no se ve.","book":"hebreos","chapter":11,"verse":1},
-  {"reference":"Salmos 37:4","text":"Deléitate asimismo en Jehová, y él te concederá las peticiones de tu corazón.","book":"salmos","chapter":37,"verse":4},
-  {"reference":"Proverbios 16:3","text":"Encomienda a Jehová tus obras, y tus pensamientos serán afirmados.","book":"proverbios","chapter":16,"verse":3},
-  {"reference":"Mateo 5:16","text":"Así alumbre vuestra luz delante de los hombres, para que vean vuestras buenas obras, y glorifiquen a vuestro Padre que está en los cielos.","book":"mateo","chapter":5,"verse":16},
-  {"reference":"Salmos 103:2","text":"Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios.","book":"salmos","chapter":103,"verse":2},
-  {"reference":"Lamentaciones 3:22","text":"Por la misericordia de Jehová no hemos sido consumidos, porque nunca decayeron sus misericordias.","book":"lamentaciones","chapter":3,"verse":22},
-  {"reference":"Romanos 5:8","text":"Mas Dios muestra su amor para con nosotros, en que siendo aún pecadores, Cristo murió por nosotros.","book":"romanos","chapter":5,"verse":8},
-  {"reference":"2 Timoteo 1:7","text":"Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.","book":"2timoteo","chapter":1,"verse":7},
-  {"reference":"Salmos 91:1","text":"El que habita al abrigo del Altísimo morará bajo la sombra del Omnipotente.","book":"salmos","chapter":91,"verse":1},
-  {"reference":"Mateo 7:7","text":"Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá.","book":"mateo","chapter":7,"verse":7},
-  {"reference":"Santiago 1:5","text":"Y si alguno de vosotros tiene falta de sabiduría, pídala a Dios, el cual da a todos abundantemente y sin reproche, y le será dada.","book":"santiago","chapter":1,"verse":5},
-  {"reference":"1 Pedro 5:7","text":"Echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros.","book":"1pedro","chapter":5,"verse":7},
-  {"reference":"Salmos 34:8","text":"Gustad, y ved que es bueno Jehová; dichoso el hombre que confía en él.","book":"salmos","chapter":34,"verse":8},
-  {"reference":"Eclesiastés 3:1","text":"Todo tiene su tiempo, y todo lo que se quiere debajo del cielo tiene su hora.","book":"eclesiastes","chapter":3,"verse":1},
-  {"reference":"Juan 14:27","text":"La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo.","book":"juan","chapter":14,"verse":27},
-  {"reference":"Salmos 16:11","text":"Me mostrarás la senda de la vida; en tu presencia hay plenitud de gozo.","book":"salmos","chapter":16,"verse":11},
-  {"reference":"Isaías 40:31","text":"Pero los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas.","book":"isaias","chapter":40,"verse":31},
-  {"reference":"Romanos 15:13","text":"Y el Dios de esperanza os llene de todo gozo y paz en el creer, para que abundéis en esperanza por el poder del Espíritu Santo.","book":"romanos","chapter":15,"verse":13},
-  {"reference":"Mateo 28:20","text":"Y he aquí yo estoy con vosotros todos los días, hasta el fin del mundo.","book":"mateo","chapter":28,"verse":20},
-  {"reference":"Salmos 121:1","text":"Alzaré mis ojos a los montes; ¿de dónde vendrá mi socorro?","book":"salmos","chapter":121,"verse":1},
-  {"reference":"1 Tesalonicenses 5:16","text":"Estad siempre gozosos. Orad sin cesar. Dad gracias en todo.","book":"1tesalonicenses","chapter":5,"verse":16},
-  {"reference":"Colosenses 3:23","text":"Y todo lo que hagáis, hacedlo de corazón, como para el Señor y no para los hombres.","book":"colosenses","chapter":3,"verse":23},
-  {"reference":"Proverbios 18:10","text":"Torre fuerte es el nombre de Jehová; a él correrá el justo, y será levantado.","book":"proverbios","chapter":18,"verse":10},
-  {"reference":"Salmos 55:22","text":"Echa sobre Jehová tu carga, y él te sustentará; no dejará para siempre caído al justo.","book":"salmos","chapter":55,"verse":22},
-  {"reference":"Mateo 5:9","text":"Bienaventurados los pacificadores, porque ellos serán llamados hijos de Dios.","book":"mateo","chapter":5,"verse":9},
-  {"reference":"Juan 8:32","text":"Y conoceréis la verdad, y la verdad os hará libres.","book":"juan","chapter":8,"verse":32},
-  {"reference":"Salmos 139:14","text":"Te alabaré; porque formidables, maravillosas son tus obras; estoy maravillado.","book":"salmos","chapter":139,"verse":14},
-  {"reference":"Romanos 8:38","text":"Por lo cual estoy seguro de que ni la muerte, ni la vida, ni ángeles, ni principados, podrán separarnos del amor de Dios.","book":"romanos","chapter":8,"verse":38},
-  {"reference":"Hebreos 13:5","text":"Sean vuestras costumbres sin avaricia, contentos con lo que tenéis ahora; porque él dijo: No te desampararé, ni te dejaré.","book":"hebreos","chapter":13,"verse":5},
-  {"reference":"1 Corintios 10:13","text":"No os ha sobrevenido ninguna tentación que no sea humana; pero fiel es Dios, que no os dejará ser tentados más de lo que podéis resistir.","book":"1corintios","chapter":10,"verse":13},
-  {"reference":"Salmos 73:26","text":"Mi carne y mi corazón desfallecen; mas la roca de mi corazón y mi porción es Dios para siempre.","book":"salmos","chapter":73,"verse":26},
-  {"reference":"Mateo 6:34","text":"Así que, no os afanéis por el día de mañana, porque el día de mañana traerá su afán.","book":"mateo","chapter":6,"verse":34},
-  {"reference":"Filipenses 4:6","text":"Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias.","book":"filipenses","chapter":4,"verse":6},
-  {"reference":"Filipenses 4:7","text":"Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.","book":"filipenses","chapter":4,"verse":7},
-  {"reference":"Salmos 90:12","text":"Enséñanos de tal modo a contar nuestros días, que traigamos al corazón sabiduría.","book":"salmos","chapter":90,"verse":12},
-  {"reference":"Proverbios 17:17","text":"En todo tiempo ama el amigo, y es como un hermano en tiempo de angustia.","book":"proverbios","chapter":17,"verse":17},
-  {"reference":"Eclesiastés 4:9","text":"Mejores son dos que uno; porque tienen mejor paga de su trabajo.","book":"eclesiastes","chapter":4,"verse":9},
-  {"reference":"Salmos 19:14","text":"Sean gratos los dichos de mi boca y la meditación de mi corazón delante de ti, oh Jehová, roca mía, y redentor mío.","book":"salmos","chapter":19,"verse":14},
-  {"reference":"Romanos 10:9","text":"Que si confesares con tu boca que Jesús es el Señor, y creyeres en tu corazón que Dios le levantó de los muertos, serás salvo.","book":"romanos","chapter":10,"verse":9},
-  {"reference":"Juan 15:5","text":"Yo soy la vid, vosotros los pámpanos; el que permanece en mí, y yo en él, éste lleva mucho fruto.","book":"juan","chapter":15,"verse":5},
-  {"reference":"Salmos 51:10","text":"Crea en mí, oh Dios, un corazón limpio, y renueva un espíritu recto dentro de mí.","book":"salmos","chapter":51,"verse":10},
-  {"reference":"Mateo 22:37","text":"Amarás al Señor tu Dios con todo tu corazón, y con toda tu alma, y con toda tu mente.","book":"mateo","chapter":22,"verse":37},
-  {"reference":"Isaías 26:3","text":"Tú guardarás en completa paz a aquel cuyo pensamiento en ti persevera; porque en ti ha confiado.","book":"isaias","chapter":26,"verse":3},
-  {"reference":"Salmos 118:24","text":"Este es el día que hizo Jehová; nos gozaremos y alegraremos en él.","book":"salmos","chapter":118,"verse":24},
-  {"reference":"Proverbios 27:17","text":"Hierro con hierro se aguza; y así el hombre aguza el rostro de su amigo.","book":"proverbios","chapter":27,"verse":17},
-  {"reference":"Marcos 11:24","text":"Por tanto, os digo que todo lo que pidiereis orando, creed que lo recibiréis, y os vendrá.","book":"marcos","chapter":11,"verse":24},
-  {"reference":"1 Juan 1:9","text":"Si confesamos nuestros pecados, él es fiel y justo para perdonar nuestros pecados, y limpiarnos de toda maldad.","book":"1juan","chapter":1,"verse":9},
-  {"reference":"Salmos 32:8","text":"Te haré entender, y te enseñaré el camino en que debes andar; sobre ti fijaré mis ojos.","book":"salmos","chapter":32,"verse":8},
-  {"reference":"Efesios 4:32","text":"Antes sed benignos unos con otros, misericordiosos, perdonándoos unos a otros, como Dios también os perdonó a vosotros en Cristo.","book":"efesios","chapter":4,"verse":32},
-  {"reference":"Mateo 18:20","text":"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.","book":"mateo","chapter":18,"verse":20},
-  {"reference":"Salmos 56:3","text":"En el día que temo, yo en ti confío.","book":"salmos","chapter":56,"verse":3},
-  {"reference":"Salmos 62:1","text":"En Dios solamente está acallada mi alma; de él viene mi salvación.","book":"salmos","chapter":62,"verse":1},
-  {"reference":"Hebreos 4:16","text":"Acerquémonos, pues, confiadamente al trono de la gracia, para alcanzar misericordia y hallar gracia para el oportuno socorro.","book":"hebreos","chapter":4,"verse":16},
-  {"reference":"Juan 16:33","text":"Estas cosas os he hablado para que en mí tengáis paz. En el mundo tendréis aflicción; pero confiad, yo he vencido al mundo.","book":"juan","chapter":16,"verse":33},
-  {"reference":"Salmos 145:18","text":"Cercano está Jehová a todos los que le invocan, a todos los que le invocan de veras.","book":"salmos","chapter":145,"verse":18},
-  {"reference":"Romanos 12:12","text":"Gozosos en la esperanza; sufridos en la tribulación; constantes en la oración.","book":"romanos","chapter":12,"verse":12},
-  {"reference":"Proverbios 4:23","text":"Sobre toda cosa guardada, guarda tu corazón; porque de él mana la vida.","book":"proverbios","chapter":4,"verse":23},
-  {"reference":"Isaías 43:2","text":"Cuando pases por las aguas, yo estaré contigo; y si por los ríos, no te anegarán.","book":"isaias","chapter":43,"verse":2},
-  {"reference":"Salmos 28:7","text":"Jehová es mi fortaleza y mi escudo; en él confió mi corazón, y fui ayudado.","book":"salmos","chapter":28,"verse":7},
-  {"reference":"Mateo 5:6","text":"Bienaventurados los que tienen hambre y sed de justicia, porque ellos serán saciados.","book":"mateo","chapter":5,"verse":6},
-  {"reference":"Apocalipsis 3:20","text":"He aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él.","book":"apocalipsis","chapter":3,"verse":20},
-  {"reference":"Salmos 100:5","text":"Porque Jehová es bueno; para siempre es su misericordia, y su verdad por todas las generaciones.","book":"salmos","chapter":100,"verse":5},
-  {"reference":"1 Pedro 2:9","text":"Mas vosotros sois linaje escogido, real sacerdocio, nación santa, pueblo adquirido por Dios.","book":"1pedro","chapter":2,"verse":9},
-  {"reference":"Lucas 1:37","text":"Porque nada hay imposible para Dios.","book":"lucas","chapter":1,"verse":37},
-  {"reference":"Salmos 86:5","text":"Porque tú, Señor, eres bueno y perdonador, y grande en misericordia para con todos los que te invocan.","book":"salmos","chapter":86,"verse":5},
-  {"reference":"Romanos 6:23","text":"Porque la paga del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús Señor nuestro.","book":"romanos","chapter":6,"verse":23},
-  {"reference":"Juan 1:12","text":"Mas a todos los que le recibieron, a los que creen en su nombre, les dio potestad de ser hechos hijos de Dios.","book":"juan","chapter":1,"verse":12},
-  {"reference":"Salmos 30:5","text":"Por la noche durará el lloro, y a la mañana vendrá la alegría.","book":"salmos","chapter":30,"verse":5},
-  {"reference":"Mateo 19:26","text":"Para los hombres esto es imposible; mas para Dios todo es posible.","book":"mateo","chapter":19,"verse":26},
-  {"reference":"Gálatas 6:9","text":"No nos cansemos, pues, de hacer bien; porque a su tiempo segaremos, si no desmayamos.","book":"galatas","chapter":6,"verse":9},
-  {"reference":"Salmos 1:1","text":"Bienaventurado el varón que no anduvo en consejo de malos, ni estuvo en camino de pecadores.","book":"salmos","chapter":1,"verse":1},
-  {"reference":"Proverbios 22:6","text":"Instruye al niño en su camino, y aun cuando fuere viejo no se apartará de él.","book":"proverbios","chapter":22,"verse":6},
-  {"reference":"Salmos 42:1","text":"Como el ciervo brama por las corrientes de las aguas, así clama por ti, oh Dios, el alma mía.","book":"salmos","chapter":42,"verse":1},
-  {"reference":"Juan 10:10","text":"El ladrón no viene sino para hurtar y matar y destruir; yo he venido para que tengan vida, y para que la tengan en abundancia.","book":"juan","chapter":10,"verse":10},
-  {"reference":"Salmos 23:4","text":"Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo.","book":"salmos","chapter":23,"verse":4},
-  {"reference":"Efesios 6:10","text":"Por lo demás, hermanos míos, fortaleceos en el Señor, y en el poder de su fuerza.","book":"efesios","chapter":6,"verse":10},
-  {"reference":"Isaías 53:5","text":"Mas él herido fue por nuestras rebeliones, molido por nuestros pecados; el castigo de nuestra paz fue sobre él, y por su llaga fuimos nosotros curados.","book":"isaias","chapter":53,"verse":5},
-  {"reference":"Salmos 84:11","text":"Porque sol y escudo es Jehová Dios; gracia y gloria dará Jehová. No quitará el bien a los que andan en integridad.","book":"salmos","chapter":84,"verse":11},
-  {"reference":"Mateo 6:21","text":"Porque donde esté vuestro tesoro, allí estará también vuestro corazón.","book":"mateo","chapter":6,"verse":21},
-  {"reference":"Salmos 147:3","text":"Él sana a los quebrantados de corazón, y venda sus heridas.","book":"salmos","chapter":147,"verse":3},
-  {"reference":"Santiago 4:8","text":"Acercaos a Dios, y él se acercará a vosotros.","book":"santiago","chapter":4,"verse":8},
-  {"reference":"Salmos 18:2","text":"Jehová, roca mía y castillo mío, y mi libertador; Dios mío, fortaleza mía, en él confiaré.","book":"salmos","chapter":18,"verse":2},
-  {"reference":"Romanos 8:1","text":"Ahora, pues, ninguna condenación hay para los que están en Cristo Jesús.","book":"romanos","chapter":8,"verse":1},
-  {"reference":"Hebreos 12:1","text":"Despojémonos de todo peso y del pecado que nos asedia, y corramos con paciencia la carrera que tenemos por delante.","book":"hebreos","chapter":12,"verse":1},
-  {"reference":"Salmos 8:3","text":"Cuando veo tus cielos, obra de tus dedos, la luna y las estrellas que tú formaste, digo: ¿Qué es el hombre, para que tengas de él memoria?","book":"salmos","chapter":8,"verse":3},
-  {"reference":"1 Crónicas 16:11","text":"Buscad a Jehová y su poder; buscad su rostro continuamente.","book":"1cronicas","chapter":16,"verse":11},
-  {"reference":"Salmos 116:1","text":"Amo a Jehová, pues ha oído mi voz y mis súplicas.","book":"salmos","chapter":116,"verse":1},
-  {"reference":"Mateo 5:8","text":"Bienaventurados los de limpio corazón, porque ellos verán a Dios.","book":"mateo","chapter":5,"verse":8},
-  {"reference":"Juan 14:6","text":"Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí.","book":"juan","chapter":14,"verse":6},
-  {"reference":"Salmos 25:4","text":"Muéstrame, oh Jehová, tus caminos; enséñame tus sendas.","book":"salmos","chapter":25,"verse":4},
-  {"reference":"Filipenses 2:3","text":"Nada hagáis por contienda o por vanagloria; antes bien con humildad, estimando cada uno a los demás como superiores a él mismo.","book":"filipenses","chapter":2,"verse":3},
-  {"reference":"Romanos 14:8","text":"Pues si vivimos, para el Señor vivimos; y si morimos, para el Señor morimos.","book":"romanos","chapter":14,"verse":8},
-  {"reference":"Salmos 95:6","text":"Venid, adoremos y postrémonos; arrodillémonos delante de Jehová nuestro Hacedor.","book":"salmos","chapter":95,"verse":6},
-  {"reference":"Isaías 12:2","text":"He aquí Dios es salvación mía; me aseguraré y no temeré; porque mi fortaleza y mi canción es JAH Jehová.","book":"isaias","chapter":12,"verse":2},
-  {"reference":"Salmos 33:20","text":"Nuestra alma espera a Jehová; nuestra ayuda y nuestro escudo es él.","book":"salmos","chapter":33,"verse":20},
-  {"reference":"Mateo 26:41","text":"Velad y orad, para que no entréis en tentación; el espíritu a la verdad está dispuesto, pero la carne es débil.","book":"mateo","chapter":26,"verse":41},
-  {"reference":"Salmos 138:8","text":"Jehová cumplirá su propósito en mí; tu misericordia, oh Jehová, es para siempre.","book":"salmos","chapter":138,"verse":8},
-  {"reference":"Juan 13:34","text":"Un mandamiento nuevo os doy: Que os améis unos a otros; como yo os he amado, que también os améis unos a otros.","book":"juan","chapter":13,"verse":34},
-  {"reference":"Salmos 5:3","text":"Oh Jehová, de mañana oirás mi voz; de mañana me presentaré delante de ti, y esperaré.","book":"salmos","chapter":5,"verse":3}
+  {
+    "reference": "Juan 3:16",
+    "text": "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.",
+    "book": "juan",
+    "chapter": 3,
+    "verse": 16,
+    "temas": [
+      "amor",
+      "fe",
+      "familia"
+    ]
+  },
+  {
+    "reference": "Salmos 23:1",
+    "text": "Jehová es mi pastor; nada me faltará.",
+    "book": "salmos",
+    "chapter": 23,
+    "verse": 1,
+    "temas": [
+      "perdon"
+    ]
+  },
+  {
+    "reference": "Filipenses 4:13",
+    "text": "Todo lo puedo en Cristo que me fortalece.",
+    "book": "filipenses",
+    "chapter": 4,
+    "verse": 13,
+    "temas": [
+      "fe"
+    ]
+  },
+  {
+    "reference": "Proverbios 3:5",
+    "text": "Fíate de Jehová de todo tu corazón, y no te apoyes en tu propia prudencia.",
+    "book": "proverbios",
+    "chapter": 3,
+    "verse": 5,
+    "temas": [
+      "amor"
+    ]
+  },
+  {
+    "reference": "Jeremías 29:11",
+    "text": "Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal, para daros el fin que esperáis.",
+    "book": "jeremias",
+    "chapter": 29,
+    "verse": 11,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Romanos 8:28",
+    "text": "Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien.",
+    "book": "romanos",
+    "chapter": 8,
+    "verse": 28,
+    "temas": [
+      "ansiedad"
+    ]
+  },
+  {
+    "reference": "Isaías 41:10",
+    "text": "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo.",
+    "book": "isaias",
+    "chapter": 41,
+    "verse": 10,
+    "temas": [
+      "soledad",
+      "miedo"
+    ]
+  },
+  {
+    "reference": "Mateo 11:28",
+    "text": "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.",
+    "book": "mateo",
+    "chapter": 11,
+    "verse": 28,
+    "temas": [
+      "fuerza"
+    ]
+  },
+  {
+    "reference": "Salmos 46:1",
+    "text": "Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.",
+    "book": "salmos",
+    "chapter": 46,
+    "verse": 1,
+    "temas": [
+      "fuerza"
+    ]
+  },
+  {
+    "reference": "Gálatas 5:22",
+    "text": "Mas el fruto del Espíritu es amor, gozo, paz, paciencia, benignidad, bondad, fe.",
+    "book": "galatas",
+    "chapter": 5,
+    "verse": 22,
+    "temas": [
+      "amor",
+      "fe"
+    ]
+  },
+  {
+    "reference": "1 Corintios 13:4",
+    "text": "El amor es sufrido, es benigno; el amor no tiene envidia, no es jactancioso, no se envanece.",
+    "book": "1corintios",
+    "chapter": 13,
+    "verse": 4,
+    "temas": [
+      "amor"
+    ]
+  },
+  {
+    "reference": "Salmos 119:105",
+    "text": "Lámpara es a mis pies tu palabra, y lumbrera a mi camino.",
+    "book": "salmos",
+    "chapter": 119,
+    "verse": 105,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Mateo 6:33",
+    "text": "Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas.",
+    "book": "mateo",
+    "chapter": 6,
+    "verse": 33,
+    "temas": [
+      "sanidad"
+    ]
+  },
+  {
+    "reference": "Josué 1:9",
+    "text": "Esfuérzate y sé valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en dondequiera que vayas.",
+    "book": "josue",
+    "chapter": 1,
+    "verse": 9,
+    "temas": [
+      "soledad",
+      "miedo"
+    ]
+  },
+  {
+    "reference": "Salmos 27:1",
+    "text": "Jehová es mi luz y mi salvación; ¿de quién temeré?",
+    "book": "salmos",
+    "chapter": 27,
+    "verse": 1,
+    "temas": [
+      "miedo"
+    ]
+  },
+  {
+    "reference": "Romanos 12:2",
+    "text": "No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento.",
+    "book": "romanos",
+    "chapter": 12,
+    "verse": 2,
+    "temas": [
+      "miedo"
+    ]
+  },
+  {
+    "reference": "Efesios 2:8",
+    "text": "Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios.",
+    "book": "efesios",
+    "chapter": 2,
+    "verse": 8,
+    "temas": [
+      "fe"
+    ]
+  },
+  {
+    "reference": "1 Juan 4:19",
+    "text": "Nosotros le amamos a él, porque él nos amó primero.",
+    "book": "1juan",
+    "chapter": 4,
+    "verse": 19,
+    "temas": [
+      "amor"
+    ]
+  },
+  {
+    "reference": "Hebreos 11:1",
+    "text": "Es, pues, la fe la certeza de lo que se espera, la convicción de lo que no se ve.",
+    "book": "hebreos",
+    "chapter": 11,
+    "verse": 1,
+    "temas": [
+      "fe",
+      "esperanza"
+    ]
+  },
+  {
+    "reference": "Salmos 37:4",
+    "text": "Deléitate asimismo en Jehová, y él te concederá las peticiones de tu corazón.",
+    "book": "salmos",
+    "chapter": 37,
+    "verse": 4,
+    "temas": [
+      "gratitud"
+    ]
+  },
+  {
+    "reference": "Proverbios 16:3",
+    "text": "Encomienda a Jehová tus obras, y tus pensamientos serán afirmados.",
+    "book": "proverbios",
+    "chapter": 16,
+    "verse": 3,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Mateo 5:16",
+    "text": "Así alumbre vuestra luz delante de los hombres, para que vean vuestras buenas obras, y glorifiquen a vuestro Padre que está en los cielos.",
+    "book": "mateo",
+    "chapter": 5,
+    "verse": 16,
+    "temas": [
+      "familia"
+    ]
+  },
+  {
+    "reference": "Salmos 103:2",
+    "text": "Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios.",
+    "book": "salmos",
+    "chapter": 103,
+    "verse": 2,
+    "temas": [
+      "gratitud"
+    ]
+  },
+  {
+    "reference": "Lamentaciones 3:22",
+    "text": "Por la misericordia de Jehová no hemos sido consumidos, porque nunca decayeron sus misericordias.",
+    "book": "lamentaciones",
+    "chapter": 3,
+    "verse": 22,
+    "temas": [
+      "sanidad"
+    ]
+  },
+  {
+    "reference": "Romanos 5:8",
+    "text": "Mas Dios muestra su amor para con nosotros, en que siendo aún pecadores, Cristo murió por nosotros.",
+    "book": "romanos",
+    "chapter": 5,
+    "verse": 8,
+    "temas": [
+      "amor"
+    ]
+  },
+  {
+    "reference": "2 Timoteo 1:7",
+    "text": "Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.",
+    "book": "2timoteo",
+    "chapter": 1,
+    "verse": 7,
+    "temas": [
+      "amor",
+      "fuerza"
+    ]
+  },
+  {
+    "reference": "Salmos 91:1",
+    "text": "El que habita al abrigo del Altísimo morará bajo la sombra del Omnipotente.",
+    "book": "salmos",
+    "chapter": 91,
+    "verse": 1,
+    "temas": [
+      "perdon"
+    ]
+  },
+  {
+    "reference": "Mateo 7:7",
+    "text": "Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá.",
+    "book": "mateo",
+    "chapter": 7,
+    "verse": 7,
+    "temas": [
+      "gratitud"
+    ]
+  },
+  {
+    "reference": "Santiago 1:5",
+    "text": "Y si alguno de vosotros tiene falta de sabiduría, pídala a Dios, el cual da a todos abundantemente y sin reproche, y le será dada.",
+    "book": "santiago",
+    "chapter": 1,
+    "verse": 5,
+    "temas": [
+      "matrimonio"
+    ]
+  },
+  {
+    "reference": "1 Pedro 5:7",
+    "text": "Echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros.",
+    "book": "1pedro",
+    "chapter": 5,
+    "verse": 7,
+    "temas": [
+      "ansiedad"
+    ]
+  },
+  {
+    "reference": "Salmos 34:8",
+    "text": "Gustad, y ved que es bueno Jehová; dichoso el hombre que confía en él.",
+    "book": "salmos",
+    "chapter": 34,
+    "verse": 8,
+    "temas": [
+      "fe"
+    ]
+  },
+  {
+    "reference": "Eclesiastés 3:1",
+    "text": "Todo tiene su tiempo, y todo lo que se quiere debajo del cielo tiene su hora.",
+    "book": "eclesiastes",
+    "chapter": 3,
+    "verse": 1,
+    "temas": [
+      "esperanza"
+    ]
+  },
+  {
+    "reference": "Juan 14:27",
+    "text": "La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo.",
+    "book": "juan",
+    "chapter": 14,
+    "verse": 27,
+    "temas": [
+      "miedo"
+    ]
+  },
+  {
+    "reference": "Salmos 16:11",
+    "text": "Me mostrarás la senda de la vida; en tu presencia hay plenitud de gozo.",
+    "book": "salmos",
+    "chapter": 16,
+    "verse": 11,
+    "temas": [
+      "perdon"
+    ]
+  },
+  {
+    "reference": "Isaías 40:31",
+    "text": "Pero los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas.",
+    "book": "isaias",
+    "chapter": 40,
+    "verse": 31,
+    "temas": [
+      "esperanza",
+      "fuerza"
+    ]
+  },
+  {
+    "reference": "Romanos 15:13",
+    "text": "Y el Dios de esperanza os llene de todo gozo y paz en el creer, para que abundéis en esperanza por el poder del Espíritu Santo.",
+    "book": "romanos",
+    "chapter": 15,
+    "verse": 13,
+    "temas": [
+      "fe",
+      "esperanza",
+      "fuerza"
+    ]
+  },
+  {
+    "reference": "Mateo 28:20",
+    "text": "Y he aquí yo estoy con vosotros todos los días, hasta el fin del mundo.",
+    "book": "mateo",
+    "chapter": 28,
+    "verse": 20,
+    "temas": [
+      "esperanza"
+    ]
+  },
+  {
+    "reference": "Salmos 121:1",
+    "text": "Alzaré mis ojos a los montes; ¿de dónde vendrá mi socorro?",
+    "book": "salmos",
+    "chapter": 121,
+    "verse": 1,
+    "temas": [
+      "sanidad"
+    ]
+  },
+  {
+    "reference": "1 Tesalonicenses 5:16",
+    "text": "Estad siempre gozosos. Orad sin cesar. Dad gracias en todo.",
+    "book": "1tesalonicenses",
+    "chapter": 5,
+    "verse": 16,
+    "temas": [
+      "gratitud"
+    ]
+  },
+  {
+    "reference": "Colosenses 3:23",
+    "text": "Y todo lo que hagáis, hacedlo de corazón, como para el Señor y no para los hombres.",
+    "book": "colosenses",
+    "chapter": 3,
+    "verse": 23,
+    "temas": [
+      "matrimonio"
+    ]
+  },
+  {
+    "reference": "Proverbios 18:10",
+    "text": "Torre fuerte es el nombre de Jehová; a él correrá el justo, y será levantado.",
+    "book": "proverbios",
+    "chapter": 18,
+    "verse": 10,
+    "temas": [
+      "amor"
+    ]
+  },
+  {
+    "reference": "Salmos 55:22",
+    "text": "Echa sobre Jehová tu carga, y él te sustentará; no dejará para siempre caído al justo.",
+    "book": "salmos",
+    "chapter": 55,
+    "verse": 22,
+    "temas": [
+      "esperanza"
+    ]
+  },
+  {
+    "reference": "Mateo 5:9",
+    "text": "Bienaventurados los pacificadores, porque ellos serán llamados hijos de Dios.",
+    "book": "mateo",
+    "chapter": 5,
+    "verse": 9,
+    "temas": [
+      "familia"
+    ]
+  },
+  {
+    "reference": "Juan 8:32",
+    "text": "Y conoceréis la verdad, y la verdad os hará libres.",
+    "book": "juan",
+    "chapter": 8,
+    "verse": 32,
+    "temas": [
+      "familia"
+    ]
+  },
+  {
+    "reference": "Salmos 139:14",
+    "text": "Te alabaré; porque formidables, maravillosas son tus obras; estoy maravillado.",
+    "book": "salmos",
+    "chapter": 139,
+    "verse": 14,
+    "temas": [
+      "matrimonio"
+    ]
+  },
+  {
+    "reference": "Romanos 8:38",
+    "text": "Por lo cual estoy seguro de que ni la muerte, ni la vida, ni ángeles, ni principados, podrán separarnos del amor de Dios.",
+    "book": "romanos",
+    "chapter": 8,
+    "verse": 38,
+    "temas": [
+      "amor",
+      "duelo"
+    ]
+  },
+  {
+    "reference": "Hebreos 13:5",
+    "text": "Sean vuestras costumbres sin avaricia, contentos con lo que tenéis ahora; porque él dijo: No te desampararé, ni te dejaré.",
+    "book": "hebreos",
+    "chapter": 13,
+    "verse": 5,
+    "temas": [
+      "soledad"
+    ]
+  },
+  {
+    "reference": "1 Corintios 10:13",
+    "text": "No os ha sobrevenido ninguna tentación que no sea humana; pero fiel es Dios, que no os dejará ser tentados más de lo que podéis resistir.",
+    "book": "1corintios",
+    "chapter": 10,
+    "verse": 13,
+    "temas": [
+      "gratitud"
+    ]
+  },
+  {
+    "reference": "Salmos 73:26",
+    "text": "Mi carne y mi corazón desfallecen; mas la roca de mi corazón y mi porción es Dios para siempre.",
+    "book": "salmos",
+    "chapter": 73,
+    "verse": 26,
+    "temas": [
+      "esperanza"
+    ]
+  },
+  {
+    "reference": "Mateo 6:34",
+    "text": "Así que, no os afanéis por el día de mañana, porque el día de mañana traerá su afán.",
+    "book": "mateo",
+    "chapter": 6,
+    "verse": 34,
+    "temas": [
+      "ansiedad"
+    ]
+  },
+  {
+    "reference": "Filipenses 4:6",
+    "text": "Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias.",
+    "book": "filipenses",
+    "chapter": 4,
+    "verse": 6,
+    "temas": [
+      "ansiedad",
+      "gratitud"
+    ]
+  },
+  {
+    "reference": "Filipenses 4:7",
+    "text": "Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.",
+    "book": "filipenses",
+    "chapter": 4,
+    "verse": 7,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Salmos 90:12",
+    "text": "Enséñanos de tal modo a contar nuestros días, que traigamos al corazón sabiduría.",
+    "book": "salmos",
+    "chapter": 90,
+    "verse": 12,
+    "temas": [
+      "amor"
+    ]
+  },
+  {
+    "reference": "Proverbios 17:17",
+    "text": "En todo tiempo ama el amigo, y es como un hermano en tiempo de angustia.",
+    "book": "proverbios",
+    "chapter": 17,
+    "verse": 17,
+    "temas": [
+      "amor"
+    ]
+  },
+  {
+    "reference": "Eclesiastés 4:9",
+    "text": "Mejores son dos que uno; porque tienen mejor paga de su trabajo.",
+    "book": "eclesiastes",
+    "chapter": 4,
+    "verse": 9,
+    "temas": [
+      "duelo"
+    ]
+  },
+  {
+    "reference": "Salmos 19:14",
+    "text": "Sean gratos los dichos de mi boca y la meditación de mi corazón delante de ti, oh Jehová, roca mía, y redentor mío.",
+    "book": "salmos",
+    "chapter": 19,
+    "verse": 14,
+    "temas": [
+      "duelo"
+    ]
+  },
+  {
+    "reference": "Romanos 10:9",
+    "text": "Que si confesares con tu boca que Jesús es el Señor, y creyeres en tu corazón que Dios le levantó de los muertos, serás salvo.",
+    "book": "romanos",
+    "chapter": 10,
+    "verse": 9,
+    "temas": [
+      "fe"
+    ]
+  },
+  {
+    "reference": "Juan 15:5",
+    "text": "Yo soy la vid, vosotros los pámpanos; el que permanece en mí, y yo en él, éste lleva mucho fruto.",
+    "book": "juan",
+    "chapter": 15,
+    "verse": 5,
+    "temas": [
+      "matrimonio"
+    ]
+  },
+  {
+    "reference": "Salmos 51:10",
+    "text": "Crea en mí, oh Dios, un corazón limpio, y renueva un espíritu recto dentro de mí.",
+    "book": "salmos",
+    "chapter": 51,
+    "verse": 10,
+    "temas": [
+      "esperanza"
+    ]
+  },
+  {
+    "reference": "Mateo 22:37",
+    "text": "Amarás al Señor tu Dios con todo tu corazón, y con toda tu alma, y con toda tu mente.",
+    "book": "mateo",
+    "chapter": 22,
+    "verse": 37,
+    "temas": [
+      "gratitud"
+    ]
+  },
+  {
+    "reference": "Isaías 26:3",
+    "text": "Tú guardarás en completa paz a aquel cuyo pensamiento en ti persevera; porque en ti ha confiado.",
+    "book": "isaias",
+    "chapter": 26,
+    "verse": 3,
+    "temas": [
+      "perdon"
+    ]
+  },
+  {
+    "reference": "Salmos 118:24",
+    "text": "Este es el día que hizo Jehová; nos gozaremos y alegraremos en él.",
+    "book": "salmos",
+    "chapter": 118,
+    "verse": 24,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Proverbios 27:17",
+    "text": "Hierro con hierro se aguza; y así el hombre aguza el rostro de su amigo.",
+    "book": "proverbios",
+    "chapter": 27,
+    "verse": 17,
+    "temas": [
+      "familia"
+    ]
+  },
+  {
+    "reference": "Marcos 11:24",
+    "text": "Por tanto, os digo que todo lo que pidiereis orando, creed que lo recibiréis, y os vendrá.",
+    "book": "marcos",
+    "chapter": 11,
+    "verse": 24,
+    "temas": [
+      "fe"
+    ]
+  },
+  {
+    "reference": "1 Juan 1:9",
+    "text": "Si confesamos nuestros pecados, él es fiel y justo para perdonar nuestros pecados, y limpiarnos de toda maldad.",
+    "book": "1juan",
+    "chapter": 1,
+    "verse": 9,
+    "temas": [
+      "fe",
+      "perdon"
+    ]
+  },
+  {
+    "reference": "Salmos 32:8",
+    "text": "Te haré entender, y te enseñaré el camino en que debes andar; sobre ti fijaré mis ojos.",
+    "book": "salmos",
+    "chapter": 32,
+    "verse": 8,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Efesios 4:32",
+    "text": "Antes sed benignos unos con otros, misericordiosos, perdonándoos unos a otros, como Dios también os perdonó a vosotros en Cristo.",
+    "book": "efesios",
+    "chapter": 4,
+    "verse": 32,
+    "temas": [
+      "perdon"
+    ]
+  },
+  {
+    "reference": "Mateo 18:20",
+    "text": "Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.",
+    "book": "mateo",
+    "chapter": 18,
+    "verse": 20,
+    "temas": [
+      "familia"
+    ]
+  },
+  {
+    "reference": "Salmos 56:3",
+    "text": "En el día que temo, yo en ti confío.",
+    "book": "salmos",
+    "chapter": 56,
+    "verse": 3,
+    "temas": [
+      "duelo"
+    ]
+  },
+  {
+    "reference": "Salmos 62:1",
+    "text": "En Dios solamente está acallada mi alma; de él viene mi salvación.",
+    "book": "salmos",
+    "chapter": 62,
+    "verse": 1,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Hebreos 4:16",
+    "text": "Acerquémonos, pues, confiadamente al trono de la gracia, para alcanzar misericordia y hallar gracia para el oportuno socorro.",
+    "book": "hebreos",
+    "chapter": 4,
+    "verse": 16,
+    "temas": [
+      "fe"
+    ]
+  },
+  {
+    "reference": "Juan 16:33",
+    "text": "Estas cosas os he hablado para que en mí tengáis paz. En el mundo tendréis aflicción; pero confiad, yo he vencido al mundo.",
+    "book": "juan",
+    "chapter": 16,
+    "verse": 33,
+    "temas": [
+      "gratitud"
+    ]
+  },
+  {
+    "reference": "Salmos 145:18",
+    "text": "Cercano está Jehová a todos los que le invocan, a todos los que le invocan de veras.",
+    "book": "salmos",
+    "chapter": 145,
+    "verse": 18,
+    "temas": [
+      "miedo"
+    ]
+  },
+  {
+    "reference": "Romanos 12:12",
+    "text": "Gozosos en la esperanza; sufridos en la tribulación; constantes en la oración.",
+    "book": "romanos",
+    "chapter": 12,
+    "verse": 12,
+    "temas": [
+      "esperanza"
+    ]
+  },
+  {
+    "reference": "Proverbios 4:23",
+    "text": "Sobre toda cosa guardada, guarda tu corazón; porque de él mana la vida.",
+    "book": "proverbios",
+    "chapter": 4,
+    "verse": 23,
+    "temas": [
+      "miedo"
+    ]
+  },
+  {
+    "reference": "Isaías 43:2",
+    "text": "Cuando pases por las aguas, yo estaré contigo; y si por los ríos, no te anegarán.",
+    "book": "isaias",
+    "chapter": 43,
+    "verse": 2,
+    "temas": [
+      "soledad"
+    ]
+  },
+  {
+    "reference": "Salmos 28:7",
+    "text": "Jehová es mi fortaleza y mi escudo; en él confió mi corazón, y fui ayudado.",
+    "book": "salmos",
+    "chapter": 28,
+    "verse": 7,
+    "temas": [
+      "fuerza"
+    ]
+  },
+  {
+    "reference": "Mateo 5:6",
+    "text": "Bienaventurados los que tienen hambre y sed de justicia, porque ellos serán saciados.",
+    "book": "mateo",
+    "chapter": 5,
+    "verse": 6,
+    "temas": [
+      "amor"
+    ]
+  },
+  {
+    "reference": "Apocalipsis 3:20",
+    "text": "He aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él.",
+    "book": "apocalipsis",
+    "chapter": 3,
+    "verse": 20,
+    "temas": [
+      "matrimonio"
+    ]
+  },
+  {
+    "reference": "Salmos 100:5",
+    "text": "Porque Jehová es bueno; para siempre es su misericordia, y su verdad por todas las generaciones.",
+    "book": "salmos",
+    "chapter": 100,
+    "verse": 5,
+    "temas": [
+      "fe"
+    ]
+  },
+  {
+    "reference": "1 Pedro 2:9",
+    "text": "Mas vosotros sois linaje escogido, real sacerdocio, nación santa, pueblo adquirido por Dios.",
+    "book": "1pedro",
+    "chapter": 2,
+    "verse": 9,
+    "temas": [
+      "gratitud"
+    ]
+  },
+  {
+    "reference": "Lucas 1:37",
+    "text": "Porque nada hay imposible para Dios.",
+    "book": "lucas",
+    "chapter": 1,
+    "verse": 37,
+    "temas": [
+      "soledad"
+    ]
+  },
+  {
+    "reference": "Salmos 86:5",
+    "text": "Porque tú, Señor, eres bueno y perdonador, y grande en misericordia para con todos los que te invocan.",
+    "book": "salmos",
+    "chapter": 86,
+    "verse": 5,
+    "temas": [
+      "perdon"
+    ]
+  },
+  {
+    "reference": "Romanos 6:23",
+    "text": "Porque la paga del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús Señor nuestro.",
+    "book": "romanos",
+    "chapter": 6,
+    "verse": 23,
+    "temas": [
+      "duelo"
+    ]
+  },
+  {
+    "reference": "Juan 1:12",
+    "text": "Mas a todos los que le recibieron, a los que creen en su nombre, les dio potestad de ser hechos hijos de Dios.",
+    "book": "juan",
+    "chapter": 1,
+    "verse": 12,
+    "temas": [
+      "fe",
+      "familia"
+    ]
+  },
+  {
+    "reference": "Salmos 30:5",
+    "text": "Por la noche durará el lloro, y a la mañana vendrá la alegría.",
+    "book": "salmos",
+    "chapter": 30,
+    "verse": 5,
+    "temas": [
+      "duelo"
+    ]
+  },
+  {
+    "reference": "Mateo 19:26",
+    "text": "Para los hombres esto es imposible; mas para Dios todo es posible.",
+    "book": "mateo",
+    "chapter": 19,
+    "verse": 26,
+    "temas": [
+      "esperanza"
+    ]
+  },
+  {
+    "reference": "Gálatas 6:9",
+    "text": "No nos cansemos, pues, de hacer bien; porque a su tiempo segaremos, si no desmayamos.",
+    "book": "galatas",
+    "chapter": 6,
+    "verse": 9,
+    "temas": [
+      "duelo"
+    ]
+  },
+  {
+    "reference": "Salmos 1:1",
+    "text": "Bienaventurado el varón que no anduvo en consejo de malos, ni estuvo en camino de pecadores.",
+    "book": "salmos",
+    "chapter": 1,
+    "verse": 1,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Proverbios 22:6",
+    "text": "Instruye al niño en su camino, y aun cuando fuere viejo no se apartará de él.",
+    "book": "proverbios",
+    "chapter": 22,
+    "verse": 6,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Salmos 42:1",
+    "text": "Como el ciervo brama por las corrientes de las aguas, así clama por ti, oh Dios, el alma mía.",
+    "book": "salmos",
+    "chapter": 42,
+    "verse": 1,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Juan 10:10",
+    "text": "El ladrón no viene sino para hurtar y matar y destruir; yo he venido para que tengan vida, y para que la tengan en abundancia.",
+    "book": "juan",
+    "chapter": 10,
+    "verse": 10,
+    "temas": [
+      "familia"
+    ]
+  },
+  {
+    "reference": "Salmos 23:4",
+    "text": "Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo.",
+    "book": "salmos",
+    "chapter": 23,
+    "verse": 4,
+    "temas": [
+      "duelo",
+      "miedo"
+    ]
+  },
+  {
+    "reference": "Efesios 6:10",
+    "text": "Por lo demás, hermanos míos, fortaleceos en el Señor, y en el poder de su fuerza.",
+    "book": "efesios",
+    "chapter": 6,
+    "verse": 10,
+    "temas": [
+      "fuerza"
+    ]
+  },
+  {
+    "reference": "Isaías 53:5",
+    "text": "Mas él herido fue por nuestras rebeliones, molido por nuestros pecados; el castigo de nuestra paz fue sobre él, y por su llaga fuimos nosotros curados.",
+    "book": "isaias",
+    "chapter": 53,
+    "verse": 5,
+    "temas": [
+      "sanidad"
+    ]
+  },
+  {
+    "reference": "Salmos 84:11",
+    "text": "Porque sol y escudo es Jehová Dios; gracia y gloria dará Jehová. No quitará el bien a los que andan en integridad.",
+    "book": "salmos",
+    "chapter": 84,
+    "verse": 11,
+    "temas": [
+      "familia"
+    ]
+  },
+  {
+    "reference": "Mateo 6:21",
+    "text": "Porque donde esté vuestro tesoro, allí estará también vuestro corazón.",
+    "book": "mateo",
+    "chapter": 6,
+    "verse": 21,
+    "temas": [
+      "fe"
+    ]
+  },
+  {
+    "reference": "Salmos 147:3",
+    "text": "Él sana a los quebrantados de corazón, y venda sus heridas.",
+    "book": "salmos",
+    "chapter": 147,
+    "verse": 3,
+    "temas": [
+      "sanidad"
+    ]
+  },
+  {
+    "reference": "Santiago 4:8",
+    "text": "Acercaos a Dios, y él se acercará a vosotros.",
+    "book": "santiago",
+    "chapter": 4,
+    "verse": 8,
+    "temas": [
+      "familia"
+    ]
+  },
+  {
+    "reference": "Salmos 18:2",
+    "text": "Jehová, roca mía y castillo mío, y mi libertador; Dios mío, fortaleza mía, en él confiaré.",
+    "book": "salmos",
+    "chapter": 18,
+    "verse": 2,
+    "temas": [
+      "fuerza"
+    ]
+  },
+  {
+    "reference": "Romanos 8:1",
+    "text": "Ahora, pues, ninguna condenación hay para los que están en Cristo Jesús.",
+    "book": "romanos",
+    "chapter": 8,
+    "verse": 1,
+    "temas": [
+      "duelo"
+    ]
+  },
+  {
+    "reference": "Hebreos 12:1",
+    "text": "Despojémonos de todo peso y del pecado que nos asedia, y corramos con paciencia la carrera que tenemos por delante.",
+    "book": "hebreos",
+    "chapter": 12,
+    "verse": 1,
+    "temas": [
+      "duelo"
+    ]
+  },
+  {
+    "reference": "Salmos 8:3",
+    "text": "Cuando veo tus cielos, obra de tus dedos, la luna y las estrellas que tú formaste, digo: ¿Qué es el hombre, para que tengas de él memoria?",
+    "book": "salmos",
+    "chapter": 8,
+    "verse": 3,
+    "temas": [
+      "fuerza"
+    ]
+  },
+  {
+    "reference": "1 Crónicas 16:11",
+    "text": "Buscad a Jehová y su poder; buscad su rostro continuamente.",
+    "book": "1cronicas",
+    "chapter": 16,
+    "verse": 11,
+    "temas": [
+      "fuerza"
+    ]
+  },
+  {
+    "reference": "Salmos 116:1",
+    "text": "Amo a Jehová, pues ha oído mi voz y mis súplicas.",
+    "book": "salmos",
+    "chapter": 116,
+    "verse": 1,
+    "temas": [
+      "familia"
+    ]
+  },
+  {
+    "reference": "Mateo 5:8",
+    "text": "Bienaventurados los de limpio corazón, porque ellos verán a Dios.",
+    "book": "mateo",
+    "chapter": 5,
+    "verse": 8,
+    "temas": [
+      "perdon"
+    ]
+  },
+  {
+    "reference": "Juan 14:6",
+    "text": "Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí.",
+    "book": "juan",
+    "chapter": 14,
+    "verse": 6,
+    "temas": [
+      "familia",
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Salmos 25:4",
+    "text": "Muéstrame, oh Jehová, tus caminos; enséñame tus sendas.",
+    "book": "salmos",
+    "chapter": 25,
+    "verse": 4,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Filipenses 2:3",
+    "text": "Nada hagáis por contienda o por vanagloria; antes bien con humildad, estimando cada uno a los demás como superiores a él mismo.",
+    "book": "filipenses",
+    "chapter": 2,
+    "verse": 3,
+    "temas": [
+      "fe"
+    ]
+  },
+  {
+    "reference": "Romanos 14:8",
+    "text": "Pues si vivimos, para el Señor vivimos; y si morimos, para el Señor morimos.",
+    "book": "romanos",
+    "chapter": 14,
+    "verse": 8,
+    "temas": [
+      "amor"
+    ]
+  },
+  {
+    "reference": "Salmos 95:6",
+    "text": "Venid, adoremos y postrémonos; arrodillémonos delante de Jehová nuestro Hacedor.",
+    "book": "salmos",
+    "chapter": 95,
+    "verse": 6,
+    "temas": [
+      "gratitud"
+    ]
+  },
+  {
+    "reference": "Isaías 12:2",
+    "text": "He aquí Dios es salvación mía; me aseguraré y no temeré; porque mi fortaleza y mi canción es JAH Jehová.",
+    "book": "isaias",
+    "chapter": 12,
+    "verse": 2,
+    "temas": [
+      "fuerza",
+      "miedo"
+    ]
+  },
+  {
+    "reference": "Salmos 33:20",
+    "text": "Nuestra alma espera a Jehová; nuestra ayuda y nuestro escudo es él.",
+    "book": "salmos",
+    "chapter": 33,
+    "verse": 20,
+    "temas": [
+      "esperanza"
+    ]
+  },
+  {
+    "reference": "Mateo 26:41",
+    "text": "Velad y orad, para que no entréis en tentación; el espíritu a la verdad está dispuesto, pero la carne es débil.",
+    "book": "mateo",
+    "chapter": 26,
+    "verse": 41,
+    "temas": [
+      "esperanza"
+    ]
+  },
+  {
+    "reference": "Salmos 138:8",
+    "text": "Jehová cumplirá su propósito en mí; tu misericordia, oh Jehová, es para siempre.",
+    "book": "salmos",
+    "chapter": 138,
+    "verse": 8,
+    "temas": [
+      "proposito"
+    ]
+  },
+  {
+    "reference": "Juan 13:34",
+    "text": "Un mandamiento nuevo os doy: Que os améis unos a otros; como yo os he amado, que también os améis unos a otros.",
+    "book": "juan",
+    "chapter": 13,
+    "verse": 34,
+    "temas": [
+      "sanidad"
+    ]
+  },
+  {
+    "reference": "Salmos 5:3",
+    "text": "Oh Jehová, de mañana oirás mi voz; de mañana me presentaré delante de ti, y esperaré.",
+    "book": "salmos",
+    "chapter": 5,
+    "verse": 3,
+    "temas": [
+      "esperanza"
+    ]
+  }
 ]
