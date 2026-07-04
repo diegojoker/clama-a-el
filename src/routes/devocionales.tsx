@@ -77,7 +77,7 @@ function DevocionalesPage() {
               <p className="text-lg leading-relaxed">{iaDevotional.reflection}</p>
             </div>
 
-            <Card className="p-6 bg-slate-900 text-white border-none">
+            <Card className="p-6 bg-primary text-primary-foreground border-none rounded-2xl">
               <h4 className="font-bold text-accent mb-2 flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4" />
                 Aplicación Práctica
@@ -125,14 +125,14 @@ function DevocionalesPage() {
 
       <ScrollArea className="flex-1 px-6">
         <section className="mt-4">
-          <Card className="bg-gradient-to-br from-indigo-950 via-indigo-900 to-amber-900 border-none p-4 text-white relative overflow-hidden h-auto">
+          <Card className="bg-primary text-primary-foreground border-none p-4 relative overflow-hidden h-auto rounded-2xl">
             <div className="absolute top-0 right-0 p-4 opacity-10">
               <Book className="h-24 w-24 rotate-12" />
             </div>
             <div className="relative z-10 overflow-hidden">
-              <Badge className="mb-3 bg-white/20 text-white border-none">Devocional del Día</Badge>
-              <h2 className="text-xl font-bold mb-3">Caminando en Su Luz</h2>
-              <p className="text-indigo-100/80 text-xs mb-6 line-clamp-4 overflow-hidden">
+              <Badge className="mb-3 bg-primary-foreground/15 text-primary-foreground border-none">Devocional del Día</Badge>
+              <h2 className="text-xl font-serif-verse mb-3">Caminando en Su Luz</h2>
+              <p className="text-primary-foreground/80 text-xs mb-6 line-clamp-4 overflow-hidden">
                 {daily.content}
               </p>
               <Button 
@@ -147,17 +147,17 @@ function DevocionalesPage() {
         </section>
 
         <section className="mt-8">
-          <Card className="p-4 border-accent/30 bg-white dark:bg-slate-900 shadow-xl shadow-accent/5 overflow-hidden">
+          <Card className="p-4 border-accent/30 bg-card shadow-xl shadow-accent/5 overflow-hidden rounded-2xl">
             <div className="flex items-center gap-2 text-accent mb-2">
               <Sparkles className="h-4 w-4" />
               <span className="text-[10px] font-bold uppercase tracking-widest">Lovable AI</span>
             </div>
-            <h3 className="text-lg font-bold mb-1">Devocional para ti hoy</h3>
+            <h3 className="text-lg font-serif-verse mb-1">Devocional para ti hoy</h3>
             <p className="text-muted-foreground text-xs mb-6">
               Basado en cómo te sientes, la IA crea una reflexión especial para ti.
             </p>
             <Button 
-              className="w-full bg-accent hover:bg-accent/90 text-white font-bold h-12"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-12 rounded-2xl"
               onClick={handleGenerateIa}
               disabled={isGeneratingIa}
             >
