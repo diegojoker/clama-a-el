@@ -63,27 +63,31 @@
 
 :root {
   --radius: 0.625rem;
-  /* Versículo del Día — light theme */
-  --background: oklch(0.99 0.005 90);
-  --foreground: oklch(0.25 0.04 250);
+  /* Serene watercolor — light theme */
+  /* bg #faf7f2 cream */
+  --background: oklch(0.972 0.008 85);
+  /* text #2c1810 warm dark brown */
+  --foreground: oklch(0.25 0.03 45);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.25 0.04 250);
+  --card-foreground: oklch(0.25 0.03 45);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.25 0.04 250);
+  --popover-foreground: oklch(0.25 0.03 45);
   /* deep navy #1a3a5c */
   --primary: oklch(0.36 0.06 250);
-  --primary-foreground: oklch(0.99 0.005 90);
-  --secondary: oklch(0.96 0.01 250);
-  --secondary-foreground: oklch(0.36 0.06 250);
-  --muted: oklch(0.95 0.008 250);
-  --muted-foreground: oklch(0.5 0.03 250);
+  --primary-foreground: oklch(0.972 0.008 85);
+  --secondary: oklch(0.94 0.012 80);
+  --secondary-foreground: oklch(0.25 0.03 45);
+  --muted: oklch(0.93 0.012 80);
+  /* muted text #9e8e7e */
+  --muted-foreground: oklch(0.63 0.02 60);
   /* gold #c9a84c */
   --accent: oklch(0.75 0.13 85);
-  --accent-foreground: oklch(0.25 0.04 250);
+  --accent-foreground: oklch(0.25 0.03 45);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.9 0.015 250);
-  --input: oklch(0.92 0.012 250);
+  /* border #e8e0d5 warm beige */
+  --border: oklch(0.9 0.014 80);
+  --input: oklch(0.92 0.014 80);
   --ring: oklch(0.75 0.13 85);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);

@@ -96,7 +96,11 @@ function Home() {
           <BibleSearch />
         </div>
 
-        <VerseCard verse={verse} />
+        <VerseCard
+          verse={verse}
+          onInterpret={() => deductGracias(1, "Interpretar versículo")}
+          onShare={onShare}
+        />
 
         <div className="mt-6 grid grid-cols-3 gap-3">
           <button
