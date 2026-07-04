@@ -120,29 +120,29 @@ function GraciasStore() {
 
 function ActionCard({ icon, title, reward, onClick }: { icon: React.ReactNode, title: string, reward: string, onClick: () => void }) {
   return (
-    <button 
-      onClick={onClick}
-      className="w-full flex items-center justify-between p-4 rounded-2xl bg-card border border-border hover:border-accent/30 transition-colors"
-    >
-      <div className="flex items-center gap-3">
-        <div className="p-2 rounded-xl bg-muted">
+    <div className="w-full flex items-center justify-between gap-3 p-4 rounded-2xl bg-card border border-border">
+      <div className="flex items-center gap-3 min-w-0">
+        <div className="p-2 rounded-xl bg-muted shrink-0">
           {icon}
         </div>
-        <span className="font-medium text-foreground">{title}</span>
+        <span className="font-medium text-foreground truncate">{title}</span>
       </div>
-      <div className="flex items-center gap-1 font-bold text-accent">
-        <Star className="h-3 w-3 fill-accent" />
+      <button
+        type="button"
+        onClick={onClick}
+        className="shrink-0 min-h-[52px] px-5 rounded-2xl bg-primary text-primary-foreground font-medium text-sm flex items-center gap-1.5 hover:bg-primary/90 transition-colors"
+      >
+        <Star className="h-3.5 w-3.5 fill-primary-foreground" />
         {reward}
-      </div>
-    </button>
+      </button>
+    </div>
   );
 }
 
 function PriceCard({ amount, price, description, isPopular, onClick }: { amount: number, price: string, description: string, isPopular?: boolean, onClick: () => void }) {
   return (
-    <button 
-      onClick={onClick}
-      className={`w-full relative flex items-center justify-between p-5 rounded-2xl bg-card border transition-all hover:scale-[1.02] ${isPopular ? 'border-accent ring-1 ring-accent/20 shadow-lg shadow-accent/5' : 'border-border'}`}
+    <div
+      className={`w-full relative flex items-center justify-between gap-4 p-5 rounded-2xl bg-card border ${isPopular ? 'border-accent ring-1 ring-accent/20 shadow-lg shadow-accent/5' : 'border-border'}`}
     >
       {isPopular && (
         <span className="absolute -top-3 left-6 px-2 py-0.5 bg-accent text-white text-[10px] font-bold uppercase tracking-widest rounded-full">
@@ -156,9 +156,13 @@ function PriceCard({ amount, price, description, isPopular, onClick }: { amount:
         </div>
         <p className="text-xs text-muted-foreground">{description}</p>
       </div>
-      <div className="px-4 py-2 rounded-xl bg-accent text-white font-bold">
+      <button
+        type="button"
+        onClick={onClick}
+        className="shrink-0 min-h-[52px] px-6 rounded-2xl bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
+      >
         {price}
-      </div>
-    </button>
+      </button>
+    </div>
   );
 }
