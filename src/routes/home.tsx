@@ -108,7 +108,7 @@ function Home() {
             onClick={() => deductGracias(1, "Explicar versículo")}
             className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/10 text-blue-500">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
               <Sparkles className="h-5 w-5" />
             </div>
             <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Explicar</span>
@@ -122,7 +122,7 @@ function Home() {
             onClick={() => deductGracias(2, "Orar con el versículo")}
             className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500/10 text-red-500">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/15 text-accent">
               <Heart className="h-5 w-5" />
             </div>
             <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Orar</span>
@@ -145,11 +145,11 @@ function Home() {
             })}
             className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/10 text-green-500">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
               <Share2 className="h-5 w-5" />
             </div>
             <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Compartir</span>
-            <span className="text-[9px] font-medium text-green-600 uppercase">Gratis</span>
+            <span className="text-[9px] font-medium text-accent uppercase">Gratis</span>
           </button>
         </div>
 
