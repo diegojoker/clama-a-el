@@ -55,25 +55,25 @@ function GraciasStore() {
           </h2>
           <div className="space-y-3">
             <ActionCard 
-              icon={<Video className="h-5 w-5 text-blue-500" />}
+              icon={<Video className="h-5 w-5 text-primary" />}
               title="Ver un video corto"
               reward="+3"
               onClick={() => addGracias(3)}
             />
             <ActionCard 
-              icon={<Share2 className="h-5 w-5 text-green-500" />}
+              icon={<Share2 className="h-5 w-5 text-primary" />}
               title="Compartir la app"
               reward="+5"
               onClick={() => addGracias(5)}
             />
             <ActionCard 
-              icon={<ShieldCheck className="h-5 w-5 text-purple-500" />}
+              icon={<ShieldCheck className="h-5 w-5 text-primary" />}
               title="Seguir en Instagram"
               reward="+2"
               onClick={() => addGracias(2)}
             />
             <ActionCard 
-              icon={<Heart className="h-5 w-5 text-red-500" />}
+              icon={<Heart className="h-5 w-5 text-accent" />}
               title="Calificar la app"
               reward="+10"
               onClick={() => addGracias(10)}
