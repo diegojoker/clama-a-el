@@ -32,12 +32,12 @@ export function VerseCard({ verse, onInterpret, onShare }: VerseCardProps) {
         </p>
 
         {(onInterpret || onShare) && (
-          <div className="mt-8 flex gap-3">
+          <div className="mt-8 flex w-full gap-3">
             {onInterpret && (
               <button
                 type="button"
                 onClick={onInterpret}
-                className="rounded-full border border-white/40 bg-white/5 px-5 py-2 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/15"
+                className="flex-1 min-h-[52px] px-6 rounded-2xl bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90"
               >
                 Interpretar
               </button>
@@ -46,7 +46,7 @@ export function VerseCard({ verse, onInterpret, onShare }: VerseCardProps) {
               <button
                 type="button"
                 onClick={onShare}
-                className="rounded-full border border-white/40 bg-white/5 px-5 py-2 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/15"
+                className="flex-1 min-h-[52px] px-6 rounded-2xl bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90"
               >
                 Compartir
               </button>
