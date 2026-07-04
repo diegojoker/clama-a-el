@@ -143,7 +143,7 @@ function HablarScreen() {
                   alert("No tienes suficientes gracias.");
                 }
               }}
-              className="w-full py-4 bg-primary text-primary-foreground font-bold rounded-2xl flex items-center justify-center gap-2"
+              className="w-full min-h-[52px] px-6 bg-primary text-primary-foreground font-medium rounded-2xl flex items-center justify-center gap-2"
             >
               Recibir oración — 2 gracias
               <Star className="h-4 w-4 fill-white" />
@@ -151,7 +151,7 @@ function HablarScreen() {
             <button 
               onClick={handleSave}
               disabled={saved}
-              className={`w-full py-4 ${saved ? 'bg-muted text-muted-foreground' : 'bg-card border border-border text-foreground'} font-bold rounded-2xl flex items-center justify-center gap-2`}
+              className={`w-full min-h-[52px] px-6 ${saved ? 'bg-muted text-muted-foreground border-2 border-transparent' : 'bg-transparent border-2 border-primary text-primary hover:bg-primary/5'} font-medium rounded-2xl flex items-center justify-center gap-2 transition-colors`}
             >
               <Bookmark className={`h-4 w-4 ${saved ? 'fill-muted-foreground' : ''}`} />
               {saved ? "Guardado en mi diario" : "Guardar en mi diario"}
@@ -189,7 +189,7 @@ function HablarScreen() {
                 onClick={() => setHumor(h)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium transition-all whitespace-nowrap ${
                   humor.id === h.id 
-                    ? "bg-[#1a3a5c] border-[#d4af37] border-2 text-white shadow-lg shadow-[#1a3a5c]/20" 
+                    ? "bg-primary border-accent border-2 text-primary-foreground shadow-lg shadow-primary/20" 
                     : "bg-card border-border text-foreground"
                 }`}
               >
@@ -216,7 +216,7 @@ function HablarScreen() {
           <button 
             onClick={handleSend}
             disabled={!content.trim()}
-            className="w-full py-5 bg-[#1a3a5c] text-white font-bold rounded-2xl flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-50 disabled:grayscale"
+            className="w-full min-h-[52px] px-6 py-4 bg-primary text-primary-foreground font-medium rounded-2xl flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-50 disabled:grayscale"
           >
             Enviar — 3 gracias
             <Star className="h-4 w-4 fill-white" />
