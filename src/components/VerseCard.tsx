@@ -1,15 +1,15 @@
 import type { Verse } from "@/lib/verses";
 import verseBg from "@/assets/verse-bg.jpg.asset.json";
-import { Search, Share2, Smartphone } from "lucide-react";
+import { Search, Heart, Smartphone } from "lucide-react";
 
 interface VerseCardProps {
   verse: Verse;
   onInterpret?: () => void;
-  onShare?: () => void;
+  onPray?: () => void;
   onWidget?: () => void;
 }
 
-export function VerseCard({ verse, onInterpret, onShare, onWidget }: VerseCardProps) {
+export function VerseCard({ verse, onInterpret, onPray, onWidget }: VerseCardProps) {
   return (
     <article
       className="relative aspect-[4/5] w-full overflow-hidden rounded-[24px] border border-border bg-[#2c1810] shadow-lg"
@@ -33,9 +33,9 @@ export function VerseCard({ verse, onInterpret, onShare, onWidget }: VerseCardPr
           {verse.reference}
         </p>
 
-        {(onInterpret || onShare || onWidget) && (
+        {(onInterpret || onPray || onWidget) && (
           <div className="mt-8 flex w-full flex-col items-center gap-3">
-            {(onInterpret || onShare) && (
+            {(onInterpret || onPray) && (
               <div className="flex w-full gap-3">
                 {onInterpret && (
                   <button
@@ -47,14 +47,14 @@ export function VerseCard({ verse, onInterpret, onShare, onWidget }: VerseCardPr
                     Interpretar
                   </button>
                 )}
-                {onShare && (
+                {onPray && (
                   <button
                     type="button"
-                    onClick={onShare}
+                    onClick={onPray}
                     className="flex-1 h-11 inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/15 px-4 py-[10px] text-[13px] font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25"
                   >
-                    <Share2 className="h-4 w-4" aria-hidden="true" />
-                    Compartir
+                    <Heart className="h-4 w-4" aria-hidden="true" />
+                    Orar
                   </button>
                 )}
               </div>

@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Compass, Search, ChevronRight, ArrowLeft, Sparkles, AlertCircle, BookOpen, Flame, Share2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -34,6 +34,20 @@ export const Route = createFileRoute("/explorar")({
 
 function ExplorarPage() {
   const [selectedTema, setSelectedTema] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const preselect = window.localStorage.getItem("explorar:preselect_tema");
+    if (preselect) {
+      try {
+        setSelectedTema(JSON.parse(preselect));
+      } catch {
+        setSelectedTema(preselect);
+      }
+      window.localStorage.removeItem("explorar:preselect_tema");
+    }
+  }, []);
+
   const [iaSearchQuery, setIaSearchQuery] = useState("");
   const [isSearchingIa, setIsSearchingIa] = useState(false);
   const [iaResults, setIaResults] = useState<any[] | null>(null);
