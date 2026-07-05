@@ -187,7 +187,16 @@ function Home() {
         <VerseCard
           verse={verse}
           onInterpret={() => deductGracias(1, "Interpretar versículo")}
-          onPray={() => deductGracias(2, "Orar con el versículo")}
+          onShare={() => navigate({
+            to: "/compartir",
+            search: {
+              text: verse.text,
+              reference: verse.reference,
+              book: verse.book,
+              chapter: verse.chapter,
+              verse: verse.verse,
+            },
+          })}
           onWidget={() => navigate({ to: "/widgets" })}
         />
 
