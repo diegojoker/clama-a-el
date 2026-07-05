@@ -10,6 +10,17 @@ import { useStreak } from "@/hooks/useStreak";
 import { formatDateEs, getVerseOfDay } from "@/lib/verses";
 import { STORAGE_KEYS, readLS, writeLS } from "@/lib/storage";
 import { BibleSearch } from "@/components/BibleSearch";
+import { toast } from "sonner";
+
+const WEEK_LETTERS = ["D", "L", "M", "M", "J", "V", "S"];
+const TEMAS_HOY = [
+  { id: "paz", label: "Paz interior", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" },
+  { id: "familia", label: "Familia", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80" },
+  { id: "trabajo", label: "Trabajo", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" },
+  { id: "salud", label: "Salud emocional", image: "https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=600&q=80" },
+  { id: "fe", label: "Fe", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80" },
+  { id: "relaciones", label: "Relaciones", image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600&q=80" },
+];
 
 export const Route = createFileRoute("/home")({
   head: () => ({
