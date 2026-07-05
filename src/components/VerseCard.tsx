@@ -1,5 +1,6 @@
 import type { Verse } from "@/lib/verses";
 import verseBg from "@/assets/verse-bg.jpg.asset.json";
+import { Search, Share2, LayoutGrid } from "lucide-react";
 
 interface VerseCardProps {
   verse: Verse;
@@ -33,31 +34,38 @@ export function VerseCard({ verse, onInterpret, onShare, onWidget }: VerseCardPr
         </p>
 
         {(onInterpret || onShare || onWidget) && (
-          <div className="mt-8 flex w-full gap-3">
-            {onInterpret && (
-              <button
-                type="button"
-                onClick={onInterpret}
-                className="flex-1 min-h-[52px] px-6 rounded-2xl bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90"
-              >
-                Interpretar
-              </button>
-            )}
-            {onShare && (
-              <button
-                type="button"
-                onClick={onShare}
-                className="flex-1 min-h-[52px] px-6 rounded-2xl bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90"
-              >
-                Compartir
-              </button>
+          <div className="mt-8 flex w-full flex-col items-center gap-3">
+            {(onInterpret || onShare) && (
+              <div className="flex w-full gap-3">
+                {onInterpret && (
+                  <button
+                    type="button"
+                    onClick={onInterpret}
+                    className="flex-1 h-11 inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/15 px-4 py-[10px] text-[13px] font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25"
+                  >
+                    <Search className="h-4 w-4" aria-hidden="true" />
+                    Interpretar
+                  </button>
+                )}
+                {onShare && (
+                  <button
+                    type="button"
+                    onClick={onShare}
+                    className="flex-1 h-11 inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/15 px-4 py-[10px] text-[13px] font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25"
+                  >
+                    <Share2 className="h-4 w-4" aria-hidden="true" />
+                    Compartir
+                  </button>
+                )}
+              </div>
             )}
             {onWidget && (
               <button
                 type="button"
                 onClick={onWidget}
-                className="flex-1 min-h-[52px] px-6 rounded-2xl bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90"
+                className="h-11 w-[60%] inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/15 px-4 py-[10px] text-[13px] font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25"
               >
+                <LayoutGrid className="h-4 w-4" aria-hidden="true" />
                 Widget
               </button>
             )}
