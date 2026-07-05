@@ -1,6 +1,6 @@
 import type { Verse } from "@/lib/verses";
 import verseBg from "@/assets/verse-bg.jpg.asset.json";
-import { Search, Share2, LayoutGrid } from "lucide-react";
+import { Search, Share2, Smartphone } from "lucide-react";
 
 interface VerseCardProps {
   verse: Verse;
@@ -65,8 +65,8 @@ export function VerseCard({ verse, onInterpret, onShare, onWidget }: VerseCardPr
                 onClick={onWidget}
                 className="h-11 w-[60%] inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/15 px-4 py-[10px] text-[13px] font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25"
               >
-                <LayoutGrid className="h-4 w-4" aria-hidden="true" />
-                Widget
+                <Smartphone className="h-4 w-4" aria-hidden="true" />
+                En mi pantalla
               </button>
             )}
           </div>
