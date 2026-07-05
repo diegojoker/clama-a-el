@@ -164,6 +164,76 @@ function Home() {
           </button>
         </div>
 
+        {/* Tu camino de hoy */}
+        <section className="mt-8 rounded-2xl border border-border bg-card p-4">
+          <h2 className="font-serif-verse text-lg text-foreground">Tu camino de hoy</h2>
+          <div className="mt-4 flex justify-between">
+            {WEEK_LETTERS.map((letter, i) => {
+              const todayIdx = new Date().getDay();
+              const isToday = i === todayIdx;
+              const isCompleted = !isToday && i < todayIdx && (todayIdx - i) <= streak;
+              const isFuture = i > todayIdx;
+              return (
+                <div
+                  key={i}
+                  className={
+                    "flex h-9 w-9 items-center justify-center rounded-full text-xs font-semibold " +
+                    (isCompleted
+                      ? "bg-accent text-white"
+                      : isToday
+                        ? "border-2 border-accent text-foreground"
+                        : isFuture
+                          ? "border border-border text-muted-foreground"
+                          : "border border-border text-muted-foreground")
+                  }
+                >
+                  {letter}
+                </div>
+              );
+            })}
+          </div>
+          <p className="mt-4 text-center font-serif-verse text-base text-foreground">
+            🔥 {streak} {streak === 1 ? "día seguido" : "días seguidos"}
+          </p>
+          <button
+            type="button"
+            onClick={() => navigate({ to: "/devocionales" })}
+            className="mt-4 flex min-h-[52px] w-full items-center justify-center rounded-2xl bg-primary px-6 font-medium text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            Comenzar el día →
+          </button>
+        </section>
+
+        {/* Temas de hoy */}
+        <section className="mt-8 -mx-6">
+          <h2 className="mb-3 px-6 font-serif-verse text-lg text-foreground">Temas de hoy</h2>
+          <div className="flex gap-3 overflow-x-auto px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {TEMAS_HOY.map((tema) => (
+              <button
+                key={tema.id}
+                onClick={() =>
+                  toast.info("Chat temático próximamente", {
+                    description: `${tema.label} — 2 gracias`,
+                  })
+                }
+                className="relative flex-shrink-0 overflow-hidden rounded-xl active:scale-95 transition-transform"
+                style={{
+                  width: 160,
+                  height: 100,
+                  backgroundImage: `url(${tema.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <span className="absolute inset-x-0 bottom-0 p-3 text-left font-serif-verse text-sm font-medium text-white drop-shadow">
+                  {tema.label}
+                </span>
+              </button>
+            ))}
+          </div>
+        </section>
+
         <div className="mt-10">
           <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             ¿Cómo estás hoy?
