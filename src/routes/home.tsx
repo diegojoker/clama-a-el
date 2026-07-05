@@ -41,6 +41,20 @@ const MOOD_TO_TEMA: Record<string, string> = {
   "Con fe": "fe",
   "Sin fuerzas": "fuerza",
 };
+const MOOD_TO_SUBTITLE: Record<string, string> = {
+  "Triste": "Palabras para consolarte en este momento",
+  "Ansioso": "Palabras para calmar tu corazón hoy",
+  "Frustrado": "Palabras para encontrar paz hoy",
+  "Agradecido": "Palabras que celebran tu gratitud",
+  "En paz": "Palabras para nutrir tu paz interior",
+  "Enojado": "Palabras para soltar lo que te pesa",
+  "Corazón roto": "Palabras para sanar tu corazón",
+  "Enamorado": "Palabras sobre el amor que Dios te da",
+  "Solo": "Palabras para recordarte que no estás solo",
+  "Confundido": "Palabras para guiar tus pasos hoy",
+  "Con fe": "Palabras para fortalecer tu fe",
+  "Sin fuerzas": "Palabras para renovar tus fuerzas",
+};
 const TEMAS_HOY = [
   { id: "paz", label: "Paz interior", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" },
   { id: "familia", label: "Familia", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80" },
@@ -223,11 +237,19 @@ function Home() {
               writeLS("explorar:preselect_tema", MOOD_TO_TEMA[mood]);
               navigate({ to: "/explorar" });
             }}
-            className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-accent transition-opacity hover:opacity-80"
+            className="relative mt-4 block w-full overflow-hidden rounded-2xl px-4 py-3.5 text-left transition-transform active:scale-[0.99]"
+            style={{ background: "linear-gradient(135deg, #1a3a5c 0%, #2a4a6c 100%)" }}
           >
-            <Sparkles className="h-3.5 w-3.5" />
-            Ver versículos para ti
-            <span>→</span>
+            <Sparkles className="absolute right-3 top-3 h-4 w-4 text-accent" aria-hidden="true" />
+            <p className="font-serif-verse text-base font-bold text-white pr-6">
+              Versículos especiales para ti
+            </p>
+            <p className="mt-0.5 text-[13px] text-white/80">
+              {MOOD_TO_SUBTITLE[mood] ?? "Palabras elegidas para ti hoy"}
+            </p>
+            <span className="mt-2 flex justify-end text-[12px] font-medium text-accent">
+              Ver ahora →
+            </span>
           </button>
         )}
 
