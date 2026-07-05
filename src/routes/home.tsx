@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Share2, BookOpen, Star, Sparkles, Heart, Mic } from "lucide-react";
+import { Share2, BookOpen, Star, Sparkles, Heart, Mic, Smartphone } from "lucide-react";
 import { VerseCard } from "@/components/VerseCard";
 import { StreakBadge } from "@/components/StreakBadge";
 import { BottomNav } from "@/components/BottomNav";
@@ -55,10 +55,12 @@ function Home() {
   const [userName, setUserName] = useState("Hijo de Dios");
   const [balance, setBalance] = useState(10);
   const [mood, setMood] = useState<string | null>(null);
+  const [showWidgetPromo, setShowWidgetPromo] = useState(false);
 
   useEffect(() => {
     setUserName(readLS(STORAGE_KEYS.userName, "Hijo de Dios"));
     setBalance(readLS(STORAGE_KEYS.gracias, 10));
+    setShowWidgetPromo(!readLS<boolean>("vdd:widget_promo_shown", false));
   }, []);
 
   const deductGracias = (amount: number, actionLabel: string) => {
@@ -163,7 +165,24 @@ function Home() {
           verse={verse}
           onInterpret={() => deductGracias(1, "Interpretar versículo")}
           onShare={onShare}
+          onWidget={() => navigate({ to: "/widgets" })}
         />
+
+        {showWidgetPromo && (
+          <button
+            type="button"
+            onClick={() => navigate({ to: "/widgets" })}
+            className="mt-3 flex w-full items-center justify-between gap-3 rounded-xl bg-accent px-4 py-2.5 text-left text-white transition-transform active:scale-[0.99]"
+          >
+            <div className="flex items-center gap-2">
+              <Smartphone className="h-4 w-4" />
+              <span className="text-xs font-medium">
+                ¡Añade tu widget gratis a la pantalla de inicio!
+              </span>
+            </div>
+            <span className="text-sm">→</span>
+          </button>
+        )}
 
         <div className="mt-6">
           <BibleSearch />
