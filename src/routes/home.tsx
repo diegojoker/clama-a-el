@@ -237,11 +237,19 @@ function Home() {
               writeLS("explorar:preselect_tema", MOOD_TO_TEMA[mood]);
               navigate({ to: "/explorar" });
             }}
-            className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-accent transition-opacity hover:opacity-80"
+            className="relative mt-4 block w-full overflow-hidden rounded-2xl px-4 py-3.5 text-left transition-transform active:scale-[0.99]"
+            style={{ background: "linear-gradient(135deg, #1a3a5c 0%, #2a4a6c 100%)" }}
           >
-            <Sparkles className="h-3.5 w-3.5" />
-            Ver versículos para ti
-            <span>→</span>
+            <Sparkles className="absolute right-3 top-3 h-4 w-4 text-accent" aria-hidden="true" />
+            <p className="font-serif-verse text-base font-bold text-white pr-6">
+              Versículos especiales para ti
+            </p>
+            <p className="mt-0.5 text-[13px] text-white/80">
+              {MOOD_TO_SUBTITLE[mood] ?? "Palabras elegidas para ti hoy"}
+            </p>
+            <span className="mt-2 flex justify-end text-[12px] font-medium text-accent">
+              Ver ahora →
+            </span>
           </button>
         )}
 
