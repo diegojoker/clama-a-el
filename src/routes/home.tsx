@@ -41,6 +41,20 @@ const MOOD_TO_TEMA: Record<string, string> = {
   "Con fe": "fe",
   "Sin fuerzas": "fuerza",
 };
+const MOOD_TO_SUBTITLE: Record<string, string> = {
+  "Triste": "Palabras para consolarte en este momento",
+  "Ansioso": "Palabras para calmar tu corazón hoy",
+  "Frustrado": "Palabras para encontrar paz hoy",
+  "Agradecido": "Palabras que celebran tu gratitud",
+  "En paz": "Palabras para nutrir tu paz interior",
+  "Enojado": "Palabras para soltar lo que te pesa",
+  "Corazón roto": "Palabras para sanar tu corazón",
+  "Enamorado": "Palabras sobre el amor que Dios te da",
+  "Solo": "Palabras para recordarte que no estás solo",
+  "Confundido": "Palabras para guiar tus pasos hoy",
+  "Con fe": "Palabras para fortalecer tu fe",
+  "Sin fuerzas": "Palabras para renovar tus fuerzas",
+};
 const TEMAS_HOY = [
   { id: "paz", label: "Paz interior", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" },
   { id: "familia", label: "Familia", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80" },
