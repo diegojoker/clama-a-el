@@ -9,7 +9,6 @@ import { ThemeBootstrap } from "@/components/ThemeProvider";
 import { useStreak } from "@/hooks/useStreak";
 import { formatDateEs, getVerseOfDay } from "@/lib/verses";
 import { STORAGE_KEYS, readLS, writeLS } from "@/lib/storage";
-import { BibleSearch } from "@/components/BibleSearch";
 import { toast } from "sonner";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
@@ -28,6 +27,20 @@ const MOODS = [
   { emoji: "💪", label: "Con fe" },
   { emoji: "😴", label: "Sin fuerzas" },
 ];
+const MOOD_TO_TEMA: Record<string, string> = {
+  "Triste": "esperanza",
+  "Ansioso": "ansiedad",
+  "Frustrado": "fuerza",
+  "Agradecido": "gratitud",
+  "En paz": "fe",
+  "Enojado": "perdon",
+  "Corazón roto": "sanidad",
+  "Enamorado": "amor",
+  "Solo": "soledad",
+  "Confundido": "proposito",
+  "Con fe": "fe",
+  "Sin fuerzas": "fuerza",
+};
 const TEMAS_HOY = [
   { id: "paz", label: "Paz interior", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" },
   { id: "familia", label: "Familia", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80" },
@@ -190,7 +203,7 @@ function Home() {
         <VerseCard
           verse={verse}
           onInterpret={() => deductGracias(1, "Interpretar versículo")}
-          onShare={onShare}
+          onPray={() => deductGracias(2, "Orar con el versículo")}
           onWidget={() => navigate({ to: "/widgets" })}
         />
 
@@ -210,9 +223,20 @@ function Home() {
           </button>
         )}
 
-        <div className="mt-6">
-          <BibleSearch />
-        </div>
+        {mood && MOOD_TO_TEMA[mood] && (
+          <button
+            type="button"
+            onClick={() => {
+              writeLS("explorar:preselect_tema", MOOD_TO_TEMA[mood]);
+              navigate({ to: "/explorar" });
+            }}
+            className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-accent transition-opacity hover:opacity-80"
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            Ver versículos para ti
+            <span>→</span>
+          </button>
+        )}
 
         {/* Tu camino de hoy */}
         <section className="mt-8 rounded-2xl border border-border bg-card p-4">
