@@ -5,9 +5,10 @@ interface VerseCardProps {
   verse: Verse;
   onInterpret?: () => void;
   onShare?: () => void;
+  onWidget?: () => void;
 }
 
-export function VerseCard({ verse, onInterpret, onShare }: VerseCardProps) {
+export function VerseCard({ verse, onInterpret, onShare, onWidget }: VerseCardProps) {
   return (
     <article
       className="relative aspect-[4/5] w-full overflow-hidden rounded-[24px] border border-border bg-[#2c1810] shadow-lg"
@@ -31,7 +32,7 @@ export function VerseCard({ verse, onInterpret, onShare }: VerseCardProps) {
           {verse.reference}
         </p>
 
-        {(onInterpret || onShare) && (
+        {(onInterpret || onShare || onWidget) && (
           <div className="mt-8 flex w-full gap-3">
             {onInterpret && (
               <button
@@ -49,6 +50,15 @@ export function VerseCard({ verse, onInterpret, onShare }: VerseCardProps) {
                 className="flex-1 min-h-[52px] px-6 rounded-2xl bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90"
               >
                 Compartir
+              </button>
+            )}
+            {onWidget && (
+              <button
+                type="button"
+                onClick={onWidget}
+                className="flex-1 min-h-[52px] px-6 rounded-2xl bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90"
+              >
+                Widget
               </button>
             )}
           </div>

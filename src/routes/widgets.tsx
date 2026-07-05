@@ -45,6 +45,7 @@ function WidgetsScreen() {
     setBalance(readLS(STORAGE_KEYS.gracias, 10));
     setUnlocked(readLS(STORAGE_KEYS.unlockedWidgets, ["clasico"]));
     setActiveTheme(readLS(STORAGE_KEYS.activeWidgetTheme, "clasico"));
+    writeLS("vdd:widget_promo_shown", true);
   }, []);
 
   const handleUnlock = (theme: WidgetTheme) => {
