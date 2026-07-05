@@ -12,20 +12,20 @@ import { stories } from "@/data/stories";
 import { toast } from "sonner";
 
 const TEMAS = [
-  { id: "amor", label: "Amor", icon: "❤️" },
-  { id: "fe", label: "Fe", icon: "🙏" },
-  { id: "esperanza", label: "Esperanza", icon: "🌟" },
-  { id: "ansiedad", label: "Ansiedad", icon: "😰" },
-  { id: "familia", label: "Familia", icon: "🏠" },
-  { id: "matrimonio", label: "Matrimonio", icon: "💍" },
-  { id: "duelo", label: "Duelo", icon: "🕊️" },
-  { id: "soledad", label: "Soledad", icon: "👤" },
-  { id: "perdon", label: "Perdón", icon: "🤝" },
-  { id: "fuerza", label: "Fuerza", icon: "💪" },
-  { id: "miedo", label: "Miedo", icon: "😨" },
-  { id: "gratitud", label: "Gratitud", icon: "🙌" },
-  { id: "proposito", label: "Propósito", icon: "🎯" },
-  { id: "sanidad", label: "Sanidad", icon: "🏥" },
+  { id: "amor", label: "Amor", icon: "❤️", image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" },
+  { id: "fe", label: "Fe", icon: "🙏", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80" },
+  { id: "esperanza", label: "Esperanza", icon: "🌟", image: "https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=800&q=80" },
+  { id: "ansiedad", label: "Ansiedad", icon: "😰", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80" },
+  { id: "familia", label: "Familia", icon: "🏠", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80" },
+  { id: "matrimonio", label: "Matrimonio", icon: "💍", image: "https://images.unsplash.com/photo-1503785640985-f62e3aeee448?w=800&q=80" },
+  { id: "duelo", label: "Duelo", icon: "🕊️", image: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&q=80" },
+  { id: "soledad", label: "Soledad", icon: "👤", image: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=800&q=80" },
+  { id: "perdon", label: "Perdón", icon: "🤝", image: "https://images.unsplash.com/photo-1437482078695-73f5ca6c96e2?w=800&q=80" },
+  { id: "fuerza", label: "Fuerza", icon: "💪", image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80" },
+  { id: "miedo", label: "Miedo", icon: "😨", image: "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=800&q=80" },
+  { id: "gratitud", label: "Gratitud", icon: "🙌", image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" },
+  { id: "proposito", label: "Propósito", icon: "🎯", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" },
+  { id: "sanidad", label: "Sanidad", icon: "🏥", image: "https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=800&q=80" },
 ];
 
 export const Route = createFileRoute("/explorar")({
@@ -239,17 +239,26 @@ function ExplorarPage() {
 
         <section className="mb-10">
           <h2 className="text-lg font-semibold mb-4 text-foreground/80">Versículos por tema</h2>
-          <div className="grid grid-cols-1 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             {TEMAS.map((tema) => (
-              <Button
+              <button
                 key={tema.id}
-                variant="outline"
-                className="justify-start gap-3 h-14 bg-card/50 border-border/40 hover:bg-accent/5 hover:border-accent/30 transition-all text-sm font-medium"
                 onClick={() => setSelectedTema(tema.id)}
+                className="relative h-24 rounded-2xl overflow-hidden group active:scale-[0.98] transition-transform text-left"
+                style={{
+                  backgroundImage: `url(${tema.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
               >
-                <span className="text-lg">{tema.icon}</span>
-                {tema.label}
-              </Button>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 group-hover:from-black/80 transition-colors" />
+                <div className="relative z-10 h-full flex items-end justify-between p-3">
+                  <span className="font-serif-verse text-white text-lg font-medium drop-shadow-md">
+                    {tema.label}
+                  </span>
+                  <span className="text-lg drop-shadow-md">{tema.icon}</span>
+                </div>
+              </button>
             ))}
           </div>
         </section>
