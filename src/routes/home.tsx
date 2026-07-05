@@ -10,6 +10,17 @@ import { useStreak } from "@/hooks/useStreak";
 import { formatDateEs, getVerseOfDay } from "@/lib/verses";
 import { STORAGE_KEYS, readLS, writeLS } from "@/lib/storage";
 import { BibleSearch } from "@/components/BibleSearch";
+import { toast } from "sonner";
+
+const WEEK_LETTERS = ["D", "L", "M", "M", "J", "V", "S"];
+const TEMAS_HOY = [
+  { id: "paz", label: "Paz interior", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" },
+  { id: "familia", label: "Familia", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80" },
+  { id: "trabajo", label: "Trabajo", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" },
+  { id: "salud", label: "Salud emocional", image: "https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=600&q=80" },
+  { id: "fe", label: "Fe", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80" },
+  { id: "relaciones", label: "Relaciones", image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600&q=80" },
+];
 
 export const Route = createFileRoute("/home")({
   head: () => ({
@@ -152,6 +163,76 @@ function Home() {
             <span className="text-[9px] font-medium text-accent uppercase">Gratis</span>
           </button>
         </div>
+
+        {/* Tu camino de hoy */}
+        <section className="mt-8 rounded-2xl border border-border bg-card p-4">
+          <h2 className="font-serif-verse text-lg text-foreground">Tu camino de hoy</h2>
+          <div className="mt-4 flex justify-between">
+            {WEEK_LETTERS.map((letter, i) => {
+              const todayIdx = new Date().getDay();
+              const isToday = i === todayIdx;
+              const isCompleted = !isToday && i < todayIdx && (todayIdx - i) <= streak;
+              const isFuture = i > todayIdx;
+              return (
+                <div
+                  key={i}
+                  className={
+                    "flex h-9 w-9 items-center justify-center rounded-full text-xs font-semibold " +
+                    (isCompleted
+                      ? "bg-accent text-white"
+                      : isToday
+                        ? "border-2 border-accent text-foreground"
+                        : isFuture
+                          ? "border border-border text-muted-foreground"
+                          : "border border-border text-muted-foreground")
+                  }
+                >
+                  {letter}
+                </div>
+              );
+            })}
+          </div>
+          <p className="mt-4 text-center font-serif-verse text-base text-foreground">
+            🔥 {streak} {streak === 1 ? "día seguido" : "días seguidos"}
+          </p>
+          <button
+            type="button"
+            onClick={() => navigate({ to: "/devocionales" })}
+            className="mt-4 flex min-h-[52px] w-full items-center justify-center rounded-2xl bg-primary px-6 font-medium text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            Comenzar el día →
+          </button>
+        </section>
+
+        {/* Temas de hoy */}
+        <section className="mt-8 -mx-6">
+          <h2 className="mb-3 px-6 font-serif-verse text-lg text-foreground">Temas de hoy</h2>
+          <div className="flex gap-3 overflow-x-auto px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {TEMAS_HOY.map((tema) => (
+              <button
+                key={tema.id}
+                onClick={() =>
+                  toast.info("Chat temático próximamente", {
+                    description: `${tema.label} — 2 gracias`,
+                  })
+                }
+                className="relative flex-shrink-0 overflow-hidden rounded-xl active:scale-95 transition-transform"
+                style={{
+                  width: 160,
+                  height: 100,
+                  backgroundImage: `url(${tema.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <span className="absolute inset-x-0 bottom-0 p-3 text-left font-serif-verse text-sm font-medium text-white drop-shadow">
+                  {tema.label}
+                </span>
+              </button>
+            ))}
+          </div>
+        </section>
 
         <div className="mt-10">
           <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
