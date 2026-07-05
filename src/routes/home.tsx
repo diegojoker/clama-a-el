@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Share2, BookOpen, Star, Sparkles, Heart, Mic, Smartphone } from "lucide-react";
+import { BookOpen, Star, Sparkles, Mic, Smartphone } from "lucide-react";
 import { VerseCard } from "@/components/VerseCard";
 import { StreakBadge } from "@/components/StreakBadge";
 import { BottomNav } from "@/components/BottomNav";
@@ -291,57 +291,6 @@ function Home() {
             ))}
           </div>
         </section>
-
-        <div className="mt-8 grid grid-cols-3 gap-3">
-          <button
-            type="button"
-            onClick={() => deductGracias(1, "Explicar versículo")}
-            className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <Sparkles className="h-5 w-5" />
-            </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Explicar</span>
-            <span className="text-[9px] font-medium text-muted-foreground flex items-center gap-0.5">
-              <Star className="h-2 w-2 fill-accent text-accent" /> 1
-            </span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => deductGracias(2, "Orar con el versículo")}
-            className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/15 text-accent">
-              <Heart className="h-5 w-5" />
-            </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Orar</span>
-            <span className="text-[9px] font-medium text-muted-foreground flex items-center gap-0.5">
-              <Star className="h-2 w-2 fill-accent text-accent" /> 2
-            </span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => navigate({ 
-              to: "/compartir", 
-              search: { 
-                text: verse.text, 
-                reference: verse.reference,
-                book: verse.book,
-                chapter: verse.chapter,
-                verse: verse.verse
-              } 
-            })}
-            className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <Share2 className="h-5 w-5" />
-            </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Compartir</span>
-            <span className="text-[9px] font-medium text-accent uppercase">Gratis</span>
-          </button>
-        </div>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <button
