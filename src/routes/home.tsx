@@ -99,22 +99,6 @@ function Home() {
     return true;
   };
 
-  const onShare = async () => {
-    const text = `“${verse.text}”\n— ${verse.reference}\n\nClama a Él`;
-    if (typeof navigator !== "undefined" && navigator.share) {
-      try {
-        await navigator.share({ title: "Clama a Él", text });
-        return;
-      } catch {
-        /* user cancelled */
-      }
-    }
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      await navigator.clipboard.writeText(text);
-      alert("Versículo copiado al portapapeles");
-    }
-  };
-
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-background pb-32">
       <ThemeBootstrap />
