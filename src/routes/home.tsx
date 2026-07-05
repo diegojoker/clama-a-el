@@ -11,6 +11,7 @@ import { formatDateEs, getVerseOfDay } from "@/lib/verses";
 import { STORAGE_KEYS, readLS, writeLS } from "@/lib/storage";
 import { BibleSearch } from "@/components/BibleSearch";
 import { toast } from "sonner";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 const WEEK_LETTERS = ["D", "L", "M", "M", "J", "V", "S"];
 const MOODS = [
@@ -56,12 +57,21 @@ function Home() {
   const [balance, setBalance] = useState(10);
   const [mood, setMood] = useState<string | null>(null);
   const [showWidgetPromo, setShowWidgetPromo] = useState(false);
+  const [moodOpen, setMoodOpen] = useState(false);
 
   useEffect(() => {
     setUserName(readLS(STORAGE_KEYS.userName, "Hijo de Dios"));
     setBalance(readLS(STORAGE_KEYS.gracias, 10));
     setShowWidgetPromo(!readLS<boolean>("vdd:widget_promo_shown", false));
+    setMood(readLS<string | null>("vdd:current_mood", null));
   }, []);
+
+  const selectMood = (label: string) => {
+    setMood(label);
+    writeLS("vdd:current_mood", label);
+    setMoodOpen(false);
+  };
+  const currentMood = MOODS.find((m) => m.label === mood);
 
   const deductGracias = (amount: number, actionLabel: string) => {
     if (balance < amount) {
@@ -115,34 +125,50 @@ function Home() {
           <StreakBadge count={streak} />
         </div>
 
-        {/* Mood selector */}
-        <section className="mb-4 rounded-2xl border border-accent/40 bg-card p-4">
-          <h2 className="font-serif-verse text-sm text-muted-foreground">Tu estado ahora</h2>
-          <div className="mt-3 -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {MOODS.map((m) => {
-              const active = mood === m.label;
-              return (
-                <button
-                  key={m.label}
-                  type="button"
-                  onClick={() => setMood(m.label)}
-                  className={
-                    "flex-shrink-0 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs transition-colors " +
-                    (active
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border bg-background text-foreground hover:border-accent/40")
-                  }
-                >
-                  <span className="text-base leading-none">{m.emoji}</span>
-                  <span>{m.label}</span>
-                </button>
-              );
-            })}
-          </div>
-          <p className="mt-3 text-[11px] font-medium text-accent">
-            Tu versículo y tu guía se adaptan a cómo te sientes
-          </p>
-        </section>
+        {/* Mood chip */}
+        <div className="mb-4 flex">
+          <button
+            type="button"
+            onClick={() => setMoodOpen(true)}
+            className="inline-flex items-center gap-1.5 rounded-[20px] border border-accent bg-card px-3.5 py-1.5 text-[13px]"
+            style={{ color: currentMood ? "#2c1810" : "#9e8e7e" }}
+          >
+            <span className="text-base leading-none">{currentMood?.emoji ?? "🙏"}</span>
+            <span>{currentMood?.label ?? "¿Cómo te sientes?"}</span>
+            <span className="ml-0.5">›</span>
+          </button>
+        </div>
+
+        <Sheet open={moodOpen} onOpenChange={setMoodOpen}>
+          <SheetContent side="bottom" className="rounded-t-3xl">
+            <SheetHeader>
+              <SheetTitle className="font-serif-verse text-xl text-foreground">
+                ¿Cómo te sientes ahora?
+              </SheetTitle>
+            </SheetHeader>
+            <div className="mt-4 grid grid-cols-3 gap-2 pb-4">
+              {MOODS.map((m) => {
+                const active = mood === m.label;
+                return (
+                  <button
+                    key={m.label}
+                    type="button"
+                    onClick={() => selectMood(m.label)}
+                    className={
+                      "inline-flex flex-col items-center justify-center gap-1 rounded-2xl border px-2 py-3 text-xs transition-colors " +
+                      (active
+                        ? "border-transparent bg-primary text-primary-foreground"
+                        : "border-border bg-background text-foreground hover:border-accent/40")
+                    }
+                  >
+                    <span className="text-xl leading-none">{m.emoji}</span>
+                    <span className="text-[12px]">{m.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </SheetContent>
+        </Sheet>
 
         {/* Conversation CTA */}
         <button
