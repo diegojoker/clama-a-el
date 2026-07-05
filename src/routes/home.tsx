@@ -94,21 +94,17 @@ function Home() {
     <div className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-background pb-32">
       <ThemeBootstrap />
       
-      <header className="flex items-center justify-between px-6 pt-10 pb-4">
-        <div>
-          <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
-            {today}
-          </p>
-          <h1 className="mt-1 font-serif-verse text-xl text-foreground">
-            Hola, {userName}
-          </h1>
-        </div>
-        <button 
+      <header className="flex h-8 items-center justify-between px-6">
+        <p className="truncate text-[12px] text-muted-foreground">
+          {today} · Hola, {userName}
+        </p>
+        <button
           onClick={() => navigate({ to: "/gracias" })}
-          className="flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1.5 text-sm font-bold text-accent transition-transform active:scale-95"
+          className="flex items-center gap-1 text-[12px] font-bold text-accent transition-transform active:scale-95"
         >
-          <Star className="h-4 w-4 fill-accent" />
-          {balance} <span className="text-[10px] font-medium uppercase tracking-wider ml-0.5">gracias</span>
+          <Star className="h-3.5 w-3.5 fill-accent" />
+          {balance}
+          <span className="ml-0.5 text-[10px] font-medium uppercase tracking-wider">gracias</span>
         </button>
       </header>
 
