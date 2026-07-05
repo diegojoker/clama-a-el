@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Share2, BookOpen, Star, Sparkles, Heart, Mic, Send } from "lucide-react";
+import { Share2, BookOpen, Star, Sparkles, Heart, Mic } from "lucide-react";
 import { VerseCard } from "@/components/VerseCard";
 import { StreakBadge } from "@/components/StreakBadge";
 import { BottomNav } from "@/components/BottomNav";
@@ -13,6 +13,20 @@ import { BibleSearch } from "@/components/BibleSearch";
 import { toast } from "sonner";
 
 const WEEK_LETTERS = ["D", "L", "M", "M", "J", "V", "S"];
+const MOODS = [
+  { emoji: "😔", label: "Triste" },
+  { emoji: "😰", label: "Ansioso" },
+  { emoji: "😤", label: "Frustrado" },
+  { emoji: "🙏", label: "Agradecido" },
+  { emoji: "😊", label: "En paz" },
+  { emoji: "😡", label: "Enojado" },
+  { emoji: "💔", label: "Corazón roto" },
+  { emoji: "😍", label: "Enamorado" },
+  { emoji: "🙁", label: "Solo" },
+  { emoji: "😕", label: "Confundido" },
+  { emoji: "💪", label: "Con fe" },
+  { emoji: "😴", label: "Sin fuerzas" },
+];
 const TEMAS_HOY = [
   { id: "paz", label: "Paz interior", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" },
   { id: "familia", label: "Familia", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80" },
@@ -40,7 +54,7 @@ function Home() {
   
   const [userName, setUserName] = useState("Hijo de Dios");
   const [balance, setBalance] = useState(10);
-  const [message, setMessage] = useState("");
+  const [mood, setMood] = useState<string | null>(null);
 
   useEffect(() => {
     setUserName(readLS(STORAGE_KEYS.userName, "Hijo de Dios"));
@@ -103,9 +117,51 @@ function Home() {
           <StreakBadge count={streak} />
         </div>
 
-        <div className="mb-6">
-          <BibleSearch />
-        </div>
+        {/* Mood selector */}
+        <section className="mb-4 rounded-2xl border border-accent/40 bg-card p-4">
+          <h2 className="font-serif-verse text-sm text-muted-foreground">Tu estado ahora</h2>
+          <div className="mt-3 -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {MOODS.map((m) => {
+              const active = mood === m.label;
+              return (
+                <button
+                  key={m.label}
+                  type="button"
+                  onClick={() => setMood(m.label)}
+                  className={
+                    "flex-shrink-0 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs transition-colors " +
+                    (active
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-background text-foreground hover:border-accent/40")
+                  }
+                >
+                  <span className="text-base leading-none">{m.emoji}</span>
+                  <span>{m.label}</span>
+                </button>
+              );
+            })}
+          </div>
+          <p className="mt-3 text-[11px] font-medium text-accent">
+            Tu versículo y tu guía se adaptan a cómo te sientes
+          </p>
+        </section>
+
+        {/* Conversation CTA */}
+        <button
+          type="button"
+          onClick={() => navigate({ to: "/hablar" })}
+          className="mb-6 flex w-full items-center justify-between gap-4 rounded-2xl bg-primary p-5 text-left text-primary-foreground transition-transform active:scale-[0.99]"
+        >
+          <div className="flex-1">
+            <p className="font-serif-verse text-lg leading-snug">¿Qué hay en tu corazón hoy?</p>
+            <p className="mt-1 text-xs text-primary-foreground/70">
+              Cuéntame y recibirás palabras que necesitas escuchar
+            </p>
+          </div>
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent">
+            <Mic className="h-5 w-5" />
+          </div>
+        </button>
 
         <VerseCard
           verse={verse}
@@ -113,55 +169,8 @@ function Home() {
           onShare={onShare}
         />
 
-        <div className="mt-6 grid grid-cols-3 gap-3">
-          <button
-            type="button"
-            onClick={() => deductGracias(1, "Explicar versículo")}
-            className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <Sparkles className="h-5 w-5" />
-            </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Explicar</span>
-            <span className="text-[9px] font-medium text-muted-foreground flex items-center gap-0.5">
-              <Star className="h-2 w-2 fill-accent text-accent" /> 1
-            </span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => deductGracias(2, "Orar con el versículo")}
-            className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/15 text-accent">
-              <Heart className="h-5 w-5" />
-            </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Orar</span>
-            <span className="text-[9px] font-medium text-muted-foreground flex items-center gap-0.5">
-              <Star className="h-2 w-2 fill-accent text-accent" /> 2
-            </span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => navigate({ 
-              to: "/compartir", 
-              search: { 
-                text: verse.text, 
-                reference: verse.reference,
-                book: verse.book,
-                chapter: verse.chapter,
-                verse: verse.verse
-              } 
-            })}
-            className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <Share2 className="h-5 w-5" />
-            </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Compartir</span>
-            <span className="text-[9px] font-medium text-accent uppercase">Gratis</span>
-          </button>
+        <div className="mt-6">
+          <BibleSearch />
         </div>
 
         {/* Tu camino de hoy */}
@@ -234,39 +243,55 @@ function Home() {
           </div>
         </section>
 
-        <div className="mt-10">
-          <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            ¿Cómo estás hoy?
-          </h2>
-          <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-focus-within ring-accent/20 focus-within:ring-2 focus-within:border-accent/40">
-            <textarea
-              placeholder="Escribe tus pensamientos o peticiones..."
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full bg-transparent p-4 pb-14 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none min-h-[100px] resize-none"
-            />
-            <div className="absolute bottom-3 left-3 flex items-center gap-2">
-              <button className="flex h-9 w-9 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors hover:bg-accent/10 hover:text-accent">
-                <Mic className="h-4 w-4" />
-              </button>
+        <div className="mt-8 grid grid-cols-3 gap-3">
+          <button
+            type="button"
+            onClick={() => deductGracias(1, "Explicar versículo")}
+            className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <Sparkles className="h-5 w-5" />
             </div>
-            <div className="absolute bottom-3 right-3 flex items-center gap-3">
-              <span className="text-[10px] font-medium text-muted-foreground flex items-center gap-0.5">
-                <Star className="h-2.5 w-2.5 fill-accent text-accent" /> 3 gracias
-              </span>
-              <button 
-                onClick={() => {
-                  navigate({ to: "/hablar" });
-                }}
-                className="flex h-9 items-center gap-2 rounded-full bg-primary px-4 text-xs font-bold uppercase tracking-widest text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
+            <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Explicar</span>
+            <span className="text-[9px] font-medium text-muted-foreground flex items-center gap-0.5">
+              <Star className="h-2 w-2 fill-accent text-accent" /> 1
+            </span>
+          </button>
 
-                disabled={false}
-              >
-                Hablar
-                <Send className="h-3.5 w-3.5" />
-              </button>
+          <button
+            type="button"
+            onClick={() => deductGracias(2, "Orar con el versículo")}
+            className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/15 text-accent">
+              <Heart className="h-5 w-5" />
             </div>
-          </div>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Orar</span>
+            <span className="text-[9px] font-medium text-muted-foreground flex items-center gap-0.5">
+              <Star className="h-2 w-2 fill-accent text-accent" /> 2
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => navigate({ 
+              to: "/compartir", 
+              search: { 
+                text: verse.text, 
+                reference: verse.reference,
+                book: verse.book,
+                chapter: verse.chapter,
+                verse: verse.verse
+              } 
+            })}
+            className="flex flex-col items-center gap-1.5 rounded-2xl bg-card border border-border p-3 transition-colors hover:border-accent/40"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <Share2 className="h-5 w-5" />
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-foreground">Compartir</span>
+            <span className="text-[9px] font-medium text-accent uppercase">Gratis</span>
+          </button>
         </div>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
