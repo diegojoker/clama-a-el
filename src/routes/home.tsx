@@ -1,6 +1,6 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { BookOpen, Star, Sparkles, Mic, Smartphone } from "lucide-react";
+import { Star, Sparkles, Smartphone, Send } from "lucide-react";
 import { VerseCard } from "@/components/VerseCard";
 import { StreakBadge } from "@/components/StreakBadge";
 import { BottomNav } from "@/components/BottomNav";
@@ -85,6 +85,14 @@ function Home() {
   const [mood, setMood] = useState<string | null>(null);
   const [showWidgetPromo, setShowWidgetPromo] = useState(false);
   const [moodOpen, setMoodOpen] = useState(false);
+  const [draft, setDraft] = useState("");
+  const [placeholderIdx, setPlaceholderIdx] = useState(0);
+  const [placeholderVisible, setPlaceholderVisible] = useState(true);
+  const placeholders = useRef([
+    "Cuéntame cómo amaneciste...",
+    "¿Qué hay en tu corazón hoy?",
+    "Escribe lo que sientes...",
+  ]);
 
   useEffect(() => {
     setUserName(readLS(STORAGE_KEYS.userName, "Hijo de Dios"));
@@ -92,6 +100,31 @@ function Home() {
     setShowWidgetPromo(!readLS<boolean>("vdd:widget_promo_shown", false));
     setMood(readLS<string | null>("vdd:current_mood", null));
   }, []);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setPlaceholderVisible(false);
+      setTimeout(() => {
+        setPlaceholderIdx((i) => (i + 1) % placeholders.current.length);
+        setPlaceholderVisible(true);
+      }, 350);
+    }, 3000);
+    return () => clearInterval(t);
+  }, []);
+
+  const initials = useMemo(() => {
+    const parts = userName.trim().split(/\s+/).filter(Boolean);
+    if (parts.length === 0) return "H";
+    const a = parts[0][0] ?? "";
+    const b = parts.length > 1 ? parts[parts.length - 1][0] : "";
+    return (a + b).toUpperCase() || "H";
+  }, [userName]);
+
+  const sendDraft = () => {
+    const text = draft.trim();
+    if (text) writeLS("hablar:initial_text", text);
+    navigate({ to: "/hablar" });
+  };
 
   const selectMood = (label: string) => {
     setMood(label);
@@ -117,7 +150,7 @@ function Home() {
     <div className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-background pb-32">
       <ThemeBootstrap />
       
-      <header className="flex h-8 items-center justify-between px-6">
+      <header className="mb-3 flex h-8 items-center justify-between px-6">
         <p className="truncate text-[12px] text-muted-foreground">
           {today} · Hola, {userName}
         </p>
@@ -132,12 +165,12 @@ function Home() {
       </header>
 
       <div className="px-6">
-        <div className="mb-4 flex justify-center">
+        <div className="mb-2 flex justify-center">
           <StreakBadge count={streak} />
         </div>
 
-        {/* Mood chip */}
-        <div className="mb-4 flex">
+        {/* Mood + Avatar row */}
+        <div className="mb-4 flex items-center justify-between gap-3">
           <button
             type="button"
             onClick={() => setMoodOpen(true)}
@@ -147,6 +180,15 @@ function Home() {
             <span className="text-base leading-none">{currentMood?.emoji ?? "🙏"}</span>
             <span>{currentMood?.label ?? "¿Cómo te sientes?"}</span>
             <span className="ml-0.5">›</span>
+          </button>
+          <button
+            type="button"
+            aria-label="Mi perfil"
+            onClick={() => navigate({ to: "/perfil" })}
+            className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-[13px] font-semibold text-white transition-transform active:scale-95"
+            style={{ background: "#1a3a5c" }}
+          >
+            {initials}
           </button>
         </div>
 
@@ -181,22 +223,49 @@ function Home() {
           </SheetContent>
         </Sheet>
 
-        {/* Conversation CTA */}
-        <button
-          type="button"
-          onClick={() => navigate({ to: "/hablar" })}
-          className="mb-6 flex w-full items-center justify-between gap-4 rounded-2xl bg-primary p-5 text-left text-primary-foreground transition-transform active:scale-[0.99]"
+        {/* Conversation card with inline input */}
+        <div
+          className="mb-6 rounded-2xl p-5 text-primary-foreground"
+          style={{ background: "#1a3a5c" }}
         >
-          <div className="flex-1">
-            <p className="font-serif-verse text-lg leading-snug">¿Qué hay en tu corazón hoy?</p>
-            <p className="mt-1 text-xs text-primary-foreground/70">
-              Cuéntame y recibirás palabras que necesitas escuchar
-            </p>
+          <p className="font-serif-verse text-lg leading-snug text-white">
+            ¿Qué hay en tu corazón hoy?
+          </p>
+          <div
+            className="mt-3 flex items-center gap-2 rounded-xl px-3 py-2"
+            style={{ background: "rgba(255,255,255,0.1)" }}
+          >
+            <div className="relative flex-1">
+              {draft.length === 0 && (
+                <span
+                  className={
+                    "pointer-events-none absolute inset-y-0 left-0 flex items-center text-[14px] text-white/50 transition-opacity duration-300 " +
+                    (placeholderVisible ? "opacity-100" : "opacity-0")
+                  }
+                >
+                  {placeholders.current[placeholderIdx]}
+                </span>
+              )}
+              <input
+                type="text"
+                value={draft}
+                onChange={(e) => setDraft(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") sendDraft();
+                }}
+                className="w-full bg-transparent text-[14px] text-white outline-none"
+              />
+            </div>
+            <button
+              type="button"
+              onClick={sendDraft}
+              aria-label="Enviar"
+              className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10"
+            >
+              <Send className="h-4 w-4" />
+            </button>
           </div>
-          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent">
-            <Mic className="h-5 w-5" />
-          </div>
-        </button>
+        </div>
 
         <VerseCard
           verse={verse}
@@ -212,6 +281,12 @@ function Home() {
             },
           })}
           onWidget={() => navigate({ to: "/widgets" })}
+          onReadChapter={() =>
+            navigate({
+              to: "/reader",
+              search: { book: verse.book, chapter: verse.chapter },
+            })
+          }
         />
 
         {showWidgetPromo && (
@@ -323,21 +398,6 @@ function Home() {
           </div>
         </section>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <button
-            type="button"
-            onClick={() =>
-              navigate({
-                to: "/reader",
-                search: { book: verse.book, chapter: verse.chapter },
-              })
-            }
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-xs font-semibold uppercase tracking-widest text-foreground transition-colors hover:border-accent"
-          >
-            <BookOpen className="h-4 w-4" />
-            Leer capítulo completo
-          </button>
-        </div>
       </div>
 
       <div className="fixed bottom-14 left-1/2 z-30 w-full max-w-md -translate-x-1/2">
