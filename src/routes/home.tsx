@@ -90,8 +90,8 @@ function Home() {
   const [placeholderVisible, setPlaceholderVisible] = useState(true);
   const placeholders = useRef([
     "Cuéntame cómo amaneciste...",
-    "¿Qué hay en tu corazón hoy?",
     "Escribe lo que sientes...",
+    "Estoy aquí para escucharte...",
   ]);
 
   useEffect(() => {
