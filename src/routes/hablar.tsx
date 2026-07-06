@@ -50,6 +50,11 @@ function HablarScreen() {
 
   useEffect(() => {
     setBalance(readLS(STORAGE_KEYS.gracias, 10));
+    const initial = readLS<string>("hablar:initial_text", "");
+    if (initial) {
+      setContent(initial);
+      writeLS("hablar:initial_text", "");
+    }
   }, []);
 
   const handleSend = () => {
