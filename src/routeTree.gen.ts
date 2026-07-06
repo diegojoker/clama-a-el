@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WidgetsRouteImport } from './routes/widgets'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ReaderRouteImport } from './routes/reader'
+import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as HablarRouteImport } from './routes/hablar'
@@ -36,6 +37,11 @@ const SettingsRoute = SettingsRouteImport.update({
 const ReaderRoute = ReaderRouteImport.update({
   id: '/reader',
   path: '/reader',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
   '/onboarding': typeof OnboardingRoute
+  '/perfil': typeof PerfilRoute
   '/reader': typeof ReaderRoute
   '/settings': typeof SettingsRoute
   '/widgets': typeof WidgetsRoute
@@ -114,6 +121,7 @@ export interface FileRoutesByTo {
   '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
   '/onboarding': typeof OnboardingRoute
+  '/perfil': typeof PerfilRoute
   '/reader': typeof ReaderRoute
   '/settings': typeof SettingsRoute
   '/widgets': typeof WidgetsRoute
@@ -130,6 +138,7 @@ export interface FileRoutesById {
   '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
   '/onboarding': typeof OnboardingRoute
+  '/perfil': typeof PerfilRoute
   '/reader': typeof ReaderRoute
   '/settings': typeof SettingsRoute
   '/widgets': typeof WidgetsRoute
@@ -147,6 +156,7 @@ export interface FileRouteTypes {
     | '/hablar'
     | '/home'
     | '/onboarding'
+    | '/perfil'
     | '/reader'
     | '/settings'
     | '/widgets'
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
     | '/hablar'
     | '/home'
     | '/onboarding'
+    | '/perfil'
     | '/reader'
     | '/settings'
     | '/widgets'
@@ -177,6 +188,7 @@ export interface FileRouteTypes {
     | '/hablar'
     | '/home'
     | '/onboarding'
+    | '/perfil'
     | '/reader'
     | '/settings'
     | '/widgets'
@@ -193,6 +205,7 @@ export interface RootRouteChildren {
   HablarRoute: typeof HablarRoute
   HomeRoute: typeof HomeRoute
   OnboardingRoute: typeof OnboardingRoute
+  PerfilRoute: typeof PerfilRoute
   ReaderRoute: typeof ReaderRoute
   SettingsRoute: typeof SettingsRoute
   WidgetsRoute: typeof WidgetsRoute
@@ -219,6 +232,13 @@ declare module '@tanstack/react-router' {
       path: '/reader'
       fullPath: '/reader'
       preLoaderRoute: typeof ReaderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -316,6 +336,7 @@ const rootRouteChildren: RootRouteChildren = {
   HablarRoute: HablarRoute,
   HomeRoute: HomeRoute,
   OnboardingRoute: OnboardingRoute,
+  PerfilRoute: PerfilRoute,
   ReaderRoute: ReaderRoute,
   SettingsRoute: SettingsRoute,
   WidgetsRoute: WidgetsRoute,

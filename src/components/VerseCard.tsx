@@ -7,9 +7,10 @@ interface VerseCardProps {
   onInterpret?: () => void;
   onShare?: () => void;
   onWidget?: () => void;
+  onReadChapter?: () => void;
 }
 
-export function VerseCard({ verse, onInterpret, onShare, onWidget }: VerseCardProps) {
+export function VerseCard({ verse, onInterpret, onShare, onWidget, onReadChapter }: VerseCardProps) {
   return (
     <article
       className="relative aspect-[4/5] w-full overflow-hidden rounded-[24px] border border-border bg-[#2c1810] shadow-lg"
@@ -32,6 +33,15 @@ export function VerseCard({ verse, onInterpret, onShare, onWidget }: VerseCardPr
         <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a84c]">
           {verse.reference}
         </p>
+        {onReadChapter && (
+          <button
+            type="button"
+            onClick={onReadChapter}
+            className="mt-1 text-[11px] text-[#c9a84c] hover:underline"
+          >
+            Leer capítulo completo →
+          </button>
+        )}
 
         {(onInterpret || onShare || onWidget) && (
           <div className="mt-8 flex w-full flex-col items-center gap-3">
