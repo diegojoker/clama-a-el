@@ -325,16 +325,13 @@ function Home() {
 
         {/* Tu camino de hoy */}
         <section className="mt-8 rounded-2xl border border-border bg-card p-4">
-          <div className="flex items-center justify-between gap-2">
-            <h2 className="font-serif-verse text-base text-foreground">Tu camino de hoy</h2>
-            <span
-              className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-medium text-white"
-              style={{ background: "#c9a84c" }}
-            >
-              ⭐ +5 gracias hoy
-            </span>
-          </div>
-          <div className="mt-3 flex justify-between">
+          <h2
+            className="mb-2 text-center font-serif-verse"
+            style={{ color: "#2c1810", fontSize: 18, fontWeight: 600 }}
+          >
+            Hay algo esperándote hoy 🎁
+          </h2>
+          <div className="mt-2 flex justify-center gap-2">
             {WEEK_LETTERS.map((letter, i) => {
               const todayIdx = new Date().getDay();
               const isToday = i === todayIdx;
@@ -344,7 +341,7 @@ function Home() {
                 <div
                   key={i}
                   className={
-                    "flex h-7 w-7 items-center justify-center rounded-full text-[11px] font-semibold " +
+                    "flex h-[26px] w-[26px] items-center justify-center rounded-full text-[11px] font-semibold " +
                     (isCompleted
                       ? "text-white"
                       : isToday
@@ -366,19 +363,21 @@ function Home() {
               );
             })}
           </div>
-          <p className="mt-3 text-center text-[12px]" style={{ color: "#9e8e7e" }}>
-            {streak === 0
-              ? "Completa el devocional de hoy y gana tus primeras gracias 🌟"
-              : streak >= 7
-                ? "¡7 días! Ganaste +20 gracias bonus 🎉"
-                : `Sigue así — a ${7 - streak} días de tu próxima recompensa`}
-          </p>
+          <div className="mt-3 flex justify-center">
+            <span
+              className="inline-flex items-center gap-1 rounded-full text-[11px] font-medium"
+              style={{ background: "#fef3c7", color: "#92400e", padding: "4px 12px" }}
+            >
+              ⭐ +5 gracias al completar
+            </span>
+          </div>
           <button
             type="button"
             onClick={() => navigate({ to: "/devocionales" })}
-            className="mt-3 flex min-h-[44px] w-full items-center justify-center rounded-2xl bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+            className="mt-3 flex min-h-[52px] w-full items-center justify-center rounded-2xl px-6 text-base font-medium text-white transition-opacity hover:opacity-90"
+            style={{ background: "#1a3a5c" }}
           >
-            Comenzar el día →
+            Descubrir →
           </button>
         </section>
 
