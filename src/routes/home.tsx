@@ -2,7 +2,6 @@ import { useMemo, useState, useEffect, useRef } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Star, Sparkles, Smartphone, Send } from "lucide-react";
 import { VerseCard } from "@/components/VerseCard";
-import { StreakBadge } from "@/components/StreakBadge";
 import { BottomNav } from "@/components/BottomNav";
 import { AdBanner } from "@/components/AdBanner";
 import { ThemeBootstrap } from "@/components/ThemeProvider";
@@ -165,12 +164,8 @@ function Home() {
       </header>
 
       <div className="px-6">
-        <div className="mb-2 flex justify-center">
-          <StreakBadge count={streak} />
-        </div>
-
         {/* Mood + Avatar row */}
-        <div className="mb-4 flex items-center justify-between gap-3">
+        <div className="mt-2 mb-4 flex items-center justify-between gap-3">
           <button
             type="button"
             onClick={() => setMoodOpen(true)}
@@ -330,8 +325,16 @@ function Home() {
 
         {/* Tu camino de hoy */}
         <section className="mt-8 rounded-2xl border border-border bg-card p-4">
-          <h2 className="font-serif-verse text-lg text-foreground">Tu camino de hoy</h2>
-          <div className="mt-4 flex justify-between">
+          <div className="flex items-center justify-between gap-2">
+            <h2 className="font-serif-verse text-base text-foreground">Tu camino de hoy</h2>
+            <span
+              className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-medium text-white"
+              style={{ background: "#c9a84c" }}
+            >
+              ⭐ +5 gracias hoy
+            </span>
+          </div>
+          <div className="mt-3 flex justify-between">
             {WEEK_LETTERS.map((letter, i) => {
               const todayIdx = new Date().getDay();
               const isToday = i === todayIdx;
@@ -341,14 +344,21 @@ function Home() {
                 <div
                   key={i}
                   className={
-                    "flex h-9 w-9 items-center justify-center rounded-full text-xs font-semibold " +
+                    "flex h-7 w-7 items-center justify-center rounded-full text-[11px] font-semibold " +
                     (isCompleted
-                      ? "bg-accent text-white"
+                      ? "text-white"
                       : isToday
-                        ? "border-2 border-accent text-foreground"
+                        ? "border-2 text-foreground"
                         : isFuture
                           ? "border border-border text-muted-foreground"
                           : "border border-border text-muted-foreground")
+                  }
+                  style={
+                    isCompleted
+                      ? { background: "#c9a84c" }
+                      : isToday
+                        ? { borderColor: "#c9a84c" }
+                        : undefined
                   }
                 >
                   {letter}
@@ -356,13 +366,17 @@ function Home() {
               );
             })}
           </div>
-          <p className="mt-4 text-center font-serif-verse text-base text-foreground">
-            🔥 {streak} {streak === 1 ? "día seguido" : "días seguidos"}
+          <p className="mt-3 text-center text-[12px]" style={{ color: "#9e8e7e" }}>
+            {streak === 0
+              ? "Completa el devocional de hoy y gana tus primeras gracias 🌟"
+              : streak >= 7
+                ? "¡7 días! Ganaste +20 gracias bonus 🎉"
+                : `Sigue así — a ${7 - streak} días de tu próxima recompensa`}
           </p>
           <button
             type="button"
             onClick={() => navigate({ to: "/devocionales" })}
-            className="mt-4 flex min-h-[52px] w-full items-center justify-center rounded-2xl bg-primary px-6 font-medium text-primary-foreground transition-opacity hover:opacity-90"
+            className="mt-3 flex min-h-[44px] w-full items-center justify-center rounded-2xl bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
             Comenzar el día →
           </button>
