@@ -185,6 +185,105 @@
   animation: soft-pulse 2s ease-in-out infinite;
 }
 
+/* Divine reveal animation */
+@keyframes divine-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.9);
+    box-shadow: 0 0 40px 10px rgba(201, 168, 76, 0.35);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 70px 20px rgba(201, 168, 76, 0.55);
+  }
+}
+
+@keyframes divine-flash {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(20); opacity: 1; }
+}
+
+@keyframes divine-dissipate {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes divine-fade-hint {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes verse-line-in {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes buttons-rise {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes particle-burst {
+  0% { transform: translate(-50%, -50%) translate(0, 0) scale(1); opacity: 1; }
+  100% {
+    transform: translate(-50%, -50%) translate(var(--px, 0), var(--py, 0)) scale(0.3);
+    opacity: 0;
+  }
+}
+
+.divine-orb {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 80px;
+  height: 80px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(201,168,76,0.8) 0%, rgba(201,168,76,0) 70%);
+  animation: divine-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.divine-orb-flash {
+  animation: divine-flash 0.3s ease-out forwards;
+  background: radial-gradient(circle, rgba(201,168,76,1) 0%, rgba(201,168,76,0.9) 40%, rgba(201,168,76,0.6) 100%);
+  box-shadow: 0 0 120px 40px rgba(201,168,76,0.8);
+}
+
+.divine-dissipate {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(201,168,76,0) 0%, rgba(201,168,76,0.9) 70%);
+  animation: divine-dissipate 0.4s ease-out forwards;
+  pointer-events: none;
+}
+
+.animate-fade-hint {
+  animation: divine-fade-hint 2s ease-in-out infinite;
+}
+
+.divine-particle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #f5d97a;
+  box-shadow: 0 0 8px 2px rgba(245, 217, 122, 0.9);
+  animation: particle-burst 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+.verse-line-in {
+  opacity: 0;
+  animation: verse-line-in 0.4s ease-out forwards;
+}
+
+.verse-buttons-in {
+  opacity: 0;
+  animation: buttons-rise 0.3s ease-out forwards;
+  animation-delay: 1s;
+}
+
 @layer base {
   * {
     border-color: var(--color-border);

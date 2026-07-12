@@ -1,7 +1,7 @@
 import type { Verse } from "@/lib/verses";
 import verseBg from "@/assets/verse-bg.jpg.asset.json";
-import { Search, Share2, Smartphone, Mail } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Search, Share2, Smartphone } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
 interface VerseCardProps {
   verse: Verse;
@@ -22,7 +22,20 @@ function todayKey() {
 
 export function VerseCard({ verse, onInterpret, onShare, onWidget, onReadChapter, moodEmoji, moodLabel }: VerseCardProps) {
   const [revealed, setRevealed] = useState(true);
-  const [flipping, setFlipping] = useState(false);
+  const [animating, setAnimating] = useState(false);
+
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 8 }, (_, i) => {
+        const angle = (i / 8) * Math.PI * 2;
+        const dist = 90 + Math.random() * 40;
+        return {
+          x: Math.cos(angle) * dist,
+          y: Math.sin(angle) * dist,
+        };
+      }),
+    []
+  );
 
   useEffect(() => {
     try {
@@ -34,9 +47,9 @@ export function VerseCard({ verse, onInterpret, onShare, onWidget, onReadChapter
   }, []);
 
   const handleReveal = () => {
-    if (revealed || flipping) return;
-    setFlipping(true);
-    // swap content at halfway point (300ms of 600ms animation)
+    if (revealed || animating) return;
+    setAnimating(true);
+    // reveal content after flash (300ms) so it fades in during dissipation
     window.setTimeout(() => {
       setRevealed(true);
       try {
@@ -45,10 +58,10 @@ export function VerseCard({ verse, onInterpret, onShare, onWidget, onReadChapter
         /* ignore */
       }
     }, 300);
-    window.setTimeout(() => setFlipping(false), 600);
+    window.setTimeout(() => setAnimating(false), 1300);
   };
 
-  const overlayOpacity = revealed ? 0.4 : 0.7;
+  const overlayOpacity = revealed ? 0.4 : 0.75;
 
   return (
     <article
@@ -81,45 +94,70 @@ export function VerseCard({ verse, onInterpret, onShare, onWidget, onReadChapter
           <span>{moodLabel}</span>
         </div>
       )}
-      <div
-        className={
-          "relative flex h-full flex-col items-center justify-center px-7 py-8 text-center " +
-          (flipping ? "animate-verse-flip" : "")
-        }
-      >
+      {/* Divine orb + flash + particles */}
+      {!revealed && (
+        <>
+          <div className={"divine-orb" + (animating ? " divine-orb-flash" : "")} aria-hidden="true" />
+          {animating && (
+            <>
+              {particles.map((p, i) => (
+                <span
+                  key={i}
+                  className="divine-particle"
+                  style={{ ["--px" as string]: `${p.x}px`, ["--py" as string]: `${p.y}px` }}
+                  aria-hidden="true"
+                />
+              ))}
+            </>
+          )}
+        </>
+      )}
+      {animating && revealed && (
+        <div className="divine-dissipate" aria-hidden="true" />
+      )}
+      <div className="relative flex h-full flex-col items-center justify-center px-7 py-8 text-center">
         {!revealed ? (
-          <>
-            <Mail className="h-12 w-12 text-white/80" aria-hidden="true" />
-            <p className="mt-5 font-serif-verse text-[18px] leading-snug text-white">
-              Hay una palabra especial para ti hoy
+          <div className="flex flex-col items-center justify-center pt-24">
+            <p className="font-serif-verse text-[17px] leading-snug text-white">
+              Hay una palabra para ti hoy
             </p>
-            <p className="mt-3 animate-soft-pulse text-[13px] text-white/60">
-              Toca para revelar
+            <p className="mt-3 animate-fade-hint text-[13px] text-white/60">
+              Toca para recibir
             </p>
-          </>
+          </div>
         ) : (
           <>
-        <span className="mb-4 text-[10px] uppercase tracking-[0.25em] text-white/80">
+        <span
+          className={"mb-4 text-[10px] uppercase tracking-[0.25em] text-white/80" + (animating ? " verse-line-in" : "")}
+          style={animating ? { animationDelay: "0.6s" } : undefined}
+        >
           Versículo del día
         </span>
-        <p className="font-serif-verse text-[1.5rem] leading-[1.4] italic text-white">
+        <p
+          className={"font-serif-verse text-[1.5rem] leading-[1.4] italic text-white" + (animating ? " verse-line-in" : "")}
+          style={animating ? { animationDelay: "0.7s" } : undefined}
+        >
           “{verse.text}”
         </p>
-        <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a84c]">
+        <p
+          className={"mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a84c]" + (animating ? " verse-line-in" : "")}
+          style={animating ? { animationDelay: "0.85s" } : undefined}
+        >
           {verse.reference}
         </p>
         {onReadChapter && (
           <button
             type="button"
             onClick={onReadChapter}
-            className="mt-1 text-[11px] text-[#c9a84c] hover:underline"
+            className={"mt-1 text-[11px] text-[#c9a84c] hover:underline" + (animating ? " verse-line-in" : "")}
+            style={animating ? { animationDelay: "0.9s" } : undefined}
           >
             Leer capítulo completo →
           </button>
         )}
 
         {(onInterpret || onShare || onWidget) && (
-          <div className="mt-8 flex w-full flex-col items-center gap-3">
+          <div className={"mt-8 flex w-full flex-col items-center gap-3" + (animating ? " verse-buttons-in" : "")}>
             {(onInterpret || onShare) && (
               <div className="flex w-full gap-3">
                 {onInterpret && (
