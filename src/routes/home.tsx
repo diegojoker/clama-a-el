@@ -264,6 +264,8 @@ function Home() {
 
         <VerseCard
           verse={verse}
+          moodEmoji={currentMood?.emoji}
+          moodLabel={currentMood?.label}
           onInterpret={() => deductGracias(1, "Interpretar versículo")}
           onShare={() => navigate({
             to: "/compartir",
