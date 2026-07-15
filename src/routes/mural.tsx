@@ -738,6 +738,14 @@ function PrayerModal({
               <Share2 className="h-4 w-4" />
               Compartir esta oración
             </button>
+            {shared && (
+              <p
+                className="text-center text-xs font-medium"
+                style={{ color: "#2f8f4f" }}
+              >
+                Oración compartida ✓
+              </p>
+            )}
           </div>
         </div>
       </div>
