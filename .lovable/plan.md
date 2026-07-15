@@ -1,100 +1,57 @@
-## Versículo del Día — Fase 1
+## Onboarding revisado — 7 passos + tooltips na Home
 
-App web mobile-first (preparado para Capacitor depois), em espanhol, sem backend. Persistência via `localStorage`. Versículos vêm de um JSON local. Sem login, sem Cloud.
+Reescreve `src/routes/onboarding.tsx` do zero (substituição completa) e adiciona sequência de tooltips na Home na primeira abertura pós-onboarding.
 
-### Escopo da Fase 1
-1. **Onboarding** (3 slides) — exibido apenas na primeira visita.
-2. **Home** — versículo do dia + streak + compartilhar + "Leer más" + placeholder de anúncio.
-3. **Configurações** — horário de notificação, tradução, tema (claro/escuro/sépia), avaliar, compartilhar.
+### Rotas / arquivos
+- `src/routes/onboarding.tsx` — reescrita completa, 7 passos em uma única rota controlada por state (`step: 0..6`).
+- `src/components/OnboardingTooltips.tsx` — novo, sequência de 4 tooltips com overlay + spotlight, renderizado condicionalmente na Home.
+- `src/routes/home.tsx` — inclui `<OnboardingTooltips />` no topo do return, com `data-tooltip-id` nos 4 alvos (chip de mood, saldo de gracias, card "¿Qué hay en tu corazón hoy?", aba Mural do BottomNav).
+- `src/components/BottomNav.tsx` — adiciona `data-tooltip-id="nav-mural"` no link do Mural.
+- `src/lib/storage.ts` — adiciona chaves ao `STORAGE_KEYS`: `userName` (já existe), `currentMood`, `tradition`, `tooltipsShown`.
+- `src/routes/index.tsx` — continua redirecionando via `vdd:onboarded`.
 
-**Fora da Fase 1** (entregas seguintes, individuais): Planos de Leitura, Loja/Premium, Widget Preview.
-
-### Design system
-- Paleta em `src/styles.css` via tokens `oklch`:
-  - `--primary` azul profundo `#1a3a5c`
-  - `--accent` dourado `#c9a84c`
-  - `--background` branco / sépia `#f4ecd8` / dark `#0e1b2a`
-- Três temas via classe no `<html>`: `light`, `dark`, `sepia` (toggle salvo em localStorage).
-- Tipografia: **Cormorant Garamond** (serifa, versículos) + **Inter** (sans, UI). Carregadas via `<link>` do Google Fonts no `__root.tsx`.
-- Estética adulta, premium, espaçada — não infantil.
-- Ícone do app (favicon/PWA): livro aberto com raio dourado, gerado via `imagegen`.
-
-### Arquitetura de rotas (TanStack Start)
-```text
-src/routes/
-  __root.tsx          → shell + fontes + provider de tema
-  index.tsx           → redireciona para /onboarding ou /home
-  onboarding.tsx      → 3 slides com carrossel
-  home.tsx            → versículo do dia
-  reader.tsx          → "Leer más" (capítulo completo)
-  settings.tsx        → preferências
-```
-Layout mobile-first: container `max-w-md mx-auto`, barra inferior fixa com 2 tabs (Home / Ajustes).
-
-### Dados
-- `src/data/verses.es.json` — array de ~150 versículos curados em espanhol (RV1960-style domínio público / paráfrase neutra), com `reference`, `text`, `book`, `chapter`, `verse`.
-- Versículo do dia = índice determinístico por data: `dayOfYear % verses.length`. Garante mesma exibição o dia todo, troca à meia-noite local.
-- `src/data/chapters/` — alguns capítulos completos em JSON para o "Leer más" da Fase 1 (cobertura limitada; capítulos sem dataset mostram aviso "Capítulo no disponible aún").
-
-### Persistência (localStorage)
-| Chave | Conteúdo |
+### Persistência (localStorage, padrão `vdd:*`)
+| Chave | Valor |
 |---|---|
-| `vdd:onboarded` | boolean |
-| `vdd:translation` | `"RV1960"` \| `"NVI"` \| `"BJ"` (Fase 1 só RV ativa, outras marcadas "Próximamente") |
-| `vdd:theme` | `"light"` \| `"dark"` \| `"sepia"` |
-| `vdd:notifyTime` | `"HH:mm"` |
-| `vdd:streak` | `{ count: number, lastOpenISO: string }` |
+| `vdd:onboarded` | `true` ao terminar passo 7 |
+| `vdd:user_name` | string do passo 2 |
+| `vdd:current_mood` | mood do passo 3 (mesma chave usada pela Home) |
+| `vdd:tradition` | `"catolico" \| "evangelico" \| "cristiano" \| "explorando"` |
+| `vdd:gracias` | credita +30 ao terminar |
+| `vdd:tooltips_shown` | `true` após 4º tooltip |
+| `vdd:translation` | mantém `"RV1960"` por padrão |
 
-Hook `useStreak()` incrementa quando `lastOpen` é o dia anterior, mantém se for hoje, reseta se houver gap > 1 dia.
+### Passos
+1. **Boas-vindas** — logo circular 80px #1a3a5c, título serifado "Clama a Él", subtítulo itálico Jer 33:3, botão azul "Comenzar mi camino →".
+2. **Nome** — input central borda dourada ao focar, botão desabilitado até ter texto.
+3. **Mood** — grid 3×4 dos 12 chips com emoji; selecionado #1a3a5c/branco.
+4. **Tradição** — 4 cards verticais (Católico/Evangélico/Cristiano/Explorando); selecionado borda #1a3a5c + fundo #f0f4f8.
+5. **Explicação das gracias** — moeda ⭐ 64px com brilho, dois blocos lado a lado (verde "Cómo ganarlas" / azul "Para qué usarlas"), rodapé itálico "Como monedas de fe…", botão "Entendido →".
+6. **Widget** — preview do card com overlay #1a3a5c/0.6, 3 passos de instrução, botões "Ver todos los widgets →" (leva a `/widgets` e marca onboarded) e "Hacer después".
+7. **30 gracias** — gradiente #faf7f2→#fef3c7, 8 estrelas caindo (CSS keyframes staggered), número 72px dourado, botão finaliza: grava tudo + `vdd:gracias +=30` + navega para `/home`.
 
-### Telas em detalhe
+Header do onboarding: barra de progresso com 7 bolinhas (a atual em #c9a84c). Fundo `#faf7f2` em todos os passos, transições `animate-fade-in` entre steps.
 
-**Onboarding** (`/onboarding`)
-- Carrossel com 3 passos, dots indicadores, botões "Saltar" / "Siguiente" / "Empezar".
-- Slide 3: 3 cards de tradução (RV1960 selecionado por padrão; NVI e BJ visíveis mas marcadas "Próximamente").
-- Ao concluir → grava `vdd:onboarded=true` + tradução escolhida → vai para `/home`.
+### Tooltips (Home, primeira abertura)
+Componente `OnboardingTooltips` monta se `vdd:onboarded===true` && `vdd:tooltips_shown!==true`. Overlay preto/60, "spotlight" via clip-path (retângulo do `getBoundingClientRect()` do alvo). Tooltip card branco com sombra abaixo/acima do alvo, texto #2c1810, botão azul. Sequência: mood → gracias → card conversa → aba Mural. No 4º "Comenzar ✨" grava `vdd:tooltips_shown=true`.
 
-**Home** (`/home`)
-- Cabeçalho discreto com data em espanhol ("martes, 22 de mayo").
-- Card central: texto do versículo em serifa grande (~28px), referência abaixo em dourado.
-- Badge de streak: "Llevas X días con la Palabra" (chama em dourado quando ≥ 3).
-- Botões: `Leer más` (navega para `/reader?ref=...`), `Compartir` (Web Share API com fallback para copiar texto).
-- Rodapé: placeholder `<AdBanner />` (div estilizada "Espacio publicitario").
+Elementos alvo recebem atributo `data-tooltip-id` já existente no DOM da Home:
+- `data-tooltip-id="mood-chip"` no chip de humor
+- `data-tooltip-id="gracias-balance"` no badge de saldo do header
+- `data-tooltip-id="heart-card"` no card "¿Qué hay en tu corazón hoy?"
+- `data-tooltip-id="nav-mural"` no link Mural do `BottomNav`
 
-**Reader** (`/reader`)
-- Mostra capítulo completo quando disponível no dataset; senão, mensagem amigável + botão voltar.
+### Detalhes técnicos
+- Todos os estilos inline com hex exatos do brief (não uso tokens semânticos, pois o brief fixa cores concretas).
+- Animação de estrelas: 8 `<span>` posicionados absolutos, `animation: star-fall 2s ease-out forwards` com `animation-delay` staggered 0–1.4s.
+- Animação de brilho da moeda: `@keyframes coin-glow` já pode reusar padrão pulse; adiciono em `src/styles.css`.
+- Botão "Siguiente" desabilitado usa `opacity-40 cursor-not-allowed`.
+- Ao terminar passo 7, tudo é persistido de uma vez em um único `writeLS` sequencial e depois `navigate({ to: "/home", replace: true })`.
+- Rota `/onboarding` mantém o mesmo path — nada quebra no `src/routes/index.tsx`.
 
-**Settings** (`/settings`)
-- Input `time` para horário da notificação (salvo localmente; notificação real fica para fase nativa).
-- Select de tradução.
-- Toggle de 3 temas (chips visuais).
-- Links: "Valora la app" (`window.open` de placeholder), "Comparte con amigos" (Web Share).
+### O que **não** faço nesta entrega
+- Não altero a página `/widgets` nem a home além de: (a) inserir `<OnboardingTooltips />` e (b) marcar os 4 alvos com `data-tooltip-id`.
+- Não mexo em Mural, Gracias, Diário, etc.
+- Não altero o BottomNav além do `data-tooltip-id` na aba Mural.
 
-### Componentes novos
-- `components/VerseCard.tsx`
-- `components/StreakBadge.tsx`
-- `components/ThemeProvider.tsx` (aplica classe no `<html>`)
-- `components/BottomNav.tsx`
-- `components/AdBanner.tsx` (placeholder)
-- `components/OnboardingCarousel.tsx`
-- `hooks/useDailyVerse.ts`
-- `hooks/useStreak.ts`
-- `hooks/useLocalStorage.ts`
-- `lib/verses.ts` (helpers de seleção diária)
-
-### Preparação para Capacitor (sem instalar agora)
-- Manter tudo client-side e roteamento que funcione em file:// (sem loaders server-side).
-- Evitar APIs server-only nas telas da Fase 1.
-- Adicionar `viewport` correto e PWA-friendly meta no `__root.tsx`.
-
-### Notas técnicas
-- Sem Lovable Cloud, sem server functions.
-- Imagem do ícone gerada em `src/assets/app-icon.png`.
-- Fontes via Google Fonts CDN.
-- A11y: contraste verificado nos 3 temas, `aria-label` nos botões de ação.
-
-### Próximas fases (para aprovação separada após esta)
-1. Planos de Leitura
-2. Loja/Premium
-3. Widget Preview + instruções
-4. Capacitor wrap + AdMob + notificações nativas reais
+Aprova este plano para eu implementar?

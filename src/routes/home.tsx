@@ -10,6 +10,7 @@ import { formatDateEs, getVerseOfDay } from "@/lib/verses";
 import { STORAGE_KEYS, readLS, writeLS } from "@/lib/storage";
 import { toast } from "sonner";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { OnboardingTooltips } from "@/components/OnboardingTooltips";
 
 const WEEK_LETTERS = ["D", "L", "M", "M", "J", "V", "S"];
 const MOODS = [
@@ -155,6 +156,7 @@ function Home() {
         </p>
         <button
           onClick={() => navigate({ to: "/gracias" })}
+          data-tooltip-id="gracias-balance"
           className="flex items-center gap-1 text-[12px] font-bold text-accent transition-transform active:scale-95"
         >
           <Star className="h-3.5 w-3.5 fill-accent" />
@@ -169,6 +171,7 @@ function Home() {
           <button
             type="button"
             onClick={() => setMoodOpen(true)}
+            data-tooltip-id="mood-chip"
             className="inline-flex items-center gap-1.5 rounded-[20px] border border-accent bg-card px-3.5 py-1.5 text-[13px]"
             style={{ color: currentMood ? "#2c1810" : "#9e8e7e" }}
           >
@@ -220,6 +223,7 @@ function Home() {
 
         {/* Conversation card with inline input */}
         <div
+          data-tooltip-id="heart-card"
           className="mb-6 rounded-2xl p-5 text-primary-foreground"
           style={{ background: "#1a3a5c" }}
         >
@@ -444,6 +448,7 @@ function Home() {
         <AdBanner />
       </div>
       <BottomNav />
+      <OnboardingTooltips />
     </div>
   );
 }

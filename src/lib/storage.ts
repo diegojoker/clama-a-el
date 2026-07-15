@@ -13,6 +13,9 @@ export const STORAGE_KEYS = {
   activeWidgetTheme: "vdd:active_widget_theme",
   diario: "vdd:diario",
   mural: "vdd:mural",
+  currentMood: "vdd:current_mood",
+  tradition: "vdd:tradition",
+  tooltipsShown: "vdd:tooltips_shown",
 } as const;
 
 export interface DiarioEntry {
