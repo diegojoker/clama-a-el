@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { OnboardingTooltips } from "@/components/OnboardingTooltips";
 import { RecentConversations } from "@/components/RecentConversations";
+import type { DiarioEntry } from "@/lib/storage";
 
 const WEEK_LETTERS = ["D", "L", "M", "M", "J", "V", "S"];
 const MOODS = [
@@ -89,6 +90,52 @@ function Home() {
   const [draft, setDraft] = useState("");
   const [placeholderIdx, setPlaceholderIdx] = useState(0);
   const [placeholderVisible, setPlaceholderVisible] = useState(true);
+  const [hasDiario, setHasDiario] = useState(true);
+
+  useEffect(() => {
+    setHasDiario(readLS<DiarioEntry[]>(STORAGE_KEYS.diario, []).length > 0);
+  }, []);
+
+  const seedConversations = () => {
+    const now = new Date();
+    const iso = (offsetDays: number) => {
+      const d = new Date(now);
+      d.setDate(d.getDate() - offsetDays);
+      return d.toISOString();
+    };
+    const samples: DiarioEntry[] = [
+      {
+        id: `demo-${Date.now()}-1`,
+        date: iso(0),
+        humor: "Ansioso",
+        humorEmoji: "😰",
+        content: "Me siento muy ansioso por el trabajo...",
+        responseVerse: { text: "", reference: "" },
+        responseText: "",
+      },
+      {
+        id: `demo-${Date.now()}-2`,
+        date: iso(1),
+        humor: "Confundido",
+        humorEmoji: "😕",
+        content: "¿Por qué Dios permite el sufrimiento?",
+        responseVerse: { text: "", reference: "" },
+        responseText: "",
+      },
+      {
+        id: `demo-${Date.now()}-3`,
+        date: iso(2),
+        humor: "Triste",
+        humorEmoji: "😔",
+        content: "Necesito paz en mi familia...",
+        responseVerse: { text: "", reference: "" },
+        responseText: "",
+      },
+    ];
+    const existing = readLS<DiarioEntry[]>(STORAGE_KEYS.diario, []);
+    writeLS(STORAGE_KEYS.diario, [...samples, ...existing]);
+    window.location.reload();
+  };
   const placeholders = useRef([
     "Cuéntame cómo amaneciste...",
     "Escribe lo que sientes...",
@@ -446,6 +493,17 @@ function Home() {
       </div>
 
       <RecentConversations />
+      {!hasDiario && (
+        <div className="mt-4 flex justify-center px-6">
+          <button
+            type="button"
+            onClick={seedConversations}
+            className="text-[11px] text-muted-foreground underline underline-offset-2 opacity-60 hover:opacity-100"
+          >
+            Simular conversaciones
+          </button>
+        </div>
+      )}
       <div className="fixed bottom-14 left-1/2 z-30 w-full max-w-md -translate-x-1/2">
         <AdBanner />
       </div>
