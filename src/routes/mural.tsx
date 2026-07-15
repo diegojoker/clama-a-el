@@ -386,18 +386,16 @@ function PostCard({
   onToggleExpand,
   onReact,
   onPray,
-  onGenerate,
   hasPrayed,
-  floating,
+  loading,
 }: {
   post: MuralPost;
   expanded: boolean;
   onToggleExpand: () => void;
   onReact: (k: ReactionKey) => void;
   onPray: () => void;
-  onGenerate: () => void;
   hasPrayed: boolean;
-  floating: boolean;
+  loading: boolean;
 }) {
   const showToggle = post.text.length > 140;
   return (
@@ -480,41 +478,32 @@ function PostCard({
       </div>
 
       <div className="mt-3 flex items-center justify-between gap-2">
-        <div className="relative">
-          <button
-            type="button"
-            onClick={onPray}
-            disabled={hasPrayed}
-            className="rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors"
-            style={
-              hasPrayed
-                ? { background: "#c9a84c", color: "#ffffff", border: "1px solid #c9a84c" }
-                : { background: "#faf7f2", color: "#2c1810", border: "1px solid #c9a84c" }
-            }
-          >
-            {hasPrayed ? "Orando 🙏" : "Orar 🙏 +1 gracia"}
-          </button>
-          {floating && (
-            <span
-              className="pointer-events-none absolute -top-4 left-1/2 -translate-x-1/2 text-xs font-bold"
-              style={{ color: "#c9a84c", animation: "float-up 1.2s ease-out forwards" }}
-            >
-              +1 ⭐
-            </span>
-          )}
-        </div>
         <button
           type="button"
-          onClick={onGenerate}
-          className="text-[11px]"
-          style={{ color: "#9e8e7e" }}
+          onClick={onPray}
+          disabled={hasPrayed || loading}
+          className="flex items-center gap-1.5 rounded-[20px] px-3.5 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed"
+          style={
+            hasPrayed
+              ? { background: "#c9a84c", color: "#ffffff", border: "1px solid #c9a84c" }
+              : { background: "#faf7f2", color: "#2c1810", border: "1px solid #c9a84c" }
+          }
         >
-          Generar oración — 2 gracias ⭐
+          {hasPrayed ? (
+            <>Ya oraste hoy 🙏</>
+          ) : loading ? (
+            <>
+              <Loader2 className="h-3.5 w-3.5 animate-spin" style={{ color: "#c9a84c" }} />
+              Preparando tu oración...
+            </>
+          ) : (
+            <>Orar por esta persona 🙏 +1 gracia</>
+          )}
         </button>
+        <span className="text-[11px]" style={{ color: "#9e8e7e" }}>
+          {post.prayedBy} han orado
+        </span>
       </div>
-      <p className="mt-2 text-[11px]" style={{ color: "#9e8e7e" }}>
-        {post.prayedBy} han orado
-      </p>
     </article>
   );
 }
