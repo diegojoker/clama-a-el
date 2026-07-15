@@ -133,10 +133,10 @@ function MuralScreen() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("Todos");
   const [sortMode, setSortMode] = useState<SortMode>("recientes");
-  const [prayedPosts, setPrayedPosts] = useState<Record<string, boolean>>({});
-  const [generatedFor, setGeneratedFor] = useState<MuralPost | null>(null);
-  const [insufficientOpen, setInsufficientOpen] = useState(false);
-  const [floaters, setFloaters] = useState<{ id: number; postId: string }[]>([]);
+  const [prayedToday, setPrayedToday] = useState<Record<string, string>>({});
+  const [loadingPostId, setLoadingPostId] = useState<string | null>(null);
+  const [prayerModalPost, setPrayerModalPost] = useState<MuralPost | null>(null);
+  const [headerFloat, setHeaderFloat] = useState(false);
 
   useEffect(() => {
     const existing = readLS<MuralPost[] | null>(STORAGE_KEYS.mural, null);
@@ -146,7 +146,7 @@ function MuralScreen() {
       setPosts(SEED_POSTS);
       writeLS(STORAGE_KEYS.mural, SEED_POSTS);
     }
-    setPrayedPosts(readLS<Record<string, boolean>>("vdd:mural_prayed", {}));
+    setPrayedToday(readLS<Record<string, string>>(PRAYED_KEY, {}));
   }, []);
 
   const persist = (next: MuralPost[]) => {
@@ -167,10 +167,20 @@ function MuralScreen() {
     persist(next);
   };
 
-  const prayFor = (postId: string) => {
-    if (prayedPosts[postId]) return;
+  const isPrayedToday = (postId: string) => prayedToday[postId] === todayKey();
+
+  const startPray = (post: MuralPost) => {
+    if (isPrayedToday(post.id) || loadingPostId) return;
+    setLoadingPostId(post.id);
+    setTimeout(() => {
+      setLoadingPostId(null);
+      setPrayerModalPost(post);
+    }, 1500);
+  };
+
+  const confirmAmen = (post: MuralPost) => {
     const next = posts.map((p) =>
-      p.id === postId
+      p.id === post.id
         ? {
             ...p,
             reactions: { ...p.reactions, orando: p.reactions.orando + 1 },
@@ -180,24 +190,18 @@ function MuralScreen() {
         : p
     );
     persist(next);
-    const nextPrayed = { ...prayedPosts, [postId]: true };
-    setPrayedPosts(nextPrayed);
-    writeLS("vdd:mural_prayed", nextPrayed);
+    const nextPrayed = { ...prayedToday, [post.id]: todayKey() };
+    setPrayedToday(nextPrayed);
+    writeLS(PRAYED_KEY, nextPrayed);
     const balance = readLS<number>(STORAGE_KEYS.gracias, 10);
     writeLS(STORAGE_KEYS.gracias, balance + 1);
-    const fid = Date.now();
-    setFloaters((f) => [...f, { id: fid, postId }]);
-    setTimeout(() => setFloaters((f) => f.filter((x) => x.id !== fid)), 1200);
-  };
-
-  const generatePrayer = (post: MuralPost) => {
-    const balance = readLS<number>(STORAGE_KEYS.gracias, 10);
-    if (balance < 2) {
-      setInsufficientOpen(true);
-      return;
-    }
-    writeLS(STORAGE_KEYS.gracias, balance - 2);
-    setGeneratedFor(post);
+    setPrayerModalPost(null);
+    setHeaderFloat(true);
+    setTimeout(() => setHeaderFloat(false), 1400);
+    toast("Tu oración fue enviada 🙏 +1 gracia ganada", {
+      style: { background: "#1a3a5c", color: "#ffffff", border: "none" },
+      duration: 3000,
+    });
   };
 
   const addPost = (post: MuralPost) => {
@@ -320,10 +324,9 @@ function MuralScreen() {
                   setExpanded((e) => ({ ...e, [p.id]: !e[p.id] }))
                 }
                 onReact={(k) => toggleReaction(p.id, k)}
-                onPray={() => prayFor(p.id)}
-                onGenerate={() => generatePrayer(p)}
-                hasPrayed={!!prayedPosts[p.id]}
-                floating={floaters.some((f) => f.postId === p.id)}
+                onPray={() => startPray(p)}
+                hasPrayed={isPrayedToday(p.id)}
+                loading={loadingPostId === p.id}
               />
                 ))}
               </div>
@@ -336,12 +339,21 @@ function MuralScreen() {
         <PedirOracionModal onClose={() => setModalOpen(false)} onSubmit={addPost} />
       )}
 
-      {generatedFor && (
-        <GeneratedPrayerModal post={generatedFor} onClose={() => setGeneratedFor(null)} />
+      {prayerModalPost && (
+        <PrayerModal
+          post={prayerModalPost}
+          onAmen={() => confirmAmen(prayerModalPost)}
+          onClose={() => setPrayerModalPost(null)}
+        />
       )}
 
-      {insufficientOpen && (
-        <InsufficientModal onClose={() => setInsufficientOpen(false)} />
+      {headerFloat && (
+        <span
+          className="pointer-events-none fixed left-1/2 top-14 z-[60] -translate-x-1/2 text-lg font-bold"
+          style={{ color: "#c9a84c", animation: "float-up 1.4s ease-out forwards" }}
+        >
+          +1 ⭐
+        </span>
       )}
 
       <BottomNav />
