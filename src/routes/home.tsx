@@ -448,6 +448,7 @@ function Home() {
         <AdBanner />
       </div>
       <BottomNav />
+      <OnboardingTooltips />
     </div>
   );
 }
