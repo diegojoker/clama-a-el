@@ -630,3 +630,74 @@ function PedirOracionModal({
     </div>
   );
 }
+
+function GeneratedPrayerModal({ post, onClose }: { post: MuralPost; onClose: () => void }) {
+  const prayer = useMemo(() => {
+    const name = post.anonymous ? "esta persona" : post.name;
+    return `Padre Celestial, hoy me acerco a Ti para interceder por ${name}. Tú conoces cada detalle de su corazón y de la situación que atraviesa en el área de ${post.category.toLowerCase()}. Extiende Tu mano poderosa y derrama Tu paz, Tu consuelo y Tu sabiduría. Recuérdale que no camina solo, que Tu amor le sostiene y que Tu tiempo es perfecto. Fortalece su fe y renueva su esperanza. En el nombre de Jesús, amén. 🙏`;
+  }, [post]);
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60" />
+      <div
+        className="relative z-10 w-full max-w-md rounded-3xl p-6 shadow-2xl"
+        style={{ background: "#faf7f2" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between">
+          <h2 className="font-serif-verse text-2xl" style={{ color: "#2c1810" }}>
+            Oración por {post.anonymous ? "esta petición" : post.name}
+          </h2>
+          <button type="button" onClick={onClose} aria-label="Cerrar" className="rounded-full p-1" style={{ color: "#9e8e7e" }}>
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+        <p
+          className="mt-4 font-serif-verse text-base"
+          style={{ color: "#2c1810", lineHeight: 1.7 }}
+        >
+          {prayer}
+        </p>
+        <button
+          type="button"
+          onClick={onClose}
+          className="mt-6 w-full rounded-2xl py-3 text-sm font-medium text-white"
+          style={{ background: "#1a3a5c" }}
+        >
+          Amén
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function InsufficientModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60" />
+      <div
+        className="relative z-10 w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl"
+        style={{ background: "#faf7f2" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="text-4xl">⭐</div>
+        <h2 className="mt-2 font-serif-verse text-xl" style={{ color: "#2c1810" }}>
+          No tienes suficientes gracias
+        </h2>
+        <p className="mt-2 text-sm" style={{ color: "#9e8e7e" }}>
+          Necesitas 2 gracias para generar una oración.
+        </p>
+        <a
+          href="/gracias"
+          className="mt-5 inline-block w-full rounded-2xl py-3 text-sm font-medium text-white"
+          style={{ background: "#1a3a5c" }}
+        >
+          Conseguir gracias
+        </a>
+        <button type="button" onClick={onClose} className="mt-2 w-full py-2 text-sm" style={{ color: "#9e8e7e" }}>
+          Cerrar
+        </button>
+      </div>
+    </div>
+  );
+}
