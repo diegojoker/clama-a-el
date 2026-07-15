@@ -12,6 +12,7 @@ export const STORAGE_KEYS = {
   unlockedWidgets: "vdd:unlocked_widgets",
   activeWidgetTheme: "vdd:active_widget_theme",
   diario: "vdd:diario",
+  mural: "vdd:mural",
 } as const;
 
 export interface DiarioEntry {
