@@ -664,18 +664,25 @@ function PrayerModal({
 }) {
   const displayName = post.anonymous ? "esta persona" : post.name;
   const prayer = PRAYER_BY_CATEGORY[post.category](displayName);
+  const [shared, setShared] = useState(false);
 
   const share = async () => {
     const text = `${prayer}\n\n— Una oración por ${displayName}`;
+    let ok = false;
     try {
       if (typeof navigator !== "undefined" && navigator.share) {
         await navigator.share({ text });
+        ok = true;
       } else if (typeof navigator !== "undefined" && navigator.clipboard) {
         await navigator.clipboard.writeText(text);
-        toast.success("Oración copiada");
+        ok = true;
       }
     } catch {
       // ignore cancel
+    }
+    if (ok) {
+      setShared(true);
+      setTimeout(() => setShared(false), 2000);
     }
   };
 
@@ -731,6 +738,14 @@ function PrayerModal({
               <Share2 className="h-4 w-4" />
               Compartir esta oración
             </button>
+            {shared && (
+              <p
+                className="text-center text-xs font-medium"
+                style={{ color: "#2f8f4f" }}
+              >
+                Oración compartida ✓
+              </p>
+            )}
           </div>
         </div>
       </div>
