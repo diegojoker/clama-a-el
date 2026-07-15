@@ -255,7 +255,7 @@ function MuralScreen() {
           <EmptyState onCreate={() => setModalOpen(true)} />
         ) : (
           <>
-            <div className="mb-3 flex items-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            <div className="-mx-4 mb-3 flex items-center gap-2 overflow-x-auto whitespace-nowrap px-4 pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
               {CATEGORY_FILTERS.map((c) => {
                 const active = categoryFilter === c;
                 return (
