@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Star, Share2, Sun, Moon, BookOpen } from "lucide-react";
+import { Star, Share2, Sun, Moon, BookOpen, Layout, ChevronRight, Flame } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { BottomNav } from "@/components/BottomNav";
 import { useTheme } from "@/components/ThemeProvider";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
@@ -122,6 +123,33 @@ function Settings() {
               </button>
             );
           })}
+        </div>
+      </Section>
+
+      <Section title="Más funciones">
+        <div className="space-y-2">
+          <Link
+            to="/widgets"
+            className="flex w-full items-center gap-3 rounded-xl border border-border bg-card px-4 py-4 text-left transition-colors hover:border-accent/40"
+          >
+            <Layout className="h-5 w-5 text-accent" />
+            <div className="flex-1">
+              <div className="text-sm font-medium text-foreground">Mis Widgets</div>
+              <div className="text-xs text-muted-foreground">Personaliza tu pantalla</div>
+            </div>
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          </Link>
+          <Link
+            to="/devocionales"
+            className="flex w-full items-center gap-3 rounded-xl border border-border bg-card px-4 py-4 text-left transition-colors hover:border-accent/40"
+          >
+            <Flame className="h-5 w-5 text-accent" />
+            <div className="flex-1">
+              <div className="text-sm font-medium text-foreground">Devocionales</div>
+              <div className="text-xs text-muted-foreground">Enciende tu vela diaria</div>
+            </div>
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          </Link>
         </div>
       </Section>
 
