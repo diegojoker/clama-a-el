@@ -445,10 +445,10 @@ function Home() {
         </button>
       </div>
 
+      <RecentConversations />
       <div className="fixed bottom-14 left-1/2 z-30 w-full max-w-md -translate-x-1/2">
         <AdBanner />
       </div>
-      <RecentConversations />
       <BottomNav />
       <OnboardingTooltips />
     </div>
