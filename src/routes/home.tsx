@@ -11,6 +11,7 @@ import { STORAGE_KEYS, readLS, writeLS } from "@/lib/storage";
 import { toast } from "sonner";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { OnboardingTooltips } from "@/components/OnboardingTooltips";
+import { RecentConversations } from "@/components/RecentConversations";
 
 const WEEK_LETTERS = ["D", "L", "M", "M", "J", "V", "S"];
 const MOODS = [
@@ -447,6 +448,7 @@ function Home() {
       <div className="fixed bottom-14 left-1/2 z-30 w-full max-w-md -translate-x-1/2">
         <AdBanner />
       </div>
+      <RecentConversations />
       <BottomNav />
       <OnboardingTooltips />
     </div>
