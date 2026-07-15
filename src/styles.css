@@ -284,6 +284,12 @@
   animation-delay: 1s;
 }
 
+@keyframes float-up {
+  0% { opacity: 0; transform: translate(-50%, 0); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -28px); }
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
