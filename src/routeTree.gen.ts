@@ -14,6 +14,7 @@ import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ReaderRouteImport } from './routes/reader'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as MuralRouteImport } from './routes/mural'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as HablarRouteImport } from './routes/hablar'
 import { Route as GraciasRouteImport } from './routes/gracias'
@@ -47,6 +48,11 @@ const PerfilRoute = PerfilRouteImport.update({
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MuralRoute = MuralRouteImport.update({
+  id: '/mural',
+  path: '/mural',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HomeRoute = HomeRouteImport.update({
@@ -104,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/gracias': typeof GraciasRoute
   '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
+  '/mural': typeof MuralRoute
   '/onboarding': typeof OnboardingRoute
   '/perfil': typeof PerfilRoute
   '/reader': typeof ReaderRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByTo {
   '/gracias': typeof GraciasRoute
   '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
+  '/mural': typeof MuralRoute
   '/onboarding': typeof OnboardingRoute
   '/perfil': typeof PerfilRoute
   '/reader': typeof ReaderRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   '/gracias': typeof GraciasRoute
   '/hablar': typeof HablarRoute
   '/home': typeof HomeRoute
+  '/mural': typeof MuralRoute
   '/onboarding': typeof OnboardingRoute
   '/perfil': typeof PerfilRoute
   '/reader': typeof ReaderRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/gracias'
     | '/hablar'
     | '/home'
+    | '/mural'
     | '/onboarding'
     | '/perfil'
     | '/reader'
@@ -171,6 +181,7 @@ export interface FileRouteTypes {
     | '/gracias'
     | '/hablar'
     | '/home'
+    | '/mural'
     | '/onboarding'
     | '/perfil'
     | '/reader'
@@ -187,6 +198,7 @@ export interface FileRouteTypes {
     | '/gracias'
     | '/hablar'
     | '/home'
+    | '/mural'
     | '/onboarding'
     | '/perfil'
     | '/reader'
@@ -204,6 +216,7 @@ export interface RootRouteChildren {
   GraciasRoute: typeof GraciasRoute
   HablarRoute: typeof HablarRoute
   HomeRoute: typeof HomeRoute
+  MuralRoute: typeof MuralRoute
   OnboardingRoute: typeof OnboardingRoute
   PerfilRoute: typeof PerfilRoute
   ReaderRoute: typeof ReaderRoute
@@ -246,6 +259,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mural': {
+      id: '/mural'
+      path: '/mural'
+      fullPath: '/mural'
+      preLoaderRoute: typeof MuralRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/home': {
@@ -335,6 +355,7 @@ const rootRouteChildren: RootRouteChildren = {
   GraciasRoute: GraciasRoute,
   HablarRoute: HablarRoute,
   HomeRoute: HomeRoute,
+  MuralRoute: MuralRoute,
   OnboardingRoute: OnboardingRoute,
   PerfilRoute: PerfilRoute,
   ReaderRoute: ReaderRoute,

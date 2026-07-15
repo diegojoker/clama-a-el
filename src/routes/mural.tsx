@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { HandHeart, Plus, X, Sparkles, Heart } from "lucide-react";
+import { HandHeart, Plus, X } from "lucide-react";
 import { toast } from "sonner";
 import { BottomNav } from "@/components/BottomNav";
 import { ThemeBootstrap } from "@/components/ThemeProvider";
@@ -486,7 +486,3 @@ function PedirOracionModal({
     </div>
   );
 }
-
-// Unused imports kept intentionally minimal
-void Sparkles;
-void Heart;
