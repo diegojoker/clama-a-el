@@ -653,72 +653,86 @@ function PedirOracionModal({
   );
 }
 
-function GeneratedPrayerModal({ post, onClose }: { post: MuralPost; onClose: () => void }) {
-  const prayer = useMemo(() => {
-    const name = post.anonymous ? "esta persona" : post.name;
-    return `Padre Celestial, hoy me acerco a Ti para interceder por ${name}. Tú conoces cada detalle de su corazón y de la situación que atraviesa en el área de ${post.category.toLowerCase()}. Extiende Tu mano poderosa y derrama Tu paz, Tu consuelo y Tu sabiduría. Recuérdale que no camina solo, que Tu amor le sostiene y que Tu tiempo es perfecto. Fortalece su fe y renueva su esperanza. En el nombre de Jesús, amén. 🙏`;
-  }, [post]);
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/60" />
-      <div
-        className="relative z-10 w-full max-w-md rounded-3xl p-6 shadow-2xl"
-        style={{ background: "#faf7f2" }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center justify-between">
-          <h2 className="font-serif-verse text-2xl" style={{ color: "#2c1810" }}>
-            Oración por {post.anonymous ? "esta petición" : post.name}
-          </h2>
-          <button type="button" onClick={onClose} aria-label="Cerrar" className="rounded-full p-1" style={{ color: "#9e8e7e" }}>
-            <X className="h-5 w-5" />
-          </button>
-        </div>
-        <p
-          className="mt-4 font-serif-verse text-base"
-          style={{ color: "#2c1810", lineHeight: 1.7 }}
-        >
-          {prayer}
-        </p>
-        <button
-          type="button"
-          onClick={onClose}
-          className="mt-6 w-full rounded-2xl py-3 text-sm font-medium text-white"
-          style={{ background: "#1a3a5c" }}
-        >
-          Amén
-        </button>
-      </div>
-    </div>
-  );
-}
+function PrayerModal({
+  post,
+  onAmen,
+  onClose,
+}: {
+  post: MuralPost;
+  onAmen: () => void;
+  onClose: () => void;
+}) {
+  const displayName = post.anonymous ? "esta persona" : post.name;
+  const prayer = PRAYER_BY_CATEGORY[post.category](displayName);
 
-function InsufficientModal({ onClose }: { onClose: () => void }) {
+  const share = async () => {
+    const text = `${prayer}\n\n— Una oración por ${displayName}`;
+    try {
+      if (typeof navigator !== "undefined" && navigator.share) {
+        await navigator.share({ text });
+      } else if (typeof navigator !== "undefined" && navigator.clipboard) {
+        await navigator.clipboard.writeText(text);
+        toast.success("Oración copiada");
+      }
+    } catch {
+      // ignore cancel
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/60" />
+    <div className="fixed inset-0 z-50 flex items-end justify-center" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/50" />
       <div
-        className="relative z-10 w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl"
+        className="relative z-10 w-full max-w-md overflow-hidden rounded-t-3xl shadow-2xl"
         style={{ background: "#faf7f2" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="text-4xl">⭐</div>
-        <h2 className="mt-2 font-serif-verse text-xl" style={{ color: "#2c1810" }}>
-          No tienes suficientes gracias
-        </h2>
-        <p className="mt-2 text-sm" style={{ color: "#9e8e7e" }}>
-          Necesitas 2 gracias para generar una oración.
-        </p>
-        <a
-          href="/gracias"
-          className="mt-5 inline-block w-full rounded-2xl py-3 text-sm font-medium text-white"
-          style={{ background: "#1a3a5c" }}
-        >
-          Conseguir gracias
-        </a>
-        <button type="button" onClick={onClose} className="mt-2 w-full py-2 text-sm" style={{ color: "#9e8e7e" }}>
-          Cerrar
-        </button>
+        <div className="relative h-[120px] w-full">
+          <img src={verseBg.url} alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="absolute inset-0" style={{ background: "rgba(26,58,92,0.35)" }} />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Cerrar"
+            className="absolute right-3 top-3 rounded-full bg-black/30 p-1.5 text-white"
+          >
+            <X className="h-4 w-4" />
+          </button>
+          <div className="absolute inset-x-0 bottom-4 text-center">
+            <p className="text-xs uppercase tracking-[0.2em] text-white/90">
+              Una oración por {displayName}
+            </p>
+          </div>
+        </div>
+
+        <div className="px-5 pt-5 pb-6">
+          <p
+            className="font-serif-verse"
+            style={{ color: "#2c1810", fontSize: 16, lineHeight: 1.8 }}
+          >
+            {prayer}
+          </p>
+
+          <div className="mt-6 flex flex-col gap-2">
+            <button
+              type="button"
+              onClick={onAmen}
+              className="w-full rounded-2xl py-3.5 text-sm font-medium text-white"
+              style={{ background: "#1a3a5c" }}
+            >
+              Amén ✨
+            </button>
+            <button
+              type="button"
+              onClick={share}
+              className="flex w-full items-center justify-center gap-2 rounded-2xl py-3 text-sm font-medium"
+              style={{ background: "transparent", color: "#1a3a5c", border: "1px solid #1a3a5c" }}
+            >
+              <Share2 className="h-4 w-4" />
+              Compartir esta oración
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
