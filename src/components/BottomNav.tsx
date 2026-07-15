@@ -42,6 +42,7 @@ export function BottomNav() {
         </Link>
         <Link
           to="/mural"
+          data-tooltip-id="nav-mural"
           className="flex flex-col items-center gap-1 py-3 text-[10px] font-medium text-muted-foreground transition-colors data-[status=active]:font-bold data-[status=active]:text-foreground"
           activeProps={{ "data-status": "active" } as never}
         >
