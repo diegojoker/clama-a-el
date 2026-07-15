@@ -18,6 +18,9 @@ export const Route = createFileRoute("/mural")({
 
 type Category = "Salud" | "Familia" | "Trabajo" | "Fe" | "Otro";
 const CATEGORIES: Category[] = ["Salud", "Familia", "Trabajo", "Fe", "Otro"];
+type CategoryFilter = "Todos" | Category;
+const CATEGORY_FILTERS: CategoryFilter[] = ["Todos", ...CATEGORIES];
+type SortMode = "recientes" | "orados";
 
 type ReactionKey = "orando" | "amor" | "fe";
 const REACTIONS: { key: ReactionKey; emoji: string; label: string }[] = [
@@ -107,6 +110,8 @@ function MuralScreen() {
   const [posts, setPosts] = useState<MuralPost[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("Todos");
+  const [sortMode, setSortMode] = useState<SortMode>("recientes");
 
   useEffect(() => {
     const existing = readLS<MuralPost[] | null>(STORAGE_KEYS.mural, null);
@@ -161,6 +166,23 @@ function MuralScreen() {
     toast.success("Petición publicada 🙏");
   };
 
+  const visiblePosts = useMemo(() => {
+    const filtered =
+      categoryFilter === "Todos"
+        ? posts
+        : posts.filter((p) => p.category === categoryFilter);
+    const sorted = [...filtered];
+    if (sortMode === "recientes") {
+      sorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    } else {
+      sorted.sort((a, b) => {
+        const sum = (p: MuralPost) => p.reactions.orando + p.reactions.amor + p.reactions.fe;
+        return sum(b) - sum(a);
+      });
+    }
+    return sorted;
+  }, [posts, categoryFilter, sortMode]);
+
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-background pb-32">
       <ThemeBootstrap />
@@ -187,8 +209,68 @@ function MuralScreen() {
         {posts.length === 0 ? (
           <EmptyState onCreate={() => setModalOpen(true)} />
         ) : (
-          <div className="flex flex-col gap-3">
-            {posts.map((p) => (
+          <>
+            <div className="mb-3 flex items-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+              {CATEGORY_FILTERS.map((c) => {
+                const active = categoryFilter === c;
+                return (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => setCategoryFilter(c)}
+                    className="shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-colors"
+                    style={
+                      active
+                        ? { background: "#1a3a5c", color: "#ffffff", border: "1px solid #1a3a5c" }
+                        : { background: "#faf7f2", color: "#2c1810", border: "1px solid #e8e0d5" }
+                    }
+                  >
+                    {c}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mb-3 flex items-center justify-end gap-1 rounded-full p-1" style={{ background: "#faf7f2", border: "1px solid #e8e0d5", width: "fit-content", marginLeft: "auto" }}>
+              {([
+                { k: "recientes", label: "Más recientes" },
+                { k: "orados", label: "Más orados" },
+              ] as { k: SortMode; label: string }[]).map((o) => {
+                const active = sortMode === o.k;
+                return (
+                  <button
+                    key={o.k}
+                    type="button"
+                    onClick={() => setSortMode(o.k)}
+                    className="rounded-full px-3 py-1 text-[11px] font-medium transition-colors"
+                    style={
+                      active
+                        ? { background: "#1a3a5c", color: "#ffffff" }
+                        : { background: "transparent", color: "#2c1810" }
+                    }
+                  >
+                    {o.label}
+                  </button>
+                );
+              })}
+            </div>
+            {visiblePosts.length === 0 ? (
+              <div className="mt-12 flex flex-col items-center gap-4 px-6 text-center">
+                <div className="text-4xl">🙏</div>
+                <p className="font-serif-verse text-base" style={{ color: "#9e8e7e" }}>
+                  No hay peticiones en esta categoría aún
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setModalOpen(true)}
+                  className="rounded-xl px-5 py-2.5 text-sm font-medium text-white"
+                  style={{ background: "#1a3a5c" }}
+                >
+                  Ser el primero →
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {visiblePosts.map((p) => (
               <PostCard
                 key={p.id}
                 post={p}
@@ -199,8 +281,10 @@ function MuralScreen() {
                 onReact={(k) => toggleReaction(p.id, k)}
                 onPray={() => prayFor(p.id)}
               />
-            ))}
-          </div>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
 
