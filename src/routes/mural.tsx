@@ -242,10 +242,10 @@ function MuralScreen() {
         <button
           type="button"
           onClick={() => setModalOpen(true)}
-          className="flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-medium text-white"
-          style={{ background: "#1a3a5c" }}
+          className="mural-cta-pulse flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-semibold text-white"
+          style={{ background: "#c9a84c" }}
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="h-4 w-4" strokeWidth={2.5} />
           Pedir oración
         </button>
       </header>
