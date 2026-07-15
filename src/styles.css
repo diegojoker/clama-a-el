@@ -311,3 +311,20 @@
     font-family: "Inter", system-ui, -apple-system, sans-serif;
   }
 }
+
+@keyframes coin-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(201,168,76,0.6)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 20px rgba(201,168,76,0.95)); transform: scale(1.06); }
+}
+.coin-glow {
+  animation: coin-glow 2.2s ease-in-out infinite;
+}
+
+@keyframes star-fall {
+  0% { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(90vh) rotate(180deg); opacity: 0; }
+}
+.star-fall {
+  animation: star-fall 2s ease-out forwards;
+}
