@@ -112,6 +112,10 @@ function MuralScreen() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("Todos");
   const [sortMode, setSortMode] = useState<SortMode>("recientes");
+  const [prayedPosts, setPrayedPosts] = useState<Record<string, boolean>>({});
+  const [generatedFor, setGeneratedFor] = useState<MuralPost | null>(null);
+  const [insufficientOpen, setInsufficientOpen] = useState(false);
+  const [floaters, setFloaters] = useState<{ id: number; postId: string }[]>([]);
 
   useEffect(() => {
     const existing = readLS<MuralPost[] | null>(STORAGE_KEYS.mural, null);
@@ -121,6 +125,7 @@ function MuralScreen() {
       setPosts(SEED_POSTS);
       writeLS(STORAGE_KEYS.mural, SEED_POSTS);
     }
+    setPrayedPosts(readLS<Record<string, boolean>>("vdd:mural_prayed", {}));
   }, []);
 
   const persist = (next: MuralPost[]) => {
@@ -142,21 +147,36 @@ function MuralScreen() {
   };
 
   const prayFor = (postId: string) => {
-    const balance = readLS<number>(STORAGE_KEYS.gracias, 10);
-    if (balance < 1) {
-      toast.error("No tienes gracias suficientes", {
-        description: "Consigue más gracias en la tienda.",
-      });
-      return;
-    }
-    writeLS(STORAGE_KEYS.gracias, balance - 1);
+    if (prayedPosts[postId]) return;
     const next = posts.map((p) =>
-      p.id === postId ? { ...p, prayedBy: p.prayedBy + 1 } : p
+      p.id === postId
+        ? {
+            ...p,
+            reactions: { ...p.reactions, orando: p.reactions.orando + 1 },
+            userReactions: { ...p.userReactions, orando: true },
+            prayedBy: p.prayedBy + 1,
+          }
+        : p
     );
     persist(next);
-    toast.success("Oración enviada 🙏", {
-      description: "Tu oración fue añadida al mural.",
-    });
+    const nextPrayed = { ...prayedPosts, [postId]: true };
+    setPrayedPosts(nextPrayed);
+    writeLS("vdd:mural_prayed", nextPrayed);
+    const balance = readLS<number>(STORAGE_KEYS.gracias, 10);
+    writeLS(STORAGE_KEYS.gracias, balance + 1);
+    const fid = Date.now();
+    setFloaters((f) => [...f, { id: fid, postId }]);
+    setTimeout(() => setFloaters((f) => f.filter((x) => x.id !== fid)), 1200);
+  };
+
+  const generatePrayer = (post: MuralPost) => {
+    const balance = readLS<number>(STORAGE_KEYS.gracias, 10);
+    if (balance < 2) {
+      setInsufficientOpen(true);
+      return;
+    }
+    writeLS(STORAGE_KEYS.gracias, balance - 2);
+    setGeneratedFor(post);
   };
 
   const addPost = (post: MuralPost) => {
@@ -280,6 +300,9 @@ function MuralScreen() {
                 }
                 onReact={(k) => toggleReaction(p.id, k)}
                 onPray={() => prayFor(p.id)}
+                onGenerate={() => generatePrayer(p)}
+                hasPrayed={!!prayedPosts[p.id]}
+                floating={floaters.some((f) => f.postId === p.id)}
               />
                 ))}
               </div>
@@ -290,6 +313,14 @@ function MuralScreen() {
 
       {modalOpen && (
         <PedirOracionModal onClose={() => setModalOpen(false)} onSubmit={addPost} />
+      )}
+
+      {generatedFor && (
+        <GeneratedPrayerModal post={generatedFor} onClose={() => setGeneratedFor(null)} />
+      )}
+
+      {insufficientOpen && (
+        <InsufficientModal onClose={() => setInsufficientOpen(false)} />
       )}
 
       <BottomNav />
@@ -322,12 +353,18 @@ function PostCard({
   onToggleExpand,
   onReact,
   onPray,
+  onGenerate,
+  hasPrayed,
+  floating,
 }: {
   post: MuralPost;
   expanded: boolean;
   onToggleExpand: () => void;
   onReact: (k: ReactionKey) => void;
   onPray: () => void;
+  onGenerate: () => void;
+  hasPrayed: boolean;
+  floating: boolean;
 }) {
   const showToggle = post.text.length > 140;
   return (
@@ -409,19 +446,42 @@ function PostCard({
         })}
       </div>
 
-      <div className="mt-3 flex items-center justify-between">
-        <span className="text-[11px]" style={{ color: "#9e8e7e" }}>
-          {post.prayedBy} han orado
-        </span>
+      <div className="mt-3 flex items-center justify-between gap-2">
+        <div className="relative">
+          <button
+            type="button"
+            onClick={onPray}
+            disabled={hasPrayed}
+            className="rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors"
+            style={
+              hasPrayed
+                ? { background: "#c9a84c", color: "#ffffff", border: "1px solid #c9a84c" }
+                : { background: "#faf7f2", color: "#2c1810", border: "1px solid #c9a84c" }
+            }
+          >
+            {hasPrayed ? "Orando 🙏" : "Orar 🙏 +1 gracia"}
+          </button>
+          {floating && (
+            <span
+              className="pointer-events-none absolute -top-4 left-1/2 -translate-x-1/2 text-xs font-bold"
+              style={{ color: "#c9a84c", animation: "float-up 1.2s ease-out forwards" }}
+            >
+              +1 ⭐
+            </span>
+          )}
+        </div>
         <button
           type="button"
-          onClick={onPray}
-          className="flex items-center gap-1 text-xs font-medium"
-          style={{ color: "#c9a84c" }}
+          onClick={onGenerate}
+          className="text-[11px]"
+          style={{ color: "#9e8e7e" }}
         >
-          Orar por esta persona — 1 gracia ⭐
+          Generar oración — 2 gracias ⭐
         </button>
       </div>
+      <p className="mt-2 text-[11px]" style={{ color: "#9e8e7e" }}>
+        {post.prayedBy} han orado
+      </p>
     </article>
   );
 }
@@ -565,6 +625,77 @@ function PedirOracionModal({
           className="mt-2 w-full py-2 text-sm text-muted-foreground"
         >
           Cancelar
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function GeneratedPrayerModal({ post, onClose }: { post: MuralPost; onClose: () => void }) {
+  const prayer = useMemo(() => {
+    const name = post.anonymous ? "esta persona" : post.name;
+    return `Padre Celestial, hoy me acerco a Ti para interceder por ${name}. Tú conoces cada detalle de su corazón y de la situación que atraviesa en el área de ${post.category.toLowerCase()}. Extiende Tu mano poderosa y derrama Tu paz, Tu consuelo y Tu sabiduría. Recuérdale que no camina solo, que Tu amor le sostiene y que Tu tiempo es perfecto. Fortalece su fe y renueva su esperanza. En el nombre de Jesús, amén. 🙏`;
+  }, [post]);
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60" />
+      <div
+        className="relative z-10 w-full max-w-md rounded-3xl p-6 shadow-2xl"
+        style={{ background: "#faf7f2" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between">
+          <h2 className="font-serif-verse text-2xl" style={{ color: "#2c1810" }}>
+            Oración por {post.anonymous ? "esta petición" : post.name}
+          </h2>
+          <button type="button" onClick={onClose} aria-label="Cerrar" className="rounded-full p-1" style={{ color: "#9e8e7e" }}>
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+        <p
+          className="mt-4 font-serif-verse text-base"
+          style={{ color: "#2c1810", lineHeight: 1.7 }}
+        >
+          {prayer}
+        </p>
+        <button
+          type="button"
+          onClick={onClose}
+          className="mt-6 w-full rounded-2xl py-3 text-sm font-medium text-white"
+          style={{ background: "#1a3a5c" }}
+        >
+          Amén
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function InsufficientModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60" />
+      <div
+        className="relative z-10 w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl"
+        style={{ background: "#faf7f2" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="text-4xl">⭐</div>
+        <h2 className="mt-2 font-serif-verse text-xl" style={{ color: "#2c1810" }}>
+          No tienes suficientes gracias
+        </h2>
+        <p className="mt-2 text-sm" style={{ color: "#9e8e7e" }}>
+          Necesitas 2 gracias para generar una oración.
+        </p>
+        <a
+          href="/gracias"
+          className="mt-5 inline-block w-full rounded-2xl py-3 text-sm font-medium text-white"
+          style={{ background: "#1a3a5c" }}
+        >
+          Conseguir gracias
+        </a>
+        <button type="button" onClick={onClose} className="mt-2 w-full py-2 text-sm" style={{ color: "#9e8e7e" }}>
+          Cerrar
         </button>
       </div>
     </div>

@@ -61,6 +61,12 @@ function GraciasStore() {
               onClick={() => addGracias(3)}
             />
             <ActionCard 
+              icon={<span className="text-lg">🙏</span>}
+              title="Orar por alguien en el Mural"
+              reward="+1"
+              onClick={() => addGracias(1)}
+            />
+            <ActionCard 
               icon={<Share2 className="h-5 w-5 text-primary" />}
               title="Compartir la app"
               reward="+5"
