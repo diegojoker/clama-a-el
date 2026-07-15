@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { BottomNav } from "@/components/BottomNav";
 import { ThemeBootstrap } from "@/components/ThemeProvider";
 import { STORAGE_KEYS, readLS, writeLS } from "@/lib/storage";
-import verseBg from "@/assets/verse-bg.jpg";
+import verseBg from "@/assets/verse-bg.jpg.asset.json";
 
 const PRAYED_KEY = "vdd:mural_prayed_today";
 
