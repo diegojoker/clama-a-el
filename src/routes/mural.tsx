@@ -1,10 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { HandHeart, Plus, X } from "lucide-react";
+import { HandHeart, Loader2, Plus, Share2, X } from "lucide-react";
 import { toast } from "sonner";
 import { BottomNav } from "@/components/BottomNav";
 import { ThemeBootstrap } from "@/components/ThemeProvider";
 import { STORAGE_KEYS, readLS, writeLS } from "@/lib/storage";
+import verseBg from "@/assets/verse-bg.jpg";
+
+const PRAYED_KEY = "vdd:mural_prayed_today";
+
+function todayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+}
+
+const PRAYER_BY_CATEGORY: Record<Category, (name: string) => string> = {
+  Salud: (n) =>
+    `Señor, te pedimos por ${n}. Que tu mano sanadora la cubra en este momento. Que la paz que sobrepasa todo entendimiento guarde su corazón y su mente. Amén.`,
+  Familia: (n) =>
+    `Padre, levantamos a ${n} y a su familia ante ti. Une sus corazones con tu amor y que tu gracia cubra cada necesidad. Amén.`,
+  Trabajo: (n) =>
+    `Dios, abre puertas para ${n} que ningún hombre pueda cerrar. Guía sus pasos y que tu propósito se cumpla en su vida. Amén.`,
+  Fe: (n) =>
+    `Señor, fortalece la fe de ${n} en este momento. Que sienta tu presencia cerca y que tu Palabra sea lámpara a sus pies. Amén.`,
+  Otro: (n) =>
+    `Padre celestial, te pedimos por ${n}. Tú conoces cada necesidad de su corazón. Que tu amor y tu gracia sean suficientes hoy. Amén.`,
+};
 
 export const Route = createFileRoute("/mural")({
   head: () => ({
