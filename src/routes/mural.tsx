@@ -1,10 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { HandHeart, Plus, X } from "lucide-react";
+import { HandHeart, Loader2, Plus, Share2, X } from "lucide-react";
 import { toast } from "sonner";
 import { BottomNav } from "@/components/BottomNav";
 import { ThemeBootstrap } from "@/components/ThemeProvider";
 import { STORAGE_KEYS, readLS, writeLS } from "@/lib/storage";
+import verseBg from "@/assets/verse-bg.jpg.asset.json";
+
+const PRAYED_KEY = "vdd:mural_prayed_today";
+
+function todayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+}
+
+const PRAYER_BY_CATEGORY: Record<Category, (name: string) => string> = {
+  Salud: (n) =>
+    `Señor, te pedimos por ${n}. Que tu mano sanadora la cubra en este momento. Que la paz que sobrepasa todo entendimiento guarde su corazón y su mente. Amén.`,
+  Familia: (n) =>
+    `Padre, levantamos a ${n} y a su familia ante ti. Une sus corazones con tu amor y que tu gracia cubra cada necesidad. Amén.`,
+  Trabajo: (n) =>
+    `Dios, abre puertas para ${n} que ningún hombre pueda cerrar. Guía sus pasos y que tu propósito se cumpla en su vida. Amén.`,
+  Fe: (n) =>
+    `Señor, fortalece la fe de ${n} en este momento. Que sienta tu presencia cerca y que tu Palabra sea lámpara a sus pies. Amén.`,
+  Otro: (n) =>
+    `Padre celestial, te pedimos por ${n}. Tú conoces cada necesidad de su corazón. Que tu amor y tu gracia sean suficientes hoy. Amén.`,
+};
 
 export const Route = createFileRoute("/mural")({
   head: () => ({
@@ -112,10 +133,10 @@ function MuralScreen() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("Todos");
   const [sortMode, setSortMode] = useState<SortMode>("recientes");
-  const [prayedPosts, setPrayedPosts] = useState<Record<string, boolean>>({});
-  const [generatedFor, setGeneratedFor] = useState<MuralPost | null>(null);
-  const [insufficientOpen, setInsufficientOpen] = useState(false);
-  const [floaters, setFloaters] = useState<{ id: number; postId: string }[]>([]);
+  const [prayedToday, setPrayedToday] = useState<Record<string, string>>({});
+  const [loadingPostId, setLoadingPostId] = useState<string | null>(null);
+  const [prayerModalPost, setPrayerModalPost] = useState<MuralPost | null>(null);
+  const [headerFloat, setHeaderFloat] = useState(false);
 
   useEffect(() => {
     const existing = readLS<MuralPost[] | null>(STORAGE_KEYS.mural, null);
@@ -125,7 +146,7 @@ function MuralScreen() {
       setPosts(SEED_POSTS);
       writeLS(STORAGE_KEYS.mural, SEED_POSTS);
     }
-    setPrayedPosts(readLS<Record<string, boolean>>("vdd:mural_prayed", {}));
+    setPrayedToday(readLS<Record<string, string>>(PRAYED_KEY, {}));
   }, []);
 
   const persist = (next: MuralPost[]) => {
@@ -146,10 +167,20 @@ function MuralScreen() {
     persist(next);
   };
 
-  const prayFor = (postId: string) => {
-    if (prayedPosts[postId]) return;
+  const isPrayedToday = (postId: string) => prayedToday[postId] === todayKey();
+
+  const startPray = (post: MuralPost) => {
+    if (isPrayedToday(post.id) || loadingPostId) return;
+    setLoadingPostId(post.id);
+    setTimeout(() => {
+      setLoadingPostId(null);
+      setPrayerModalPost(post);
+    }, 1500);
+  };
+
+  const confirmAmen = (post: MuralPost) => {
     const next = posts.map((p) =>
-      p.id === postId
+      p.id === post.id
         ? {
             ...p,
             reactions: { ...p.reactions, orando: p.reactions.orando + 1 },
@@ -159,24 +190,18 @@ function MuralScreen() {
         : p
     );
     persist(next);
-    const nextPrayed = { ...prayedPosts, [postId]: true };
-    setPrayedPosts(nextPrayed);
-    writeLS("vdd:mural_prayed", nextPrayed);
+    const nextPrayed = { ...prayedToday, [post.id]: todayKey() };
+    setPrayedToday(nextPrayed);
+    writeLS(PRAYED_KEY, nextPrayed);
     const balance = readLS<number>(STORAGE_KEYS.gracias, 10);
     writeLS(STORAGE_KEYS.gracias, balance + 1);
-    const fid = Date.now();
-    setFloaters((f) => [...f, { id: fid, postId }]);
-    setTimeout(() => setFloaters((f) => f.filter((x) => x.id !== fid)), 1200);
-  };
-
-  const generatePrayer = (post: MuralPost) => {
-    const balance = readLS<number>(STORAGE_KEYS.gracias, 10);
-    if (balance < 2) {
-      setInsufficientOpen(true);
-      return;
-    }
-    writeLS(STORAGE_KEYS.gracias, balance - 2);
-    setGeneratedFor(post);
+    setPrayerModalPost(null);
+    setHeaderFloat(true);
+    setTimeout(() => setHeaderFloat(false), 1400);
+    toast("Tu oración fue enviada 🙏 +1 gracia ganada", {
+      style: { background: "#1a3a5c", color: "#ffffff", border: "none" },
+      duration: 3000,
+    });
   };
 
   const addPost = (post: MuralPost) => {
@@ -299,10 +324,9 @@ function MuralScreen() {
                   setExpanded((e) => ({ ...e, [p.id]: !e[p.id] }))
                 }
                 onReact={(k) => toggleReaction(p.id, k)}
-                onPray={() => prayFor(p.id)}
-                onGenerate={() => generatePrayer(p)}
-                hasPrayed={!!prayedPosts[p.id]}
-                floating={floaters.some((f) => f.postId === p.id)}
+                onPray={() => startPray(p)}
+                hasPrayed={isPrayedToday(p.id)}
+                loading={loadingPostId === p.id}
               />
                 ))}
               </div>
@@ -315,12 +339,21 @@ function MuralScreen() {
         <PedirOracionModal onClose={() => setModalOpen(false)} onSubmit={addPost} />
       )}
 
-      {generatedFor && (
-        <GeneratedPrayerModal post={generatedFor} onClose={() => setGeneratedFor(null)} />
+      {prayerModalPost && (
+        <PrayerModal
+          post={prayerModalPost}
+          onAmen={() => confirmAmen(prayerModalPost)}
+          onClose={() => setPrayerModalPost(null)}
+        />
       )}
 
-      {insufficientOpen && (
-        <InsufficientModal onClose={() => setInsufficientOpen(false)} />
+      {headerFloat && (
+        <span
+          className="pointer-events-none fixed left-1/2 top-14 z-[60] -translate-x-1/2 text-lg font-bold"
+          style={{ color: "#c9a84c", animation: "float-up 1.4s ease-out forwards" }}
+        >
+          +1 ⭐
+        </span>
       )}
 
       <BottomNav />
@@ -353,18 +386,16 @@ function PostCard({
   onToggleExpand,
   onReact,
   onPray,
-  onGenerate,
   hasPrayed,
-  floating,
+  loading,
 }: {
   post: MuralPost;
   expanded: boolean;
   onToggleExpand: () => void;
   onReact: (k: ReactionKey) => void;
   onPray: () => void;
-  onGenerate: () => void;
   hasPrayed: boolean;
-  floating: boolean;
+  loading: boolean;
 }) {
   const showToggle = post.text.length > 140;
   return (
@@ -447,41 +478,32 @@ function PostCard({
       </div>
 
       <div className="mt-3 flex items-center justify-between gap-2">
-        <div className="relative">
-          <button
-            type="button"
-            onClick={onPray}
-            disabled={hasPrayed}
-            className="rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors"
-            style={
-              hasPrayed
-                ? { background: "#c9a84c", color: "#ffffff", border: "1px solid #c9a84c" }
-                : { background: "#faf7f2", color: "#2c1810", border: "1px solid #c9a84c" }
-            }
-          >
-            {hasPrayed ? "Orando 🙏" : "Orar 🙏 +1 gracia"}
-          </button>
-          {floating && (
-            <span
-              className="pointer-events-none absolute -top-4 left-1/2 -translate-x-1/2 text-xs font-bold"
-              style={{ color: "#c9a84c", animation: "float-up 1.2s ease-out forwards" }}
-            >
-              +1 ⭐
-            </span>
-          )}
-        </div>
         <button
           type="button"
-          onClick={onGenerate}
-          className="text-[11px]"
-          style={{ color: "#9e8e7e" }}
+          onClick={onPray}
+          disabled={hasPrayed || loading}
+          className="flex items-center gap-1.5 rounded-[20px] px-3.5 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed"
+          style={
+            hasPrayed
+              ? { background: "#c9a84c", color: "#ffffff", border: "1px solid #c9a84c" }
+              : { background: "#faf7f2", color: "#2c1810", border: "1px solid #c9a84c" }
+          }
         >
-          Generar oración — 2 gracias ⭐
+          {hasPrayed ? (
+            <>Ya oraste hoy 🙏</>
+          ) : loading ? (
+            <>
+              <Loader2 className="h-3.5 w-3.5 animate-spin" style={{ color: "#c9a84c" }} />
+              Preparando tu oración...
+            </>
+          ) : (
+            <>Orar por esta persona 🙏 +1 gracia</>
+          )}
         </button>
+        <span className="text-[11px]" style={{ color: "#9e8e7e" }}>
+          {post.prayedBy} han orado
+        </span>
       </div>
-      <p className="mt-2 text-[11px]" style={{ color: "#9e8e7e" }}>
-        {post.prayedBy} han orado
-      </p>
     </article>
   );
 }
@@ -631,72 +653,86 @@ function PedirOracionModal({
   );
 }
 
-function GeneratedPrayerModal({ post, onClose }: { post: MuralPost; onClose: () => void }) {
-  const prayer = useMemo(() => {
-    const name = post.anonymous ? "esta persona" : post.name;
-    return `Padre Celestial, hoy me acerco a Ti para interceder por ${name}. Tú conoces cada detalle de su corazón y de la situación que atraviesa en el área de ${post.category.toLowerCase()}. Extiende Tu mano poderosa y derrama Tu paz, Tu consuelo y Tu sabiduría. Recuérdale que no camina solo, que Tu amor le sostiene y que Tu tiempo es perfecto. Fortalece su fe y renueva su esperanza. En el nombre de Jesús, amén. 🙏`;
-  }, [post]);
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/60" />
-      <div
-        className="relative z-10 w-full max-w-md rounded-3xl p-6 shadow-2xl"
-        style={{ background: "#faf7f2" }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center justify-between">
-          <h2 className="font-serif-verse text-2xl" style={{ color: "#2c1810" }}>
-            Oración por {post.anonymous ? "esta petición" : post.name}
-          </h2>
-          <button type="button" onClick={onClose} aria-label="Cerrar" className="rounded-full p-1" style={{ color: "#9e8e7e" }}>
-            <X className="h-5 w-5" />
-          </button>
-        </div>
-        <p
-          className="mt-4 font-serif-verse text-base"
-          style={{ color: "#2c1810", lineHeight: 1.7 }}
-        >
-          {prayer}
-        </p>
-        <button
-          type="button"
-          onClick={onClose}
-          className="mt-6 w-full rounded-2xl py-3 text-sm font-medium text-white"
-          style={{ background: "#1a3a5c" }}
-        >
-          Amén
-        </button>
-      </div>
-    </div>
-  );
-}
+function PrayerModal({
+  post,
+  onAmen,
+  onClose,
+}: {
+  post: MuralPost;
+  onAmen: () => void;
+  onClose: () => void;
+}) {
+  const displayName = post.anonymous ? "esta persona" : post.name;
+  const prayer = PRAYER_BY_CATEGORY[post.category](displayName);
 
-function InsufficientModal({ onClose }: { onClose: () => void }) {
+  const share = async () => {
+    const text = `${prayer}\n\n— Una oración por ${displayName}`;
+    try {
+      if (typeof navigator !== "undefined" && navigator.share) {
+        await navigator.share({ text });
+      } else if (typeof navigator !== "undefined" && navigator.clipboard) {
+        await navigator.clipboard.writeText(text);
+        toast.success("Oración copiada");
+      }
+    } catch {
+      // ignore cancel
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/60" />
+    <div className="fixed inset-0 z-50 flex items-end justify-center" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/50" />
       <div
-        className="relative z-10 w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl"
+        className="relative z-10 w-full max-w-md overflow-hidden rounded-t-3xl shadow-2xl"
         style={{ background: "#faf7f2" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="text-4xl">⭐</div>
-        <h2 className="mt-2 font-serif-verse text-xl" style={{ color: "#2c1810" }}>
-          No tienes suficientes gracias
-        </h2>
-        <p className="mt-2 text-sm" style={{ color: "#9e8e7e" }}>
-          Necesitas 2 gracias para generar una oración.
-        </p>
-        <a
-          href="/gracias"
-          className="mt-5 inline-block w-full rounded-2xl py-3 text-sm font-medium text-white"
-          style={{ background: "#1a3a5c" }}
-        >
-          Conseguir gracias
-        </a>
-        <button type="button" onClick={onClose} className="mt-2 w-full py-2 text-sm" style={{ color: "#9e8e7e" }}>
-          Cerrar
-        </button>
+        <div className="relative h-[120px] w-full">
+          <img src={verseBg.url} alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="absolute inset-0" style={{ background: "rgba(26,58,92,0.35)" }} />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Cerrar"
+            className="absolute right-3 top-3 rounded-full bg-black/30 p-1.5 text-white"
+          >
+            <X className="h-4 w-4" />
+          </button>
+          <div className="absolute inset-x-0 bottom-4 text-center">
+            <p className="text-xs uppercase tracking-[0.2em] text-white/90">
+              Una oración por {displayName}
+            </p>
+          </div>
+        </div>
+
+        <div className="px-5 pt-5 pb-6">
+          <p
+            className="font-serif-verse"
+            style={{ color: "#2c1810", fontSize: 16, lineHeight: 1.8 }}
+          >
+            {prayer}
+          </p>
+
+          <div className="mt-6 flex flex-col gap-2">
+            <button
+              type="button"
+              onClick={onAmen}
+              className="w-full rounded-2xl py-3.5 text-sm font-medium text-white"
+              style={{ background: "#1a3a5c" }}
+            >
+              Amén ✨
+            </button>
+            <button
+              type="button"
+              onClick={share}
+              className="flex w-full items-center justify-center gap-2 rounded-2xl py-3 text-sm font-medium"
+              style={{ background: "transparent", color: "#1a3a5c", border: "1px solid #1a3a5c" }}
+            >
+              <Share2 className="h-4 w-4" />
+              Compartir esta oración
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
