@@ -415,6 +415,31 @@ function Home() {
 
       </div>
 
+      <div className="mt-6 px-6">
+        <button
+          type="button"
+          onClick={() => navigate({ to: "/mural" })}
+          className="w-full rounded-2xl px-4 py-3.5 text-left transition-transform active:scale-[0.99]"
+          style={{
+            background: "#1a3a5c",
+            boxShadow: "0 0 0 1px rgba(201,168,76,0.3)",
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-base leading-none">🙏</span>
+            <span className="font-serif-verse text-[15px] font-semibold text-white">
+              ¿Alguien oró por ti hoy?
+            </span>
+          </div>
+          <div className="mt-1 flex items-center justify-between">
+            <span className="text-[12px] text-white/60">Mural de Oración</span>
+            <span className="text-[12px] font-medium" style={{ color: "#c9a84c" }}>
+              Descúbrelo →
+            </span>
+          </div>
+        </button>
+      </div>
+
       <div className="fixed bottom-14 left-1/2 z-30 w-full max-w-md -translate-x-1/2">
         <AdBanner />
       </div>
