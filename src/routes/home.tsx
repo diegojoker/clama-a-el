@@ -493,6 +493,17 @@ function Home() {
       </div>
 
       <RecentConversations />
+      {!hasDiario && (
+        <div className="mt-4 flex justify-center px-6">
+          <button
+            type="button"
+            onClick={seedConversations}
+            className="text-[11px] text-muted-foreground underline underline-offset-2 opacity-60 hover:opacity-100"
+          >
+            Simular conversaciones
+          </button>
+        </div>
+      )}
       <div className="fixed bottom-14 left-1/2 z-30 w-full max-w-md -translate-x-1/2">
         <AdBanner />
       </div>
