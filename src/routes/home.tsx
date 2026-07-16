@@ -205,11 +205,11 @@ function Home() {
         <button
           onClick={() => navigate({ to: "/gracias" })}
           data-tooltip-id="gracias-balance"
-          className="flex items-center gap-1 text-[12px] font-bold text-accent transition-transform active:scale-95"
+          className="flex items-center gap-1 text-[15px] font-bold text-accent transition-transform active:scale-95"
         >
           <Star className="h-3.5 w-3.5 fill-accent" />
           {balance}
-          <span className="ml-0.5 text-[10px] font-medium uppercase tracking-wider">gracias</span>
+          <span className="ml-0.5 text-[12px] font-semibold uppercase tracking-wider">gracias</span>
         </button>
       </header>
 
