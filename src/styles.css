@@ -309,33 +309,6 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: "Inter", system-ui, -apple-system, sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.5;
-  }
-
-  h1, h2, h3 {
-    font-weight: 700;
-  }
-}
-
-/* Accessibility: minimum readable sizes for 40-60 audience.
-   Bump Tailwind's smallest text utilities up to legible floors
-   without changing layout structure or color. */
-@layer utilities {
-  .text-\[10px\] { font-size: 12px; }
-  .text-\[11px\] { font-size: 13px; }
-  .text-\[12px\],
-  .text-xs { font-size: 14px; }
-  .text-\[13px\] { font-size: 14px; }
-  .text-\[14px\],
-  .text-sm { font-size: 15px; }
-}
-
-/* Serif verse text: bold, readable */
-.font-serif-verse {
-  font-weight: 600;
-}
   }
 }
 

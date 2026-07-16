@@ -134,13 +134,13 @@ export function VerseCard({ verse, onInterpret, onShare, onWidget, onReadChapter
           Versículo del día
         </span>
         <p
-          className={"font-serif-verse text-[22px] font-semibold leading-[1.4] italic text-white" + (animating ? " verse-line-in" : "")}
+          className={"font-serif-verse text-[1.5rem] leading-[1.4] italic text-white" + (animating ? " verse-line-in" : "")}
           style={animating ? { animationDelay: "0.7s" } : undefined}
         >
           “{verse.text}”
         </p>
         <p
-          className={"mt-6 text-[14px] font-bold uppercase tracking-[0.2em] text-[#c9a84c]" + (animating ? " verse-line-in" : "")}
+          className={"mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a84c]" + (animating ? " verse-line-in" : "")}
           style={animating ? { animationDelay: "0.85s" } : undefined}
         >
           {verse.reference}
@@ -149,7 +149,7 @@ export function VerseCard({ verse, onInterpret, onShare, onWidget, onReadChapter
           <button
             type="button"
             onClick={onReadChapter}
-            className={"mt-1 text-[14px] font-medium text-[#c9a84c] hover:underline" + (animating ? " verse-line-in" : "")}
+            className={"mt-1 text-[11px] text-[#c9a84c] hover:underline" + (animating ? " verse-line-in" : "")}
             style={animating ? { animationDelay: "0.9s" } : undefined}
           >
             Leer capítulo completo →
