@@ -134,7 +134,7 @@ export function VerseCard({ verse, onInterpret, onShare, onWidget, onReadChapter
           Versículo del día
         </span>
         <p
-          className={"font-serif-verse text-[1.5rem] leading-[1.4] italic text-white" + (animating ? " verse-line-in" : "")}
+          className={"font-serif-verse text-xl font-semibold leading-[1.4] italic text-white" + (animating ? " verse-line-in" : "")}
           style={animating ? { animationDelay: "0.7s" } : undefined}
         >
           “{verse.text}”
