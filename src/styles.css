@@ -302,11 +302,11 @@
 
 /* Accessibility floor: bump the smallest text utilities to legible sizes
    for a 40-60 audience without changing layout or colors. */
-.text-\[10px\] { font-size: 12px; }
-.text-\[11px\] { font-size: 13px; }
-.text-\[12px\] { font-size: 14px; }
-.text-\[13px\] { font-size: 14px; }
-.text-\[14px\] { font-size: 15px; }
+[class*="text-[10px]"] { font-size: 12px !important; }
+[class*="text-[11px]"] { font-size: 13px !important; }
+[class*="text-[12px]"] { font-size: 14px !important; }
+[class*="text-[13px]"] { font-size: 14px !important; }
+[class*="text-[14px]"] { font-size: 15px !important; }
 
 @layer base {
   * {
