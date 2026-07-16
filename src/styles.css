@@ -300,6 +300,14 @@
   animation: pulse-border 2s ease-in-out infinite;
 }
 
+/* Accessibility floor: bump the smallest text utilities to legible sizes
+   for a 40-60 audience without changing layout or colors. */
+.text-\[10px\] { font-size: 12px; }
+.text-\[11px\] { font-size: 13px; }
+.text-\[12px\] { font-size: 14px; }
+.text-\[13px\] { font-size: 14px; }
+.text-\[14px\] { font-size: 15px; }
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -319,23 +327,6 @@
   }
 }
 
-/* Accessibility: minimum readable sizes for 40-60 audience.
-   Bump Tailwind's smallest text utilities up to legible floors
-   without changing layout structure or color. */
-@layer utilities {
-  .text-\[10px\] { font-size: 12px; }
-  .text-\[11px\] { font-size: 13px; }
-  .text-\[12px\],
-  .text-xs { font-size: 14px; }
-  .text-\[13px\] { font-size: 14px; }
-  .text-\[14px\],
-  .text-sm { font-size: 15px; }
-}
-
-/* Serif verse text: bold, readable */
-.font-serif-verse {
-  font-weight: 600;
-}
   }
 }
 
